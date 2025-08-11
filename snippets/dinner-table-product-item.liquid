@@ -1,0 +1,190 @@
+{% comment %}
+  =================================================================================
+  FILE: snippets/dinner-table-product-item.liquid
+  =================================================================================
+{% endcomment %}
+
+{% liquid
+  assign product = block.settings.product
+  assign normal_img = block.settings.normal_image
+  assign hover_img = block.settings.hover_image
+  assign pos_x = block.settings.position_x
+  assign pos_y = block.settings.position_y
+  assign item_width = block.settings.item_width
+  assign item_height = block.settings.item_height
+  assign click_action = block.settings.click_action
+  assign hover_scale = block.settings.hover_scale
+%}
+
+{% if product %}
+  <div
+    class="table-product-item"
+    data-product-id="{{ product.id }}"
+    data-block-id="{{ block.id }}"
+    data-click-action="{{ click_action }}"
+    style="
+      left: {{ pos_x }}%;
+      top: {{ pos_y }}%;
+      width: {{ item_width }}px;
+      height: {{ item_height }}px;
+      --hover-scale: {{ hover_scale | divided_by: 100.0 }};
+    "
+  >
+    {% comment %} Normal state image {% endcomment %}
+    {% if normal_img %}
+      <img
+        src="{{ normal_img | img_url: 'master' }}"
+        alt="{{ product.title }}"
+        class="item-normal-state"
+        loading="lazy"
+      >
+    {% endif %}
+
+    {% comment %} Hover state image {% endcomment %}
+    {% if hover_img %}
+      <img
+        src="{{ hover_img | img_url: 'master' }}"
+        alt="{{ product.title }} - highlighted"
+        class="item-hover-state"
+        loading="lazy"
+      >
+    {% endif %}
+
+    {% comment %} Product info overlay {% endcomment %}
+    {% if block.settings.show_product_title or block.settings.show_price %}
+      <div class="product-info-overlay">
+        {% if block.settings.show_product_title %}
+          <div class="product-title">{{ product.title }}</div>
+        {% endif %}
+        {% if block.settings.show_price %}
+          <div class="product-price">{{ product.price | money }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% comment %} Click target {% endcomment %}
+    <a
+      href="{{ product.url }}"
+      class="item-click-target"
+      data-product-handle="{{ product.handle }}"
+      aria-label="Shop {{ product.title }}"
+    >
+      <span class="sr-only">{{ product.title }} - {{ product.price | money }}</span>
+    </a>
+  </div>
+{% endif %}
+
+<style>
+  .table-product-item {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+  }
+
+  .table-product-item:hover {
+    transform: translate(-50%, -50%) scale(var(--hover-scale));
+    z-index: 20;
+  }
+
+  .item-normal-state,
+  .item-hover-state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+  }
+
+  .item-hover-state {
+    opacity: 0;
+  }
+
+  .table-product-item:hover .item-hover-state {
+    opacity: 1;
+  }
+
+  .table-product-item:hover .item-normal-state {
+    opacity: 0;
+  }
+
+  .product-info-overlay {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 30;
+  }
+
+  .table-product-item:hover .product-info-overlay {
+    opacity: 1;
+  }
+
+  .product-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .product-price {
+    font-size: 11px;
+    color: #ffd700;
+  }
+
+  .item-click-target {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    z-index: 15;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Click feedback */
+  .table-product-item:active {
+    transform: translate(-50%, -50%) scale(calc(var(--hover-scale) * 0.95));
+  }
+
+  /* Loading state */
+  .table-product-item[data-loading='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .product-info-overlay {
+      font-size: 10px;
+      padding: 6px 8px;
+      bottom: -30px;
+    }
+
+    .product-price {
+      font-size: 9px;
+    }
+  }
+</style>

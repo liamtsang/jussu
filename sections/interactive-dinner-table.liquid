@@ -1,0 +1,333 @@
+{% comment %}
+  =================================================================================
+  FILE: sections/interactive-dinner-table.liquid
+  =================================================================================
+{% endcomment %}
+
+<div class="dinner-table-section" data-section-id="{{ section.id }}">
+  <div class="dinner-table-container">
+    <div
+      class="dinner-table"
+      style="width: {{ section.settings.table_width }}px; height: {{ section.settings.table_height }}px;"
+    >
+      {% comment %} Base table background {% endcomment %}
+      <div
+        class="table-surface"
+        style="background-image: url('https://cdn.shopify.com/s/files/1/0654/4690/3887/files/TABLE_EMPTY.webp?v=1754949437');"
+      ></div>
+
+      {% comment %} Render all product blocks {% endcomment %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'product_item' %}
+            {% render 'dinner-table-product-item', block: block, section_id: section.id %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .dinner-table-section {
+    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
+    background: {{ section.settings.section_background_color }};
+  }
+
+  .dinner-table-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .table-title {
+    font-size: {{ section.settings.title_font_size }}px;
+    color: {{ section.settings.title_color }};
+    margin-bottom: 30px;
+    font-family: {{ section.settings.title_font.family }}, sans-serif;
+    font-weight: {{ section.settings.title_font.weight }};
+  }
+
+  .dinner-table {
+    position: relative;
+    margin: 0 auto;
+    border-radius: {{ section.settings.table_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .table-surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .table-instructions {
+    margin-top: 20px;
+    font-style: italic;
+    color: {{ section.settings.instructions_color }};
+    font-size: {{ section.settings.instructions_font_size }}px;
+  }
+
+  @media (max-width: 768px) {
+    .dinner-table {
+      transform: scale(0.8);
+      transform-origin: center top;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Interactive Dinner Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Shop Our Dinner Collection"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title Font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "image_picker",
+      "id": "table_background",
+      "label": "Table Background Image",
+      "info": "Upload your dinner table background image"
+    },
+    {
+      "type": "range",
+      "id": "table_width",
+      "label": "Table Width",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "default": 700,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_height",
+      "label": "Table Height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "table_border_radius",
+      "label": "Table Corner Radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "section_background_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_instructions",
+      "label": "Show Instructions",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "instructions_text",
+      "label": "Instructions Text",
+      "default": "Hover over items to see them highlighted, click to shop!"
+    },
+    {
+      "type": "color",
+      "id": "instructions_color",
+      "label": "Instructions Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "instructions_font_size",
+      "label": "Instructions Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product Item",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "normal_image",
+          "label": "Normal State Image",
+          "info": "Image shown by default (outline/subtle version)"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "Hover State Image",
+          "info": "Image shown on hover (full/highlighted version)"
+        },
+        {
+          "type": "range",
+          "id": "position_x",
+          "label": "X Position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%",
+          "info": "Horizontal position from left edge"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "label": "Y Position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%",
+          "info": "Vertical position from top edge"
+        },
+        {
+          "type": "range",
+          "id": "item_width",
+          "label": "Item Width",
+          "min": 30,
+          "max": 200,
+          "step": 5,
+          "default": 80,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "item_height",
+          "label": "Item Height",
+          "min": 30,
+          "max": 200,
+          "step": 5,
+          "default": 80,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "click_action",
+          "label": "Click Action",
+          "options": [
+            {
+              "value": "product_page",
+              "label": "Go to Product Page"
+            },
+            {
+              "value": "add_to_cart",
+              "label": "Add to Cart"
+            },
+            {
+              "value": "quick_view",
+              "label": "Quick View Modal"
+            }
+          ],
+          "default": "product_page"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_title",
+          "label": "Show Product Title on Hover",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "Show Price on Hover",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "hover_scale",
+          "label": "Hover Scale Effect",
+          "min": 100,
+          "max": 150,
+          "step": 5,
+          "default": 110,
+          "unit": "%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Interactive Dinner Table",
+      "blocks": [
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        },
+        {
+          "type": "product_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

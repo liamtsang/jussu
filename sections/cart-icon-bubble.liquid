@@ -1,14 +1,28 @@
 {% if cart == empty %}
-  <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+  <span class="svg-wrapper">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0654/4690/3887/files/table-cart.png?v=1754340462"
+      alt="Cart"
+      width="32"
+      height="32"
+    >
+  </span>
 {% else %}
-  <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+  <span class="svg-wrapper">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0654/4690/3887/files/table-cart.png?v=1754340462"
+      alt="Cart"
+      width="32"
+      height="32"
+    >
+  </span>
 {% endif %}
 
 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
 {%- if cart != empty -%}
   <div class="cart-count-bubble">
     {%- if cart.item_count < 100 -%}
-      <span aria-hidden="true">{{ cart.item_count }}</span>
+      <span aria-hidden="true">({{ cart.item_count }})</span>
     {%- endif -%}
     <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
   </div>
