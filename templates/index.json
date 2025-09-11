@@ -69,7 +69,7 @@
         "product_item_3wXYKM": {
           "type": "product_item",
           "settings": {
-            "product": "",
+            "product": "item-01",
             "normal_image": "shopify://shop_images/PROPSNWARDROBE_HOVER.webp",
             "hover_image": "shopify://shop_images/PROPSNWARDROBE.webp",
             "position_x": 72,
@@ -92,8 +92,8 @@
         "title_font": "system_ui_n4",
         "title_font_size": 36,
         "title_color": "#333333",
-        "table_width": 700,
-        "table_height": 500,
+        "table_width": 1000,
+        "table_height": 800,
         "table_border_radius": 20,
         "section_background_color": "#ffffff",
         "section_padding_top": 50,

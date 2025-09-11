@@ -11,9 +11,9 @@
   "current": {
     "logo": "shopify://shop_images/13_1.png",
     "logo_width": 130,
-    "type_header_font": "inconsolata_n4",
+    "type_header_font": "courier_new_n7",
     "heading_scale": 100,
-    "type_body_font": "inconsolata_n4",
+    "type_body_font": "courier_new_n4",
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,

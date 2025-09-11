@@ -30,6 +30,11 @@ class ProductHoverInfo {
     this.infoPanel.addEventListener('mouseenter', () => {
       // Keep the current state when hovering over info panel
     });
+
+    // Show first product by default instead of placeholder
+    if (productItems.length > 0) {
+      this.showProductInfo(productItems[0]);
+    }
   }
 
   showProductInfo(productItem) {
@@ -49,14 +54,9 @@ class ProductHoverInfo {
   }
 
   hideProductInfo() {
-    if (!this.infoPanel) return;
-    
-    // Small delay to prevent flickering when moving between products
-    setTimeout(() => {
-      if (!this.infoPanel.matches(':hover') && !this.productGrid.matches(':hover')) {
-        this.showPlaceholder();
-      }
-    }, 100);
+    // Don't hide the product info - keep the last viewed product displayed
+    // This prevents going back to blank state on mouse out
+    return;
   }
 
   updateInfoPanel(productData) {
@@ -78,20 +78,28 @@ class ProductHoverInfo {
     }
 
     if (this.infoPrice) {
-      let priceHtml = `<span class="price-item price-item--regular">${productData.price}</span>`;
-      
-      if (productData.comparePrice && productData.comparePrice !== productData.price) {
-        priceHtml = `
-          <span class="price-item price-item--sale">${productData.price}</span>
-          <s class="price-item price-item--regular">${productData.comparePrice}</s>
-        `;
-      }
-
       if (!productData.available) {
-        priceHtml += '<span class="price-item--unavailable"> - Sold Out</span>';
-      }
+        // Show "Sold out" instead of price for unavailable products
+        this.infoPrice.innerHTML = '<span class="price-item--unavailable">Sold out</span>';
+      } else {
+        let priceHtml = `<span class="price-item price-item--regular">${productData.price}</span>`;
+        
+        if (productData.comparePrice && productData.comparePrice !== productData.price) {
+          priceHtml = `
+            <span class="price-item price-item--sale">${productData.price}</span>
+            <s class="price-item price-item--regular">${productData.comparePrice}</s>
+          `;
+        }
 
-      this.infoPrice.innerHTML = priceHtml;
+        this.infoPrice.innerHTML = priceHtml;
+      }
+    }
+
+    // Apply sold out styling if product is unavailable
+    if (!productData.available) {
+      this.infoPanel.classList.add('product-sold-out');
+    } else {
+      this.infoPanel.classList.remove('product-sold-out');
     }
 
     // Show details, hide placeholder
