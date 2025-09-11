@@ -51,16 +51,18 @@
     {% endif %}
 
     {% comment %} Product info overlay {% endcomment %}
-    {% if block.settings.show_product_title or block.settings.show_price %}
-      <div class="product-info-overlay">
-        {% if block.settings.show_product_title %}
-          <div class="product-title">{{ product.title }}</div>
-        {% endif %}
-        {% if block.settings.show_price %}
-          <div class="product-price">{{ product.price | money }}</div>
-        {% endif %}
-      </div>
-    {% endif %}
+    {% comment %}
+      {% if block.settings.show_product_title or block.settings.show_price %}
+        <div class="product-info-overlay">
+          {% if block.settings.show_product_title %}
+            <div class="product-title">{{ product.title }}</div>
+          {% endif %}
+          {% if block.settings.show_price %}
+            <div class="product-price">{{ product.price | money }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endcomment %}
 
     {% comment %} Click target {% endcomment %}
     <a
@@ -84,7 +86,7 @@
   }
 
   .table-product-item:hover {
-    transform: translate(-50%, -50%) scale(var(--hover-scale));
+    transform: translate(-50%, -50%);
     z-index: 20;
   }
 
