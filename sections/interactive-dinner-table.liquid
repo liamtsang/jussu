@@ -6,10 +6,7 @@
 
 <div class="dinner-table-section" data-section-id="{{ section.id }}">
   <div class="dinner-table-container">
-    <div
-      class="dinner-table"
-      style="width: {{ section.settings.table_width }}px; height: {{ section.settings.table_height }}px;"
-    >
+    <div class="dinner-table">
       {% comment %} Base table background {% endcomment %}
       <div
         class="table-surface"
@@ -49,6 +46,9 @@
 
   .dinner-table {
     position: relative;
+    width: 100%;
+    max-width: {{ section.settings.table_width }}px;
+    aspect-ratio: {{ section.settings.table_width }} / {{ section.settings.table_height }};
     margin: 0 auto;
     border-radius: {{ section.settings.table_border_radius }}px;
     overflow: hidden;
@@ -70,13 +70,6 @@
     font-style: italic;
     color: {{ section.settings.instructions_color }};
     font-size: {{ section.settings.instructions_font_size }}px;
-  }
-
-  @media (max-width: 768px) {
-    .dinner-table {
-      transform: scale(0.8);
-      transform-origin: center top;
-    }
   }
 </style>
 
@@ -123,9 +116,9 @@
       "id": "table_width",
       "label": "Table Width",
       "min": 400,
-      "max": 1000,
+      "max": 4000,
       "step": 50,
-      "default": 700,
+      "default": 1600,
       "unit": "px"
     },
     {
@@ -133,9 +126,9 @@
       "id": "table_height",
       "label": "Table Height",
       "min": 300,
-      "max": 800,
+      "max": 4000,
       "step": 50,
-      "default": 500,
+      "default": 1000,
       "unit": "px"
     },
     {
@@ -161,7 +154,7 @@
       "min": 0,
       "max": 100,
       "step": 5,
-      "default": 50,
+      "default": 0,
       "unit": "px"
     },
     {

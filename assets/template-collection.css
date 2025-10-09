@@ -107,7 +107,7 @@
 /* Desktop layout: 2/3 for products, 1/3 for info */
 @media screen and (min-width: 990px) {
   .collection-with-info {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     align-items: start;
   }
 }

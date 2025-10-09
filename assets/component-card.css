@@ -5,6 +5,60 @@
   text-decoration: none;
 }
 
+/* Simple grid layout */
+.card--simple-grid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card--simple-grid .card__inner {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.card--simple-grid .card__media {
+  margin: 0;
+  width: 100%;
+}
+
+.card--simple-grid .card__media .media img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: top;
+}
+
+.card--simple-grid .card__number {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%) translateY(100%);
+  text-align: center;
+  padding: 0.8rem 0;
+  font-size: 16rem;
+  line-height: 1;
+  font-weight: 400;
+  color: rgb(var(--color-foreground));
+}
+
+.product-card-wrapper {
+  padding-bottom: 16rem;
+}
+
+.product-grid {
+  gap: 0;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+}
+
+.product-grid .grid__item {
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 0;
+}
+
 .card {
   text-decoration: none;
   text-align: var(--text-alignment);
@@ -291,8 +345,8 @@
 
 .card__media .media img {
   height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  object-fit: contain;
+  object-position: top;
   width: 100%;
 }
 
@@ -384,11 +438,6 @@
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
     transition: transform var(--duration-long) ease;
-  }
-
-  .card:hover .media.media--hover-effect > img:first-child:only-child,
-  .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
-    transform: scale(1.03);
   }
 
   .card-wrapper:hover .media.media--hover-effect > img:first-child:not(:only-child) {
