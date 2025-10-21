@@ -16,6 +16,7 @@
       "blocks": {
         "footer-0": {
           "type": "link_list",
+          "disabled": true,
           "settings": {
             "heading": "Quick links",
             "menu": "footer"
@@ -23,6 +24,7 @@
         },
         "footer-2": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "heading": "Our mission",
             "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
@@ -33,6 +35,7 @@
         "footer-0",
         "footer-2"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": false,

@@ -19,6 +19,7 @@
     "spacing_sections": 0,
     "spacing_grid_horizontal": 0,
     "spacing_grid_vertical": 4,
+    "animations_reveal_on_scroll": false,
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
     "buttons_radius": 0,
@@ -132,6 +133,37 @@
         "type": "main-password-footer",
         "settings": {
           "color_scheme": "scheme-1"
+        }
+      },
+      "fixed-bottom-nav": {
+        "type": "fixed-bottom-nav",
+        "settings": {
+          "menu": "main-menu",
+          "offset_bottom": 20,
+          "offset_left": 20,
+          "offset_right": 20,
+          "z_index": 100,
+          "logo_image": "shopify://shop_images/13_1.png",
+          "logo_alt": "Logo",
+          "logo_width": 120,
+          "logo_spacing": 8,
+          "menu_text_color": "#000000",
+          "menu_font_size": 14,
+          "menu_font_weight": "400",
+          "menu_item_spacing": 8,
+          "info_text_color": "#666666",
+          "info_font_size": 12,
+          "info_font_weight": "400",
+          "info_item_spacing": 6,
+          "show_copyright": true,
+          "copyright_text": "JUSSU OBJECTS",
+          "instagram_handle": "@JUSSU.OBJECTS",
+          "instagram_link": "",
+          "show_year": true,
+          "custom_year": "2025",
+          "transition_speed": 300,
+          "hover_translate": 4,
+          "hide_on_mobile": false
         }
       }
     },

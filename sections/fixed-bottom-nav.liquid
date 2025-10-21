@@ -1,0 +1,689 @@
+{% comment %}
+  Fixed Bottom Navigation
+  Left side: Menu items (vertical stack)
+  Right side: Info section (logo, copyright, Instagram, year)
+{% endcomment %}
+
+<style>
+  .fixed-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: {{ section.settings.z_index }};
+    pointer-events: none;
+  }
+
+  .fixed-bottom-nav__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* Left Navigation Menu */
+  .fixed-bottom-nav__menu {
+    position: relative;
+    bottom: {{ section.settings.offset_bottom }}px;
+    left: {{ section.settings.offset_left }}px;
+    pointer-events: auto;
+  }
+
+  .fixed-bottom-nav__menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.menu_item_spacing }}px;
+  }
+
+  .fixed-bottom-nav__menu-item {
+    margin: 0;
+  }
+
+  .fixed-bottom-nav__menu-link {
+    display: inline-block;
+    padding: 0;
+    background-color: transparent;
+    color: {{ section.settings.menu_text_color }};
+    text-decoration: none;
+    font-size: {{ section.settings.menu_font_size }}px;
+    font-weight: {{ section.settings.menu_font_weight }};
+    transition: all {{ section.settings.transition_speed }}ms ease;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .fixed-bottom-nav__menu-link:hover,
+  .fixed-bottom-nav__menu-link:focus {
+    text-decoration: underline;
+    transform: translateX({{ section.settings.hover_translate }}px);
+  }
+
+  .fixed-bottom-nav__menu-link:focus {
+    outline: 2px solid {{ section.settings.menu_text_color }};
+    outline-offset: 2px;
+  }
+
+  /* Right Info Section */
+  .fixed-bottom-nav__info {
+    position: relative;
+    bottom: {{ section.settings.offset_bottom }}px;
+    right: {{ section.settings.offset_right }}px;
+    pointer-events: auto;
+  }
+
+  .fixed-bottom-nav__info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.info_item_spacing }}px;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .fixed-bottom-nav__info-item {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: {{ section.settings.info_text_color }};
+    font-size: {{ section.settings.info_font_size }}px;
+    font-weight: {{ section.settings.info_font_weight }};
+    transition: all {{ section.settings.transition_speed }}ms ease;
+  }
+
+  .fixed-bottom-nav__info-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity {{ section.settings.transition_speed }}ms ease;
+  }
+
+  .fixed-bottom-nav__info-link:hover,
+  .fixed-bottom-nav__info-link:focus {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+
+  .fixed-bottom-nav__info-link:focus {
+    outline: 2px solid {{ section.settings.info_text_color }};
+    outline-offset: 2px;
+  }
+
+  /* Logo styling */
+  .fixed-bottom-nav__logo {
+    margin-bottom: {{ section.settings.logo_spacing }}px;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .fixed-bottom-nav__logo-image {
+    max-width: {{ section.settings.logo_width }}px;
+    height: auto;
+    display: block;
+  }
+
+  /* Special styling for copyright and social */
+  .fixed-bottom-nav__info-item--icon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  .fixed-bottom-nav__info-item--year {
+    font-weight: 500;
+  }
+
+  /* Tablet styles (768px - 1023px) */
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    .fixed-bottom-nav__container {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .fixed-bottom-nav__menu {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: {{ section.settings.offset_bottom | times: 0.75 }}px;
+    }
+
+    .fixed-bottom-nav__menu-list {
+      flex-direction: row;
+      gap: {{ section.settings.menu_item_spacing | times: 0.75 }}px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .fixed-bottom-nav__info {
+      right: 50%;
+      transform: translateX(50%);
+      bottom: {{ section.settings.offset_bottom | times: 0.5 }}px;
+    }
+
+    .fixed-bottom-nav__info-list {
+      flex-direction: row;
+      gap: {{ section.settings.info_item_spacing | times: 0.75 }}px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .fixed-bottom-nav__menu-link,
+    .fixed-bottom-nav__info-item {
+      font-size: {{ section.settings.menu_font_size | times: 0.9 }}px;
+    }
+  }
+
+  /* Mobile styles (<768px) */
+  @media screen and (max-width: 767px) {
+    {% if section.settings.hide_on_mobile %}
+      .fixed-bottom-nav {
+        display: none;
+      }
+    {% else %}
+      .fixed-bottom-nav__container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 10px 10px;
+      }
+
+      .fixed-bottom-nav__menu {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .fixed-bottom-nav__menu-list {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .fixed-bottom-nav__menu-item {
+        flex: 1;
+      }
+
+      .fixed-bottom-nav__menu-link {
+        width: 100%;
+        text-align: center;
+        font-size: {{ section.settings.menu_font_size | times: 0.85 }}px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .fixed-bottom-nav__menu-link:hover,
+      .fixed-bottom-nav__menu-link:focus {
+        transform: translateY(-3px);
+      }
+
+      .fixed-bottom-nav__info {
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .fixed-bottom-nav__info-list {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .fixed-bottom-nav__info-item {
+        font-size: {{ section.settings.info_font_size | times: 0.8 }}px;
+      }
+    {% endif %}
+  }
+
+  /* Desktop only (1024px+) */
+  @media screen and (min-width: 1024px) {
+    .fixed-bottom-nav__menu-link:hover {
+      transform: translateX({{ section.settings.hover_translate }}px);
+    }
+  }
+</style>
+
+<nav class="fixed-bottom-nav" aria-label="Fixed bottom navigation" role="navigation">
+  <div class="fixed-bottom-nav__container">
+
+    {% comment %} Left Menu Section {% endcomment %}
+    {% if section.settings.menu != blank %}
+      <div class="fixed-bottom-nav__menu">
+        <ul class="fixed-bottom-nav__menu-list" role="list">
+          {% for link in linklists[section.settings.menu].links %}
+            <li class="fixed-bottom-nav__menu-item">
+              <a
+                href="{{ link.url }}"
+                class="fixed-bottom-nav__menu-link"
+                {% if link.current %}aria-current="page"{% endif %}
+              >
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% comment %} Right Info Section {% endcomment %}
+    <div class="fixed-bottom-nav__info">
+      <ul class="fixed-bottom-nav__info-list" role="list">
+
+        {% comment %} Logo Image {% endcomment %}
+        {% if section.settings.logo_image != blank %}
+          <li class="fixed-bottom-nav__logo">
+            <img
+              src="{{ section.settings.logo_image | image_url: width: section.settings.logo_width }}"
+              alt="{{ section.settings.logo_alt | default: shop.name }}"
+              class="fixed-bottom-nav__logo-image"
+              width="{{ section.settings.logo_width }}"
+              height="auto"
+              loading="lazy"
+            >
+          </li>
+        {% endif %}
+
+        {% comment %} Copyright Text {% endcomment %}
+        {% if section.settings.show_copyright %}
+          <li class="fixed-bottom-nav__info-item">
+            © Copyright of {{ section.settings.copyright_text | default: shop.name }}
+          </li>
+        {% endif %}
+
+        {% comment %} Instagram Handle {% endcomment %}
+        {% if section.settings.instagram_handle != blank %}
+          <li class="fixed-bottom-nav__info-item fixed-bottom-nav__info-item--icon">
+            {% if section.settings.instagram_link != blank %}
+              <a href="{{ section.settings.instagram_link }}" class="fixed-bottom-nav__info-link" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram page">
+                <span aria-hidden="true">IG</span> {{ section.settings.instagram_handle }}
+              </a>
+            {% else %}
+              <span aria-hidden="true">IG</span> {{ section.settings.instagram_handle }}
+            {% endif %}
+          </li>
+        {% endif %}
+
+        {% comment %} Year {% endcomment %}
+        {% if section.settings.show_year %}
+          <li class="fixed-bottom-nav__info-item fixed-bottom-nav__info-item--year">
+            {{ section.settings.custom_year | default: 'now' | date: '%Y' }}
+          </li>
+        {% endif %}
+
+        {% comment %} Custom Info Blocks {% endcomment %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'text_item' %}
+              <li class="fixed-bottom-nav__info-item" {{ block.shopify_attributes }}>
+                {% if block.settings.link != blank %}
+                  <a href="{{ block.settings.link }}" class="fixed-bottom-nav__info-link">
+                    {{ block.settings.text }}
+                  </a>
+                {% else %}
+                  {{ block.settings.text }}
+                {% endif %}
+              </li>
+
+            {% when 'html_item' %}
+              <li class="fixed-bottom-nav__info-item" {{ block.shopify_attributes }}>
+                {{ block.settings.html_content }}
+              </li>
+          {% endcase %}
+        {% endfor %}
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Fixed Bottom Navigation",
+  "tag": "section",
+  "class": "section-fixed-bottom-nav",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Menu Settings"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Select which menu to display in the left navigation"
+    },
+    {
+      "type": "header",
+      "content": "Position & Spacing"
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom offset",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "offset_left",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Left offset (menu)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "offset_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Right offset (info)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "z_index",
+      "min": 10,
+      "max": 1000,
+      "step": 10,
+      "label": "Z-index",
+      "default": 100,
+      "info": "Controls layering priority"
+    },
+    {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image",
+      "info": "Displayed at the top of the info section"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Logo alt text",
+      "default": "Logo",
+      "info": "Describe the logo for accessibility"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 30,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo bottom spacing",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Menu Styling"
+    },
+    {
+      "type": "color",
+      "id": "menu_text_color",
+      "label": "Menu text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "menu_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Menu font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "menu_font_weight",
+      "label": "Menu font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "menu_item_spacing",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between menu items",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Info Section Styling"
+    },
+    {
+      "type": "color",
+      "id": "info_text_color",
+      "label": "Info text color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "info_font_size",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Info font size",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "info_font_weight",
+      "label": "Info font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "info_item_spacing",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between info items",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_copyright",
+      "label": "Show copyright",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "JUSSU OBJECTS",
+      "info": "Text after '© Copyright of'"
+    },
+    {
+      "type": "header",
+      "content": "Instagram"
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram handle",
+      "default": "@JUSSU.OBJECTS",
+      "info": "Example: @JUSSU.OBJECTS"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram URL",
+      "info": "Full Instagram profile URL (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Year"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_year",
+      "label": "Show year",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_year",
+      "label": "Custom year",
+      "default": "2025",
+      "info": "Leave blank to show current year automatically"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "min": 100,
+      "max": 800,
+      "step": 50,
+      "unit": "ms",
+      "label": "Transition speed",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "hover_translate",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Hover translate distance",
+      "default": 4,
+      "info": "How far menu items move on hover (desktop only)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false,
+      "info": "Hide navigation on screens smaller than 768px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_item",
+      "name": "Text Info Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Info text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "Leave empty for plain text"
+        }
+      ]
+    },
+    {
+      "type": "html_item",
+      "name": "HTML Info Item",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html_content",
+          "label": "HTML Content",
+          "default": "<span>Custom HTML</span>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fixed Bottom Navigation"
+    }
+  ]
+}
+{% endschema %}

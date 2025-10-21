@@ -25,8 +25,8 @@
     style="
       left: {{ pos_x }}%;
       top: {{ pos_y }}%;
-      width: {{ item_width }}px;
-      height: {{ item_height }}px;
+      --item-base-width: {{ item_width }};
+      --item-base-height: {{ item_height }};
       --hover-scale: {{ hover_scale | divided_by: 100.0 }};
     "
   >
@@ -83,6 +83,11 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
+    /* Scale items proportionally with table height */
+    /* Formula: (item_px / table_base_height) * actual_table_height */
+    /* Since table height = min(table-max-vh, calculated by aspect ratio) */
+    width: calc((var(--item-base-width) / var(--table-base-height)) * var(--table-max-vh));
+    height: calc((var(--item-base-height) / var(--table-base-height)) * var(--table-max-vh));
   }
 
   .table-product-item:hover {
