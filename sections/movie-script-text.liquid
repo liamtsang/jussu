@@ -1,0 +1,304 @@
+{{ 'section-movie-script-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {%- if section.settings.background_image != blank -%}
+    #MovieScriptText-{{ section.id }} .movie-script-text__container {
+      background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+      background-size: {{ section.settings.background_size }};
+      background-position: {{ section.settings.background_position }};
+      background-repeat: no-repeat;
+    }
+  {%- elsif section.settings.custom_background_color != blank -%}
+    #MovieScriptText-{{ section.id }} .movie-script-text__container {
+      background: {{ section.settings.custom_background_color }};
+    }
+    #MovieScriptText-{{ section.id }} .movie-script-text__container::before {
+      background: linear-gradient(to bottom, {{ section.settings.custom_background_color }} 0%, rgba({{ section.settings.custom_background_color | color_extract: 'red' }}, {{ section.settings.custom_background_color | color_extract: 'green' }}, {{ section.settings.custom_background_color | color_extract: 'blue' }}, 0) 100%);
+    }
+    #MovieScriptText-{{ section.id }} .movie-script-text__container::after {
+      background: linear-gradient(to top, {{ section.settings.custom_background_color }} 0%, rgba({{ section.settings.custom_background_color | color_extract: 'red' }}, {{ section.settings.custom_background_color | color_extract: 'green' }}, {{ section.settings.custom_background_color | color_extract: 'blue' }}, 0) 100%);
+    }
+  {%- endif -%}
+
+  {%- if section.settings.background_image != blank and section.settings.background_overlay_opacity > 0 -%}
+    #MovieScriptText-{{ section.id }} .movie-script-text__container::before {
+      background: rgba(0, 0, 0, {{ section.settings.background_overlay_opacity | divided_by: 100.0 }});
+    }
+  {%- endif -%}
+
+  {%- if section.settings.custom_text_color != blank -%}
+    #MovieScriptText-{{ section.id }} .movie-script-text__content {
+      color: {{ section.settings.custom_text_color }};
+    }
+    #MovieScriptText-{{ section.id }} .movie-script-text__content a {
+      color: {{ section.settings.custom_text_color }};
+    }
+  {%- endif -%}
+
+  #MovieScriptText-{{ section.id }} .movie-script-text__container {
+    height: {{ section.settings.container_height }}vh;
+    max-width: {{ section.settings.max_width }}%;
+  }
+
+  #MovieScriptText-{{ section.id }} .movie-script-text__content {
+    font-size: {{ section.settings.font_size | times: 0.1 }}rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    #MovieScriptText-{{ section.id }} .movie-script-text__content {
+      font-size: {{ section.settings.font_size | times: 0.1 }}rem;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="MovieScriptText-{{ section.id }}"
+  class="movie-script-text color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+>
+  <div class="movie-script-text__wrapper">
+    <div
+      class="movie-script-text__container"
+      data-auto-scroll="{{ section.settings.enable_auto_scroll }}"
+      data-scroll-speed="{{ section.settings.scroll_speed }}"
+    >
+      <div class="movie-script-text__scrollable">
+        <div class="movie-script-text__content rte">
+          {%- if section.settings.script_content != blank -%}
+            {{ section.settings.script_content }}
+          {%- else -%}
+            <p><strong>INT. COFFEE SHOP - DAY</strong></p>
+            <p>A cozy coffee shop buzzes with the morning rush. SARAH, mid-30s, sits at a corner table with her laptop.</p>
+            <p style="text-align: center;"><strong>SARAH</strong></p>
+            <p style="margin-left: 4rem;">This is where your movie script content will appear. You can format it with <strong>bold</strong>, <em>italic</em>, <u>underline</u>, and <a href="#">links</a>.</p>
+            <p>The barista approaches with a fresh cup of coffee.</p>
+            <p style="text-align: center;"><strong>BARISTA</strong></p>
+            <p style="margin-left: 4rem;">Your usual?</p>
+            <p style="text-align: center;"><strong>SARAH</strong></p>
+            <p style="margin-left: 4rem;">(smiling)</p>
+            <p style="margin-left: 4rem;">You know it.</p>
+            <p><strong>FADE OUT.</strong></p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'movie-script-text.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Movie Script Text",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Script Content"
+    },
+    {
+      "type": "richtext",
+      "id": "script_content",
+      "label": "Script Content",
+      "default": "<p><strong>INT. COFFEE SHOP - DAY</strong></p><p>A cozy coffee shop buzzes with the morning rush.</p>",
+      "info": "Write your script here. Use the formatting tools for bold, italic, underline, and links. Add manual indentation and spacing as needed."
+    },
+    {
+      "type": "header",
+      "content": "Auto-Scroll Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_auto_scroll",
+      "label": "Enable Auto-Scroll",
+      "default": true,
+      "info": "Automatically scroll the script. Hover to pause."
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll Speed (pixels per second)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "info": "Lower = slower, Higher = faster"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "range",
+      "id": "container_height",
+      "label": "Container Height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 60,
+      "info": "Height of the script container (% of viewport height)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85,
+      "info": "Maximum width of the script container"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "info": "Base font size for the script text"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Upload a custom background image (overrides background color)"
+    },
+    {
+      "type": "select",
+      "id": "background_size",
+      "label": "Background Size",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "auto",
+          "label": "Original Size"
+        }
+      ],
+      "default": "cover",
+      "info": "How the background image should fit"
+    },
+    {
+      "type": "select",
+      "id": "background_position",
+      "label": "Background Position",
+      "options": [
+        {
+          "value": "center center",
+          "label": "Center"
+        },
+        {
+          "value": "top center",
+          "label": "Top"
+        },
+        {
+          "value": "bottom center",
+          "label": "Bottom"
+        },
+        {
+          "value": "left center",
+          "label": "Left"
+        },
+        {
+          "value": "right center",
+          "label": "Right"
+        }
+      ],
+      "default": "center center",
+      "info": "Position of the background image"
+    },
+    {
+      "type": "range",
+      "id": "background_overlay_opacity",
+      "label": "Background Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "info": "Add a dark overlay on the background image to improve text readability"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "custom_background_color",
+      "label": "Custom Background Color",
+      "info": "Override the script background color (leave blank for default cream color). Not used if background image is set."
+    },
+    {
+      "type": "color",
+      "id": "custom_text_color",
+      "label": "Custom Text Color",
+      "info": "Override the script text color (leave blank for default black)"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Movie Script Text",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

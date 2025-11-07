@@ -1,0 +1,208 @@
+{{ 'section-playlist-showcase.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="playlist-showcase color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="playlist-showcase__wrapper page-width">
+    <div class="playlist-showcase__container">
+
+      {%- if section.settings.playlist_title != blank -%}
+        <{{ section.settings.heading_tag }} class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.playlist_title }}
+        </{{ section.settings.heading_tag }}>
+      {%- endif -%}
+
+      {%- if section.settings.show_by_jussu -%}
+        <p class="playlist-showcase__byline{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          by <strong>Jussu</strong>
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.playlist_image != blank -%}
+        <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <img
+            srcset="
+              {%- if section.settings.playlist_image.width >= 375 -%}{{ section.settings.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
+              {%- if section.settings.playlist_image.width >= 750 -%}{{ section.settings.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
+              {%- if section.settings.playlist_image.width >= 1100 -%}{{ section.settings.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+              {{ section.settings.playlist_image | image_url }} {{ section.settings.playlist_image.width }}w
+            "
+            src="{{ section.settings.playlist_image | image_url: width: 750 }}"
+            loading="lazy"
+            alt="{{ section.settings.playlist_image.alt | escape }}"
+            width="{{ section.settings.playlist_image.width }}"
+            height="{{ section.settings.playlist_image.height }}"
+            class="playlist-showcase__image"
+          >
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <div class="playlist-showcase__button{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <a
+            {% if section.settings.button_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+            class="button-diamond"
+            style="--button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-border-color: {{ section.settings.button_border_color }};"
+          >
+            <svg class="button-diamond__bg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+              <polygon points="100,10 190,50 100,90 10,50" />
+            </svg>
+            <span class="button-diamond__text">{{ section.settings.button_label | escape }}</span>
+          </a>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Playlist Showcase",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Playlist Content"
+    },
+    {
+      "type": "text",
+      "id": "playlist_title",
+      "label": "Playlist Title",
+      "default": "PLAYLIST TITLE"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_by_jussu",
+      "label": "Show 'by Jussu' byline",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "playlist_image",
+      "label": "Playlist Image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Add your custom playlist description here. Style it with <strong>bold</strong>, <em>italic</em>, or add <a href='#'>links</a>.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Listen Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color (optional)",
+      "info": "Leave empty to match background color"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Playlist Showcase",
+      "category": "Music"
+    }
+  ]
+}
+{% endschema %}

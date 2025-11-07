@@ -64,16 +64,21 @@
               </div>
             </div>
           {%- endif -%}
-          <div class="card__number">
-            {% assign item_number = card_product.metafields.custom.item_number %}
-            {% if item_number and item_number < 10 %}
-              0{{ item_number }}
-            {% elsif item_number %}
-              {{ item_number }}
-            {% else %}
-              {{ forloop.index | prepend: '00' | slice: -2, 2 }}
-            {% endif %}
-          </div>
+          {% comment %}
+            <div class="card__number">
+              {% assign item_number = card_product.metafields.custom.item_number %}
+              {% if item_number and item_number < 10 %}
+                0{{ item_number }}
+              {% elsif item_number %}
+                {{ item_number }}
+              {% else %}
+                {{ forloop.index | prepend: '00' | slice: -2, 2 }}
+              {% endif %}
+            </div>
+          {% endcomment %}
+          {%- if card_product.tags contains 'refound' -%}
+            <div class="card__badge card__badge--refound">Refound</div>
+          {%- endif -%}
         </div>
       </div>
     </a>

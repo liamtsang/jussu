@@ -157,6 +157,13 @@
               >
                 {% assign skip_card_product_styles = false %}
                 {%- for product in collection.products -%}
+                  {%- comment -%} Exclude refound items from 'all' collection {%- endcomment -%}
+                  {%- assign is_refound = false -%}
+                  {%- if product.tags contains 'refound' -%}
+                    {%- assign is_refound = true -%}
+                  {%- endif -%}
+
+                  {%- unless collection.handle == 'all' and is_refound -%}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
@@ -200,6 +207,7 @@
                     %}
                   </li>
                   {%- assign skip_card_product_styles = true -%}
+                  {%- endunless -%}
                 {%- endfor -%}
               </ul>
 

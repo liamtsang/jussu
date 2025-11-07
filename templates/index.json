@@ -120,10 +120,31 @@
         "instructions_color": "#666666",
         "instructions_font_size": 16
       }
+    },
+    "movie_script_text_4AFfkL": {
+      "type": "movie-script-text",
+      "name": "Movie Script Text",
+      "settings": {
+        "script_content": "<p><strong>INT. COFFEE SHOP - DAY</strong></p><p>A cozy coffee shop buzzes with the morning rush.</p>",
+        "enable_auto_scroll": true,
+        "scroll_speed": 30,
+        "container_height": 60,
+        "max_width": 85,
+        "font_size": 16,
+        "background_size": "cover",
+        "background_position": "center center",
+        "background_overlay_opacity": 0,
+        "color_scheme": "",
+        "custom_background_color": "#ffffff",
+        "custom_text_color": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "multicolumn",
-    "interactive_dinner_table_zwh9EA"
+    "interactive_dinner_table_zwh9EA",
+    "movie_script_text_4AFfkL"
   ]
 }
