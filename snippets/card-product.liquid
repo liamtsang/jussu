@@ -31,11 +31,16 @@
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
+    if media_aspect_ratio == 'portrait'
+      assign ratio = 0.8
+    elsif media_aspect_ratio == 'adapt' and card_product.featured_media
+      assign ratio = card_product.featured_media.aspect_ratio
+    endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
     <a href="{{ card_product.url }}" class="full-card-link" aria-label="{{ card_product.title | escape }}">
       <div class="card card--simple-grid">
-        <div class="card__inner ratio" style="--ratio-percent: 100%;">
+        <div class="card__inner ratio" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
           {%- if card_product.featured_media -%}
             <div class="card__media">
               <div class="media media--transparent">
