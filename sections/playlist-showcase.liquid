@@ -18,9 +18,9 @@
   <div class="playlist-showcase__wrapper page-width">
     <div class="playlist-showcase__container">
 
-      {%- if section.settings.playlist_title != blank -%}
+      {%- if page.title != blank -%}
         <{{ section.settings.heading_tag }} class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.playlist_title }}
+          {{ page.title }}
         </{{ section.settings.heading_tag }}>
       {%- endif -%}
 
@@ -30,38 +30,38 @@
         </p>
       {%- endif -%}
 
-      {%- if section.settings.playlist_image != blank -%}
+      {%- if page.metafields.custom.playlist_image != blank -%}
         <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <img
             srcset="
-              {%- if section.settings.playlist_image.width >= 375 -%}{{ section.settings.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
-              {%- if section.settings.playlist_image.width >= 750 -%}{{ section.settings.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
-              {%- if section.settings.playlist_image.width >= 1100 -%}{{ section.settings.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
-              {{ section.settings.playlist_image | image_url }} {{ section.settings.playlist_image.width }}w
+              {%- if page.metafields.custom.playlist_image.width >= 375 -%}{{ page.metafields.custom.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
+              {%- if page.metafields.custom.playlist_image.width >= 750 -%}{{ page.metafields.custom.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
+              {%- if page.metafields.custom.playlist_image.width >= 1100 -%}{{ page.metafields.custom.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+              {{ page.metafields.custom.playlist_image | image_url }} {{ page.metafields.custom.playlist_image.width }}w
             "
-            src="{{ section.settings.playlist_image | image_url: width: 750 }}"
+            src="{{ page.metafields.custom.playlist_image | image_url: width: 750 }}"
             loading="lazy"
-            alt="{{ section.settings.playlist_image.alt | escape }}"
-            width="{{ section.settings.playlist_image.width }}"
-            height="{{ section.settings.playlist_image.height }}"
+            alt="{{ page.metafields.custom.playlist_image.alt | escape }}"
+            width="{{ page.metafields.custom.playlist_image.width }}"
+            height="{{ page.metafields.custom.playlist_image.height }}"
             class="playlist-showcase__image"
           >
         </div>
       {%- endif -%}
 
-      {%- if section.settings.description != blank -%}
+      {%- if page.content != blank -%}
         <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ section.settings.description }}
+          {{ page.content }}
         </div>
       {%- endif -%}
 
       {%- if section.settings.button_label != blank -%}
         <div class="playlist-showcase__button{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <a
-            {% if section.settings.button_link == blank %}
+            {% if page.metafields.custom.playlist_url == blank %}
               role="link" aria-disabled="true"
             {% else %}
-              href="{{ section.settings.button_link }}"
+              href="{{ page.metafields.custom.playlist_url }}"
             {% endif %}
             class="button-diamond"
             style="--button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-border-color: {{ section.settings.button_border_color }};"
@@ -88,14 +88,12 @@
   },
   "settings": [
     {
-      "type": "header",
-      "content": "Playlist Content"
+      "type": "paragraph",
+      "content": "This section displays playlist information from the page. Set the playlist title and description in the page editor. Add metafields 'custom.playlist_image' and 'custom.playlist_url' to the page."
     },
     {
-      "type": "text",
-      "id": "playlist_title",
-      "label": "Playlist Title",
-      "default": "PLAYLIST TITLE"
+      "type": "header",
+      "content": "Playlist Settings"
     },
     {
       "type": "select",
@@ -120,17 +118,6 @@
       "default": true
     },
     {
-      "type": "image_picker",
-      "id": "playlist_image",
-      "label": "Playlist Image"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>Add your custom playlist description here. Style it with <strong>bold</strong>, <em>italic</em>, or add <a href='#'>links</a>.</p>"
-    },
-    {
       "type": "header",
       "content": "Button"
     },
@@ -139,11 +126,6 @@
       "id": "button_label",
       "label": "Button Label",
       "default": "Listen Now"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
     },
     {
       "type": "color",
