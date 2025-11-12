@@ -55,6 +55,38 @@
                 </h2>
               {% endcomment %}
             {%- endif -%}
+
+            {%- comment -%} Collection Switcher Dropdown {%- endcomment -%}
+            {%- if filter_type == 'horizontal' -%}
+              <div class="facet-filters collection-switcher caption">
+                <div class="facet-filters__field">
+                  <h2 class="facet-filters__label caption-large text-body">
+                    <label for="CollectionSelect">Scene</label>
+                  </h2>
+                  <div class="select">
+                    <select
+                      name="collection"
+                      class="facet-filters__sort select__select caption-large"
+                      id="CollectionSelect"
+                      onchange="window.location.href = this.value"
+                    >
+                      {%- for coll in collections -%}
+                        <option
+                          value="{{ coll.url }}"
+                          {% if collection.handle == coll.handle %}selected{% endif %}
+                        >
+                          {{ coll.title }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    <span class="svg-wrapper">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
             {%- if filter_type == 'vertical' -%}
               <div class="active-facets active-facets-desktop">
@@ -511,6 +543,50 @@
               id="FacetsWrapperMobile"
               class="mobile-facets__main has-submenu gradient"
             >
+              {%- comment -%} Collection Switcher Dropdown - Mobile {%- endcomment -%}
+              <details
+                id="Details-Mobile-CollectionSelect-{{ section.id }}"
+                class="mobile-facets__details js-filter"
+                data-index="mobile-collection"
+              >
+                <summary class="mobile-facets__summary focus-inset">
+                  <div>
+                    <span>Scene</span>
+                    <span class="mobile-facets__arrow">
+                      {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    </span>
+                  </div>
+                </summary>
+                <div
+                  id="FacetMobile-Collection-{{ section.id }}"
+                  class="mobile-facets__submenu gradient"
+                >
+                  <button
+                    class="mobile-facets__close-button link link--text focus-inset"
+                    aria-expanded="true"
+                    type="button"
+                  >
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    <span>Scene</span>
+                  </button>
+                  <ul class="mobile-facets__list list-unstyled" role="list">
+                    {%- for coll in collections -%}
+                      <li class="mobile-facets__item list-menu__item">
+                        <a
+                          href="{{ coll.url }}"
+                          class="mobile-facets__label{% if collection.handle == coll.handle %} active{% endif %}"
+                        >
+                          {{ coll.title }}
+                          {%- if collection.handle == coll.handle -%}
+                            <span class="mobile-facets__highlight"></span>
+                          {%- endif -%}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </details>
+
               {%- if enable_filtering -%}
                 {%- for filter in results.filters -%}
                   {% liquid
