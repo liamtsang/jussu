@@ -70,8 +70,6 @@
           "type": "product_item",
           "settings": {
             "product": "item-02",
-            "normal_image": "shopify://shop_images/4.webp",
-            "hover_image": "shopify://shop_images/4_HOVER.webp",
             "position_x": 72,
             "position_y": 37,
             "item_width": 125,
@@ -86,8 +84,6 @@
           "type": "product_item",
           "settings": {
             "product": "item-03",
-            "normal_image": "shopify://shop_images/11.webp",
-            "hover_image": "shopify://shop_images/11_HOVER.webp",
             "position_x": 35,
             "position_y": 23,
             "item_width": 145,
@@ -125,12 +121,12 @@
       "type": "movie-script-text",
       "name": "Movie Script Text",
       "settings": {
-        "script_content": "<p><strong>INT. COFFEE SHOP - DAY</strong></p><p>A cozy coffee shop buzzes with the morning rush.</p>",
+        "script_content": "<p>EXT. EVENING</p><p>The guests arrive, each carrying something for the host. Some hold wine bottles, some flowers. One rings the doorbell.</p><p>CHATTER OF GUESTS.</p><p>THE HOST opens the door.</p><p>HOST</p><p>(warmly to the guests)</p><p>Hello, hello.</p><p>INT. DINING ROOM</p><p>ROBERTA puts down her flowers on the table and notices <span style=\"text-decoration:underline\">O1</span>. </p><p>ROBERTA (V.O.)</p><p>It’s smaller than a typical wine glass, slightly unusual.</p><p>JEREMYN points his finger at <span style=\"text-decoration:underline\">O5</span>; it seems to have its stoic eyes on him.</p><p>JEREMYN</p><p>Are… they staring at me?</p><p>ROBERTA</p><p>Who?</p><p>JEREMYN grabs one of them, the one with the mustache.</p><p>MARIA B. opens a bottle of red with <span style=\"text-decoration:underline\">J1-P</span>, pouring for JEREMYN and CLARA.</p><p>THE HOST walks over to the stereo and puts <span style=\"text-decoration:underline\">Jussu Mix.1</span> on shuffle.</p><p>MUSIC CUE: “POURQUOI TU ME FOUS PLUS DES COUPS? - RADIO EDIT” by An Luu</p><p>JEREMYN</p><p>I wonder what the <span style=\"text-decoration:underline\">cue object</span> is.</p>",
         "enable_auto_scroll": true,
-        "scroll_speed": 30,
+        "scroll_speed": 35,
         "container_height": 60,
         "max_width": 85,
-        "font_size": 16,
+        "font_size": 12,
         "background_size": "cover",
         "background_position": "center center",
         "background_overlay_opacity": 0,
