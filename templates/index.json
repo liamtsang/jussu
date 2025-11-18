@@ -85,14 +85,16 @@
         "product_item_9eeqtN": {
           "type": "product_item",
           "settings": {
-            "product": "item-03",
+            "product": "o2",
+            "normal_image": "shopify://shop_images/2.png",
+            "hover_image": "shopify://shop_images/2_HOVER.png",
             "position_x": 35,
             "position_y": 23,
-            "item_width": 145,
-            "item_height": 145,
+            "item_width": 140,
+            "item_height": 200,
             "click_action": "product_page",
             "show_product_title": true,
-            "show_price": true,
+            "show_price": false,
             "hover_scale": 110
           }
         }
