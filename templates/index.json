@@ -129,13 +129,30 @@
             "show_price": true,
             "hover_scale": 110
           }
+        },
+        "product_item_9f9DBp": {
+          "type": "product_item",
+          "settings": {
+            "product": "o6",
+            "normal_image": "shopify://shop_images/6.png",
+            "hover_image": "shopify://shop_images/6_HOVER.png",
+            "position_x": 50,
+            "position_y": 34,
+            "item_width": 200,
+            "item_height": 200,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
         }
       },
       "block_order": [
         "product_item_3wXYKM",
         "product_item_9eeqtN",
         "product_item_dfBVQC",
-        "product_item_CV9xxk"
+        "product_item_CV9xxk",
+        "product_item_9f9DBp"
       ],
       "name": "Interactive Dinner Table",
       "settings": {
