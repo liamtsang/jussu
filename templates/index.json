@@ -200,7 +200,7 @@
         "section_background_color": "#ffffff",
         "section_padding_top": 50,
         "section_padding_bottom": 50,
-        "show_instructions": true,
+        "show_instructions": false,
         "instructions_text": "Hover over items to see them highlighted, click to shop!",
         "instructions_color": "#666666",
         "instructions_font_size": 16
@@ -214,7 +214,7 @@
         "enable_auto_scroll": true,
         "scroll_speed": 30,
         "container_height": 60,
-        "max_width": 85,
+        "max_width": 80,
         "font_size": 12,
         "background_size": "cover",
         "background_position": "center center",

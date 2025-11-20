@@ -162,7 +162,7 @@
           "custom_year": "",
           "transition_speed": 300,
           "hover_translate": 4,
-          "hide_on_mobile": true
+          "hide_on_mobile": false
         }
       }
     },
