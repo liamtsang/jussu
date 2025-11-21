@@ -41,10 +41,24 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "fixed_side_image_4FALPR": {
+      "type": "fixed-side-image",
+      "name": "Fixed Side Image",
+      "settings": {
+        "image": "shopify://shop_images/JUSSUMIX1.png",
+        "alt_text": "",
+        "link_url": "",
+        "open_in_new_tab": false,
+        "image_width": 120,
+        "mobile_image_width": 100,
+        "hide_on_mobile": false
+      }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "fixed_side_image_4FALPR"
   ]
 }
