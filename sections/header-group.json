@@ -48,7 +48,7 @@
       "settings": {
         "image": "shopify://shop_images/JUSSUMIX1.png",
         "alt_text": "",
-        "link_url": "",
+        "link_url": "shopify://pages/test-playlist",
         "open_in_new_tab": false,
         "image_width": 120,
         "mobile_image_width": 100,
