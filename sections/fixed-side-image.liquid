@@ -1,0 +1,113 @@
+{%- style -%}
+  .fixed-side-image-{{ section.id }} {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    max-width: {{ section.settings.image_width }}px;
+  }
+
+  .fixed-side-image-{{ section.id }} img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: 749px) {
+    .fixed-side-image-{{ section.id }} {
+      max-width: {{ section.settings.mobile_image_width }}px;
+    }
+  }
+
+  {% if section.settings.hide_on_mobile %}
+    @media screen and (max-width: 749px) {
+      .fixed-side-image-{{ section.id }} {
+        display: none;
+      }
+    }
+  {% endif %}
+{%- endstyle -%}
+
+{% if section.settings.image != blank %}
+  <div class="fixed-side-image-{{ section.id }}">
+    {% if section.settings.link_url != blank %}
+      <a href="{{ section.settings.link_url }}" {% if section.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+        {{ section.settings.image | image_url: width: section.settings.image_width | image_tag:
+          loading: 'lazy',
+          alt: section.settings.image.alt | default: section.settings.alt_text
+        }}
+      </a>
+    {% else %}
+      {{ section.settings.image | image_url: width: section.settings.image_width | image_tag:
+        loading: 'lazy',
+        alt: section.settings.image.alt | default: section.settings.alt_text
+      }}
+    {% endif %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Fixed Side Image",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "This image will be fixed to the right side of the screen"
+    },
+    {
+      "type": "text",
+      "id": "alt_text",
+      "label": "Image alt text",
+      "info": "Describe the image for accessibility"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL",
+      "info": "Optional: Add a link destination for the image"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open link in new tab",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width (desktop)",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_width",
+      "min": 30,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width (mobile)",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile devices",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fixed Side Image"
+    }
+  ]
+}
+{% endschema %}
