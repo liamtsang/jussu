@@ -34,9 +34,13 @@ class MovieScriptText {
   }
 
   setupAnimation() {
-    // Calculate the duration based on content height and scroll speed
-    const contentHeight = this.content.scrollHeight;
-    const duration = (contentHeight / this.scrollSpeed) * 2; // Multiply by 2 for both up and down movement
+    // Calculate the duration based on a single item's height and scroll speed
+    // Since we have two copies of the content, we only need to animate through one
+    const firstItem = this.content.querySelector('.movie-script-text__item');
+    if (!firstItem) return;
+
+    const itemHeight = firstItem.scrollHeight;
+    const duration = itemHeight / this.scrollSpeed;
 
     this.content.style.animationDuration = `${duration}s`;
     this.content.classList.add('scrolling');
@@ -106,7 +110,7 @@ class MovieScriptText {
 // Initialize all movie script sections on the page
 function initMovieScriptSections() {
   const containers = document.querySelectorAll('.movie-script-text__container');
-  containers.forEach(container => {
+  containers.forEach((container) => {
     if (!container.movieScriptInstance) {
       container.movieScriptInstance = new MovieScriptText(container);
     }

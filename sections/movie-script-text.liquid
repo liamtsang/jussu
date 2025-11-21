@@ -75,21 +75,30 @@
     >
       <div class="movie-script-text__scrollable">
         <div class="movie-script-text__content rte">
-          {%- if section.settings.script_content != blank -%}
-            {{ section.settings.script_content }}
-          {%- else -%}
-            <p><strong>INT. COFFEE SHOP - DAY</strong></p>
-            <p>A cozy coffee shop buzzes with the morning rush. SARAH, mid-30s, sits at a corner table with her laptop.</p>
-            <p style="text-align: center;"><strong>SARAH</strong></p>
-            <p style="margin-left: 4rem;">This is where your movie script content will appear. You can format it with <strong>bold</strong>, <em>italic</em>, <u>underline</u>, and <a href="#">links</a>.</p>
-            <p>The barista approaches with a fresh cup of coffee.</p>
-            <p style="text-align: center;"><strong>BARISTA</strong></p>
-            <p style="margin-left: 4rem;">Your usual?</p>
-            <p style="text-align: center;"><strong>SARAH</strong></p>
-            <p style="margin-left: 4rem;">(smiling)</p>
-            <p style="margin-left: 4rem;">You know it.</p>
-            <p><strong>FADE OUT.</strong></p>
-          {%- endif -%}
+          {%- capture script_content -%}
+            {%- if section.settings.script_content != blank -%}
+              {{ section.settings.script_content }}
+            {%- else -%}
+              <p><strong>INT. COFFEE SHOP - DAY</strong></p>
+              <p>A cozy coffee shop buzzes with the morning rush. SARAH, mid-30s, sits at a corner table with her laptop.</p>
+              <p style="text-align: center;"><strong>SARAH</strong></p>
+              <p style="margin-left: 4rem;">This is where your movie script content will appear. You can format it with <strong>bold</strong>, <em>italic</em>, <u>underline</u>, and <a href="#">links</a>.</p>
+              <p>The barista approaches with a fresh cup of coffee.</p>
+              <p style="text-align: center;"><strong>BARISTA</strong></p>
+              <p style="margin-left: 4rem;">Your usual?</p>
+              <p style="text-align: center;"><strong>SARAH</strong></p>
+              <p style="margin-left: 4rem;">(smiling)</p>
+              <p style="margin-left: 4rem;">You know it.</p>
+              <p><strong>FADE OUT.</strong></p>
+            {%- endif -%}
+          {%- endcapture -%}
+
+          <div class="movie-script-text__item">
+            {{ script_content }}
+          </div>
+          <div class="movie-script-text__item movie-script-text__item--clone" aria-hidden="true">
+            {{ script_content }}
+          </div>
         </div>
       </div>
     </div>
