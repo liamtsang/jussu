@@ -143,6 +143,7 @@
           "offset_left": 20,
           "offset_right": 20,
           "z_index": 100,
+          "logo_image": "shopify://shop_images/transparent_logo.png",
           "logo_alt": "Logo",
           "logo_width": 120,
           "logo_spacing": 8,
