@@ -296,7 +296,7 @@
         {% comment %} Copyright Text {% endcomment %}
         {% if section.settings.show_copyright %}
           <li class="fixed-bottom-nav__info-item">
-            © Copyright of {{ section.settings.copyright_text | default: shop.name }}
+            © {{ section.settings.copyright_text | default: shop.name }}
           </li>
         {% endif %}
 
