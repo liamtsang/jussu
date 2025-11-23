@@ -107,7 +107,7 @@
             "position_x": 50,
             "position_y": 16,
             "item_width": 200,
-            "item_height": 115,
+            "item_height": 160,
             "click_action": "product_page",
             "show_product_title": true,
             "show_price": false,
