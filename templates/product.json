@@ -92,7 +92,7 @@
           "disabled": true,
           "settings": {
             "heading": "Care Instructions",
-            "icon": "heart",
+            "icon": "none",
             "content": "",
             "page": ""
           }
