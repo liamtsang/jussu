@@ -14,13 +14,13 @@
       "name": "Playlist Showcase",
       "settings": {
         "heading_tag": "h2",
-        "show_by_jussu": true,
+        "show_by_jussu": false,
         "button_label": "PLAY",
         "button_bg_color": "#ff0000",
-        "button_text_color": "#ffffff",
+        "button_text_color": "#000000",
         "button_border_color": "",
         "color_scheme": "",
-        "padding_top": 36,
+        "padding_top": 8,
         "padding_bottom": 36
       }
     },
