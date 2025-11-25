@@ -46,11 +46,11 @@
       "type": "fixed-side-image",
       "name": "Fixed Side Image",
       "settings": {
-        "image": "shopify://shop_images/jussumixbutton.png",
+        "image": "shopify://shop_images/jussumixbutton_copy.png",
         "alt_text": "",
         "link_url": "shopify://pages/test-playlist",
         "open_in_new_tab": false,
-        "image_width": 50,
+        "image_width": 70,
         "mobile_image_width": 30,
         "hide_on_mobile": false
       }
