@@ -152,7 +152,7 @@
           "menu_font_weight": "400",
           "menu_item_spacing": 4,
           "info_text_color": "#000000",
-          "info_font_size": 12,
+          "info_font_size": 10,
           "info_font_weight": "400",
           "info_item_spacing": 4,
           "show_copyright": true,
