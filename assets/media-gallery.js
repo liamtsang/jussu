@@ -28,7 +28,7 @@ if (!customElements.get('media-gallery')) {
         this.setActiveThumbnail(thumbnail);
       }
 
-      setActiveMedia(mediaId, prepend) {
+      setActiveMedia(mediaId, moveToSecond) {
         const activeMedia =
           this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`) ||
           this.elements.viewer.querySelector('[data-media-id]');
@@ -40,12 +40,22 @@ if (!customElements.get('media-gallery')) {
         });
         activeMedia?.classList?.add('is-active');
 
-        if (prepend) {
-          activeMedia.parentElement.firstChild !== activeMedia && activeMedia.parentElement.prepend(activeMedia);
+        if (moveToSecond) {
+          const parent = activeMedia.parentElement;
+          const firstChild = parent.firstElementChild;
+          // Only move if it's not already the first or second item
+          if (activeMedia !== firstChild && activeMedia !== firstChild.nextElementSibling) {
+            // Insert after the first child (as second item)
+            firstChild.after(activeMedia);
+          }
 
           if (this.elements.thumbnails) {
             const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
-            activeThumbnail.parentElement.firstChild !== activeThumbnail && activeThumbnail.parentElement.prepend(activeThumbnail);
+            const thumbParent = activeThumbnail.parentElement;
+            const firstThumb = thumbParent.firstElementChild;
+            if (activeThumbnail !== firstThumb && activeThumbnail !== firstThumb.nextElementSibling) {
+              firstThumb.after(activeThumbnail);
+            }
           }
 
           if (this.elements.viewer.slider) this.elements.viewer.resetPages();

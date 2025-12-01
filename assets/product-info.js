@@ -298,10 +298,10 @@ if (!customElements.get('product-info')) {
           });
         }
 
-        // set featured media as active in the media gallery (false = don't prepend/reorder)
+        // set featured media as active in the media gallery (true = move to second position)
         this.querySelector(`media-gallery`)?.setActiveMedia?.(
           `${this.dataset.section}-${variantFeaturedMediaId}`,
-          false
+          true
         );
 
         // update media modal
