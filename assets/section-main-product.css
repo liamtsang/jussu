@@ -173,6 +173,9 @@ product-info {
   max-width: 44rem;
   min-width: fit-content;
   border: none;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / 2;
 }
 
 .product-form__input .form__label {
