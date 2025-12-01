@@ -1501,3 +1501,39 @@ a.product__text {
     border: none;
   }
 }
+
+/* Quantity and Buy Button Side by Side */
+.product-form__quantity {
+  display: inline-block;
+  flex: 0 0 auto;
+  vertical-align: bottom;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product-form__quantity + div {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.product-form__quantity + div .product-form__buttons {
+  max-width: none;
+}
+
+.product-form__quantity + div .product-form__submit {
+  margin-bottom: 0;
+}
+
+.product-form__quantity .quantity__label {
+  display: none;
+}
+
+.product-form__quantity .quantity__button,
+.product-form__quantity .quantity__input {
+  height: 4.5rem;
+}
+
+/* Space between first image and rest of gallery */
+.product__media-list .product__media-item:first-child {
+  margin-bottom: 50vh;
+}
