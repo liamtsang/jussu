@@ -2019,6 +2019,11 @@ input[type='checkbox'] {
   position: relative;
 }
 
+.product__info-container  {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .product__info-container .loading__spinner:not(.hidden) ~ *,
 .quantity__rules-cart .loading__spinner:not(.hidden) ~ * {
   visibility: hidden;
