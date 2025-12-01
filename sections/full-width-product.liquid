@@ -1,0 +1,133 @@
+{%- liquid
+  assign product = section.settings.product
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .full-width-product__link {
+    display: block;
+    width: 100%;
+  }
+
+  .full-width-product__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .full-width-product__placeholder {
+    background-color: rgba(var(--color-foreground), 0.04);
+    padding: 2rem;
+  }
+
+  .full-width-product__placeholder svg {
+    width: 100%;
+    max-height: 400px;
+  }
+{%- endstyle -%}
+
+<section class="full-width-product color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  {%- if section.settings.full_width == false -%}
+    <div class="page-width">
+  {%- endif -%}
+
+  {%- if product != blank and product.featured_media -%}
+    <a href="{{ product.url }}" class="full-width-product__link" aria-label="{{ product.title | escape }}">
+      {%- liquid
+        assign image = product.featured_media
+        assign image_height = image.width | divided_by: image.aspect_ratio
+        assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+      -%}
+      {{
+        image
+        | image_url: width: 3840
+        | image_tag:
+          width: image.width,
+          height: image_height,
+          class: 'full-width-product__image',
+          sizes: '100vw',
+          widths: widths,
+          loading: 'lazy'
+      }}
+    </a>
+  {%- else -%}
+    <div class="full-width-product__placeholder">
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.full_width == false -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Full width product",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "Full width",
+      "info": "When enabled, image spans edge-to-edge. When disabled, image is contained within page width."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full width product"
+    }
+  ]
+}
+{% endschema %}
