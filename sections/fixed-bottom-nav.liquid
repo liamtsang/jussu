@@ -67,6 +67,95 @@
     outline-offset: 2px;
   }
 
+  /* Submenu styles */
+  .fixed-bottom-nav__submenu-wrapper {
+    position: relative;
+  }
+
+  .fixed-bottom-nav__submenu-wrapper > summary {
+    display: inline-block;
+    padding: 0;
+    background-color: transparent;
+    color: {{ section.settings.menu_text_color }};
+    text-decoration: none;
+    font-size: {{ section.settings.menu_font_size }}px;
+    font-weight: {{ section.settings.menu_font_weight }};
+    transition: all {{ section.settings.transition_speed }}ms ease;
+    white-space: nowrap;
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .fixed-bottom-nav__submenu-wrapper > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .fixed-bottom-nav__submenu-wrapper > summary::marker {
+    display: none;
+    content: '';
+  }
+
+  .fixed-bottom-nav__submenu-wrapper > summary:hover,
+  .fixed-bottom-nav__submenu-wrapper > summary:focus {
+    text-decoration: underline;
+  }
+
+  .fixed-bottom-nav__submenu-wrapper > summary:focus {
+    outline: 2px solid {{ section.settings.menu_text_color }};
+    outline-offset: 2px;
+  }
+
+  .fixed-bottom-nav__submenu-wrapper > summary .icon-caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    margin-left: 0.3em;
+    transition: transform {{ section.settings.transition_speed }}ms ease;
+  }
+
+  .fixed-bottom-nav__submenu-wrapper[open] > summary .icon-caret {
+    transform: rotate(180deg);
+  }
+
+  .fixed-bottom-nav__submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 1em;
+    padding-top: 0.25em;
+  }
+
+  .fixed-bottom-nav__submenu-item {
+    margin: 0;
+    line-height: 1.2rem;
+  }
+
+  .fixed-bottom-nav__submenu-link {
+    display: inline-block;
+    padding: 0;
+    background-color: transparent;
+    color: {{ section.settings.menu_text_color }};
+    text-decoration: none;
+    font-size: {{ section.settings.menu_font_size | times: 0.9 }}px;
+    font-weight: {{ section.settings.menu_font_weight }};
+    transition: all {{ section.settings.transition_speed }}ms ease;
+    white-space: nowrap;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .fixed-bottom-nav__submenu-link:hover,
+  .fixed-bottom-nav__submenu-link:focus {
+    text-decoration: underline;
+    opacity: 1;
+  }
+
+  .fixed-bottom-nav__submenu-link:focus {
+    outline: 2px solid {{ section.settings.menu_text_color }};
+    outline-offset: 2px;
+  }
+
   /* Right Info Section */
   .fixed-bottom-nav__info {
     position: relative;
@@ -259,13 +348,39 @@
         <ul class="fixed-bottom-nav__menu-list" role="list">
           {% for link in linklists[section.settings.menu].links %}
             <li class="fixed-bottom-nav__menu-item">
-              <a
-                href="{{ link.url }}"
-                class="fixed-bottom-nav__menu-link"
-                {% if link.current %}aria-current="page"{% endif %}
-              >
-                {{ link.title }}
-              </a>
+              {% if link.links != blank %}
+                {% comment %} Menu item with submenu {% endcomment %}
+                <details class="fixed-bottom-nav__submenu-wrapper">
+                  <summary>
+                    {{ link.title }}
+                    <svg class="icon-caret" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </summary>
+                  <ul class="fixed-bottom-nav__submenu" role="list">
+                    {% for childlink in link.links %}
+                      <li class="fixed-bottom-nav__submenu-item">
+                        <a
+                          href="{{ childlink.url }}"
+                          class="fixed-bottom-nav__submenu-link"
+                          {% if childlink.current %}aria-current="page"{% endif %}
+                        >
+                          {{ childlink.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </details>
+              {% else %}
+                {% comment %} Simple menu link {% endcomment %}
+                <a
+                  href="{{ link.url }}"
+                  class="fixed-bottom-nav__menu-link"
+                  {% if link.current %}aria-current="page"{% endif %}
+                >
+                  {{ link.title }}
+                </a>
+              {% endif %}
             </li>
           {% endfor %}
         </ul>
