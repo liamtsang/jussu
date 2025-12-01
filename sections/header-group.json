@@ -47,6 +47,7 @@
       "name": "Fixed Side Image",
       "settings": {
         "image": "shopify://shop_images/jussumixbutton_copy.png",
+        "hover_image": "shopify://shop_images/jussumixbutton_hover.png",
         "alt_text": "",
         "link_url": "shopify://pages/test-playlist",
         "open_in_new_tab": false,
