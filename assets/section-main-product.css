@@ -1513,8 +1513,9 @@ a.product__text {
 
 /* Quantity and Buy Button Side by Side */
 .product-form__quantity {
-  display: inline-block;
-  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / 2;  flex: 0 0 auto;
   vertical-align: bottom;
   margin-right: 1rem;
   margin-bottom: 1rem;
