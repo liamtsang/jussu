@@ -11,26 +11,61 @@ class MovieScriptText {
     this.scrollSpeed = parseInt(this.container.dataset.scrollSpeed) || 30;
     this.isPaused = false;
 
-    if (this.isAutoScrollEnabled && this.content) {
+    if (this.content) {
       this.init();
     }
   }
 
   init() {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      return;
+    // Process screenplay indentation markers (always run)
+    this.processScriptIndentation();
+
+    // Only set up auto-scroll if enabled
+    if (this.isAutoScrollEnabled) {
+      // Check for reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      // Set up the animation
+      this.setupAnimation();
+
+      // Add hover pause functionality
+      this.setupHoverPause();
+
+      // Handle window resize
+      this.handleResize();
     }
+  }
 
-    // Set up the animation
-    this.setupAnimation();
+  processScriptIndentation() {
+    // Find all paragraph elements in both items
+    const items = this.content.querySelectorAll('.movie-script-text__item');
 
-    // Add hover pause functionality
-    this.setupHoverPause();
+    items.forEach((item) => {
+      const paragraphs = item.querySelectorAll('p');
 
-    // Handle window resize
-    this.handleResize();
+      paragraphs.forEach((p) => {
+        const text = p.innerHTML.trim();
+
+        // Check for triple arrow (character names)
+        if (text.startsWith('&gt;&gt;&gt;') || text.startsWith('>>>')) {
+          p.classList.add('script-indent-3');
+          p.innerHTML = text.replace(/^(&gt;){3}|^>{3}/, '').trim();
+        }
+        // Check for double arrow (parentheticals)
+        else if (text.startsWith('&gt;&gt;') || text.startsWith('>>')) {
+          p.classList.add('script-indent-2');
+          p.innerHTML = text.replace(/^(&gt;){2}|^>{2}/, '').trim();
+        }
+        // Check for single arrow (dialogue)
+        else if (text.startsWith('&gt;') || text.startsWith('>')) {
+          p.classList.add('script-indent-1');
+          p.innerHTML = text.replace(/^&gt;|^>/, '').trim();
+        }
+      });
+    });
   }
 
   setupAnimation() {
