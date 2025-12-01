@@ -80,26 +80,29 @@
                     <legend class="visually-hidden">Scene</legend>
                     <ul class="facets-layout facets-layout-list facets__list list-unstyled" role="list">
                       {%- for coll in collections -%}
-                        <li class="list-menu__item facets__item">
-                          <a
-                            href="{{ coll.url }}"
-                            class="facets__label facet-checkbox{% if collection.handle == coll.handle %} active{% endif %}"
-                          >
-                            {{- 'square.svg' | inline_asset_content -}}
-                            <div class="svg-wrapper">
-                              {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                            </div>
-                            <span class="facet-checkbox__text">
-                              <span class="facet-checkbox__text-label">
-                                {%- if coll.handle == 'frontpage' -%}
-                                  All Scenes
-                                {%- else -%}
-                                  {{ coll.title }}
-                                {%- endif -%}
+                        {%- assign coll_title_lower = coll.title | downcase -%}
+                        {%- if coll_title_lower contains 'scene' or coll.handle == 'frontpage' -%}
+                          <li class="list-menu__item facets__item">
+                            <a
+                              href="{{ coll.url }}"
+                              class="facets__label facet-checkbox{% if collection.handle == coll.handle %} active{% endif %}"
+                            >
+                              {{- 'square.svg' | inline_asset_content -}}
+                              <div class="svg-wrapper">
+                                {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                              </div>
+                              <span class="facet-checkbox__text">
+                                <span class="facet-checkbox__text-label">
+                                  {%- if coll.handle == 'frontpage' -%}
+                                    All Scenes
+                                  {%- else -%}
+                                    {{ coll.title }}
+                                  {%- endif -%}
+                                </span>
                               </span>
-                            </span>
-                          </a>
-                        </li>
+                            </a>
+                          </li>
+                        {%- endif -%}
                       {%- endfor -%}
                     </ul>
                   </fieldset>
@@ -591,21 +594,24 @@
                   </button>
                   <ul class="mobile-facets__list list-unstyled" role="list">
                     {%- for coll in collections -%}
-                      <li class="mobile-facets__item list-menu__item">
-                        <a
-                          href="{{ coll.url }}"
-                          class="mobile-facets__label{% if collection.handle == coll.handle %} active{% endif %}"
-                        >
-                          {%- if coll.handle == 'frontpage' -%}
-                            All Scenes
-                          {%- else -%}
-                            {{ coll.title }}
-                          {%- endif -%}
-                          {%- if collection.handle == coll.handle -%}
-                            <span class="mobile-facets__highlight"></span>
-                          {%- endif -%}
-                        </a>
-                      </li>
+                      {%- assign coll_title_lower = coll.title | downcase -%}
+                      {%- if coll_title_lower contains 'scene' or coll.handle == 'frontpage' -%}
+                        <li class="mobile-facets__item list-menu__item">
+                          <a
+                            href="{{ coll.url }}"
+                            class="mobile-facets__label{% if collection.handle == coll.handle %} active{% endif %}"
+                          >
+                            {%- if coll.handle == 'frontpage' -%}
+                              All Scenes
+                            {%- else -%}
+                              {{ coll.title }}
+                            {%- endif -%}
+                            {%- if collection.handle == coll.handle -%}
+                              <span class="mobile-facets__highlight"></span>
+                            {%- endif -%}
+                          </a>
+                        </li>
+                      {%- endif -%}
                     {%- endfor -%}
                   </ul>
                 </div>
