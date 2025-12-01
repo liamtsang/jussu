@@ -2021,7 +2021,7 @@ input[type='checkbox'] {
 
 .product__info-container  {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
 }
 
 .product__info-container .loading__spinner:not(.hidden) ~ *,
