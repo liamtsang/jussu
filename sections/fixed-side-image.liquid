@@ -7,11 +7,32 @@
     z-index: 100;
     max-width: {{ section.settings.image_width }}px;
   }
-
   .fixed-side-image-{{ section.id }} img {
     display: block;
     width: 100%;
     height: auto;
+  }
+  
+  /* Hover image styles */
+  .fixed-side-image-{{ section.id }} .hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .fixed-side-image-{{ section.id }} .default-image {
+    transition: opacity 0.3s ease;
+  }
+  .fixed-side-image-{{ section.id }}:hover .hover-image {
+    opacity: 1;
+  }
+  .fixed-side-image-{{ section.id }}:hover .default-image {
+    opacity: 0;
+  }
+  .fixed-side-image-{{ section.id }} .image-wrapper {
+    position: relative;
+    display: block;
   }
 
   @media screen and (max-width: 749px) {
@@ -19,7 +40,6 @@
       max-width: {{ section.settings.mobile_image_width }}px;
     }
   }
-
   {% if section.settings.hide_on_mobile %}
     @media screen and (max-width: 749px) {
       .fixed-side-image-{{ section.id }} {
@@ -32,17 +52,35 @@
 {% if section.settings.image != blank %}
   <div class="fixed-side-image-{{ section.id }}">
     {% if section.settings.link_url != blank %}
-      <a href="{{ section.settings.link_url }}" {% if section.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+      <a href="{{ section.settings.link_url }}" class="image-wrapper" {% if section.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
         {{ section.settings.image | image_url: width: section.settings.image_width | image_tag:
           loading: 'lazy',
+          class: 'default-image',
           alt: section.settings.image.alt | default: section.settings.alt_text
         }}
+        {% if section.settings.hover_image != blank %}
+          {{ section.settings.hover_image | image_url: width: section.settings.image_width | image_tag:
+            loading: 'lazy',
+            class: 'hover-image',
+            alt: section.settings.hover_image.alt | default: section.settings.alt_text
+          }}
+        {% endif %}
       </a>
     {% else %}
-      {{ section.settings.image | image_url: width: section.settings.image_width | image_tag:
-        loading: 'lazy',
-        alt: section.settings.image.alt | default: section.settings.alt_text
-      }}
+      <div class="image-wrapper">
+        {{ section.settings.image | image_url: width: section.settings.image_width | image_tag:
+          loading: 'lazy',
+          class: 'default-image',
+          alt: section.settings.image.alt | default: section.settings.alt_text
+        }}
+        {% if section.settings.hover_image != blank %}
+          {{ section.settings.hover_image | image_url: width: section.settings.image_width | image_tag:
+            loading: 'lazy',
+            class: 'hover-image',
+            alt: section.settings.hover_image.alt | default: section.settings.alt_text
+          }}
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 {% endif %}
@@ -63,7 +101,7 @@
       "type": "image_picker",
       "id": "hover_image",
       "label": "Hover Image",
-      "info": "This image will be display on hover"
+      "info": "This image will be displayed on hover"
     },
     {
       "type": "text",
