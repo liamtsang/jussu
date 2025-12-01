@@ -1522,8 +1522,9 @@ a.product__text {
 }
 
 .product-form__quantity + div {
-  display: inline-block;
-  vertical-align: bottom;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 2 / 3;  vertical-align: bottom;
 }
 
 .product-form__quantity + div .product-form__buttons {
