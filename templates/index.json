@@ -82,20 +82,6 @@
             "hover_scale": 100
           }
         },
-        "product_item_NUhjbq": {
-          "type": "product_item",
-          "settings": {
-            "product": "",
-            "position_x": 50,
-            "position_y": 50,
-            "item_width": 80,
-            "item_height": 80,
-            "click_action": "product_page",
-            "show_product_title": true,
-            "show_price": true,
-            "hover_scale": 110
-          }
-        },
         "product_item_9eeqtN": {
           "type": "product_item",
           "settings": {
@@ -105,7 +91,7 @@
             "position_x": 35,
             "position_y": 23,
             "item_width": 200,
-            "item_height": 200,
+            "item_height": 235,
             "click_action": "product_page",
             "show_product_title": true,
             "show_price": false,
@@ -134,7 +120,7 @@
             "product": "o4",
             "normal_image": "shopify://shop_images/4.png",
             "hover_image": "shopify://shop_images/4_HOVER.png",
-            "position_x": 44,
+            "position_x": 43,
             "position_y": 45,
             "item_width": 115,
             "item_height": 95,
@@ -151,9 +137,9 @@
             "normal_image": "shopify://shop_images/5.png",
             "hover_image": "shopify://shop_images/5_HOVER.png",
             "position_x": 50,
-            "position_y": 50,
-            "item_width": 130,
-            "item_height": 135,
+            "position_y": 48,
+            "item_width": 210,
+            "item_height": 155,
             "click_action": "product_page",
             "show_product_title": true,
             "show_price": true,
@@ -168,7 +154,7 @@
             "hover_image": "shopify://shop_images/6_HOVER.png",
             "position_x": 50,
             "position_y": 34,
-            "item_width": 200,
+            "item_width": 245,
             "item_height": 200,
             "click_action": "product_page",
             "show_product_title": true,
@@ -184,7 +170,7 @@
             "hover_image": "shopify://shop_images/JUSSUMIX1_HOVER.png",
             "position_x": 64,
             "position_y": 45,
-            "item_width": 200,
+            "item_width": 275,
             "item_height": 200,
             "click_action": "product_page",
             "show_product_title": true,
@@ -195,7 +181,6 @@
       },
       "block_order": [
         "product_item_3wXYKM",
-        "product_item_NUhjbq",
         "product_item_9eeqtN",
         "product_item_dfBVQC",
         "product_item_CV9xxk",
