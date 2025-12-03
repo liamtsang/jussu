@@ -219,9 +219,9 @@
         "background_size": "cover",
         "background_position": "center center",
         "background_overlay_opacity": 0,
-        "color_scheme": "",
-        "custom_background_color": "#ffffff",
-        "custom_text_color": "",
+        "color_scheme": "scheme-1",
+        "custom_background_color": "#000000",
+        "custom_text_color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 52
       }
