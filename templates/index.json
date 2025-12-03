@@ -215,7 +215,7 @@
         "scroll_speed": 45,
         "container_height": 60,
         "max_width": 70,
-        "font_size": 13,
+        "font_size": 14,
         "background_size": "cover",
         "background_position": "center center",
         "background_overlay_opacity": 0,
