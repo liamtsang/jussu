@@ -43,7 +43,7 @@
       "name": "Full width product",
       "settings": {
         "product": "o16",
-        "full_width": true,
+        "full_width": false,
         "color_scheme": "",
         "padding_top": 0,
         "padding_bottom": 0
