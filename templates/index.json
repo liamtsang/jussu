@@ -214,7 +214,7 @@
         "enable_auto_scroll": true,
         "scroll_speed": 50,
         "container_height": 50,
-        "max_width": 90,
+        "max_width": 65,
         "font_size": 14,
         "background_size": "cover",
         "background_position": "center center",
