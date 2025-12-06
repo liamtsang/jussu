@@ -66,6 +66,22 @@
     "interactive_dinner_table_zwh9EA": {
       "type": "interactive-dinner-table",
       "blocks": {
+        "product_item_wWprtR": {
+          "type": "product_item",
+          "settings": {
+            "product": "jussu-scru-parti-color-edition-j1-p",
+            "normal_image": "shopify://shop_images/PROPSNWARDROBE.png",
+            "hover_image": "shopify://shop_images/PROPSNWARDROBE_HOVER.png",
+            "position_x": 63,
+            "position_y": 23,
+            "item_width": 305,
+            "item_height": 290,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
         "product_item_XgLrTH": {
           "type": "product_item",
           "settings": {
@@ -260,6 +276,7 @@
         }
       },
       "block_order": [
+        "product_item_wWprtR",
         "product_item_XgLrTH",
         "product_item_zLpgLM",
         "product_item_LP74Tw",
