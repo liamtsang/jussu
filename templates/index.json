@@ -66,6 +66,70 @@
     "interactive_dinner_table_zwh9EA": {
       "type": "interactive-dinner-table",
       "blocks": {
+        "product_item_zLpgLM": {
+          "type": "product_item",
+          "settings": {
+            "product": "",
+            "normal_image": "shopify://shop_images/13.png",
+            "hover_image": "shopify://shop_images/13_HOVER.png",
+            "position_x": 27,
+            "position_y": 31,
+            "item_width": 140,
+            "item_height": 135,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
+        "product_item_LP74Tw": {
+          "type": "product_item",
+          "settings": {
+            "product": "o11",
+            "normal_image": "shopify://shop_images/11.png",
+            "hover_image": "shopify://shop_images/11_HOVER.png",
+            "position_x": 79,
+            "position_y": 28,
+            "item_width": 225,
+            "item_height": 165,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
+        "product_item_zMtJy6": {
+          "type": "product_item",
+          "settings": {
+            "product": "o9",
+            "normal_image": "shopify://shop_images/9.png",
+            "hover_image": "shopify://shop_images/9_HOVER.png",
+            "position_x": 58,
+            "position_y": 45,
+            "item_width": 160,
+            "item_height": 220,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
+        "product_item_jxUd9m": {
+          "type": "product_item",
+          "settings": {
+            "product": "o7",
+            "normal_image": "shopify://shop_images/7.png",
+            "hover_image": "shopify://shop_images/7_HOVER.png",
+            "position_x": 35,
+            "position_y": 42,
+            "item_width": 255,
+            "item_height": 125,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
         "product_item_3wXYKM": {
           "type": "product_item",
           "settings": {
@@ -168,10 +232,10 @@
             "product": "",
             "normal_image": "shopify://shop_images/JUSSUMIX1.png",
             "hover_image": "shopify://shop_images/JUSSUMIX1_HOVER.png",
-            "position_x": 64,
-            "position_y": 45,
-            "item_width": 275,
-            "item_height": 200,
+            "position_x": 71,
+            "position_y": 38,
+            "item_width": 290,
+            "item_height": 220,
             "click_action": "product_page",
             "show_product_title": true,
             "show_price": true,
@@ -180,6 +244,10 @@
         }
       },
       "block_order": [
+        "product_item_zLpgLM",
+        "product_item_LP74Tw",
+        "product_item_zMtJy6",
+        "product_item_jxUd9m",
         "product_item_3wXYKM",
         "product_item_9eeqtN",
         "product_item_dfBVQC",
