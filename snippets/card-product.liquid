@@ -29,6 +29,9 @@
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
+  {%- comment -%} Hide password-protected products from cards {%- endcomment -%}
+  {%- assign is_password_protected = card_product.metafields.custom.is_password_protected -%}
+  {%- unless is_password_protected -%}
   {%- liquid
     assign ratio = 1
     if media_aspect_ratio == 'portrait'
@@ -88,6 +91,7 @@
       </div>
     </a>
   </div>
+  {%- endunless -%}
 {%- else -%}
   {%- liquid
     assign ratio = 1

@@ -162,8 +162,11 @@
                   {%- if product.tags contains 'refound' -%}
                     {%- assign is_refound = true -%}
                   {%- endif -%}
+                  
+                  {%- comment -%} Exclude password-protected products from collection grids {%- endcomment -%}
+                  {%- assign is_password_protected = product.metafields.custom.is_password_protected -%}
 
-                  {%- unless collection.handle == 'all' and is_refound -%}
+                  {%- unless collection.handle == 'all' and is_refound or is_password_protected -%}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}

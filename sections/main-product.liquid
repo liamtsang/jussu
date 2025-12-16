@@ -15,6 +15,10 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  
+  {%- if product.metafields.custom.is_password_protected -%}
+    {{ 'product-password.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -44,6 +48,10 @@
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+  
+  {%- if product.metafields.custom.is_password_protected -%}
+    <script src="{{ 'product-password.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
   {% if section.settings.image_zoom == 'hover' %}
@@ -678,6 +686,10 @@
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
+    
+    {%- if product.metafields.custom.is_password_protected -%}
+      {% render 'product-password-modal', product: product %}
+    {%- endif -%}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}
