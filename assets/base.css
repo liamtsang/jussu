@@ -725,6 +725,8 @@ summary::-webkit-details-marker {
     /*outline: var(--focused-base-outline);
   outline-offset: var(--focused-base-outline-offset);
   box-shadow: var(--focused-base-box-shadow);*/
+    outline: none;
+    box-shadow: none;
 }
 
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
