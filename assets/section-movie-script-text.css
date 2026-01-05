@@ -38,6 +38,8 @@
 
 .movie-script-text__item {
     padding: 4rem 6rem;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 /* Auto-scroll animation */
@@ -83,7 +85,7 @@
 }
 
 .movie-script-text__content p {
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 0rem 0;
 }
 
 .movie-script-text__content p:last-child {
