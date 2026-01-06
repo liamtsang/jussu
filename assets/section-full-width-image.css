@@ -1,0 +1,109 @@
+/* Full Width Image Section */
+
+.full-width-image {
+  position: relative;
+}
+
+.full-width-image__media {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.full-width-image__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Height variations */
+.full-width-image--adapt .full-width-image__media {
+  height: auto;
+}
+
+.full-width-image--small .full-width-image__media {
+  height: 30rem;
+}
+
+.full-width-image--medium .full-width-image__media {
+  height: 45rem;
+}
+
+.full-width-image--large .full-width-image__media {
+  height: 60rem;
+}
+
+/* Responsive behavior */
+@media screen and (max-width: 749px) {
+  .full-width-image--small .full-width-image__media,
+  .full-width-image--medium .full-width-image__media,
+  .full-width-image--large .full-width-image__media {
+    height: auto;
+    min-height: 20rem;
+  }
+}
+
+/* Image behavior animations */
+.full-width-image__media.animate--ambient .full-width-image__image {
+  animation: ambient 120s linear infinite;
+  transform: scale(1.2);
+}
+
+.full-width-image__media.animate--fixed .full-width-image__image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.full-width-image__media.animate--zoom-in .full-width-image__image {
+  transform: scale(1);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.full-width-image__media.animate--zoom-in:hover .full-width-image__image {
+  transform: scale(1.05);
+}
+
+@keyframes ambient {
+  0% {
+    transform: scale(1.2) translateY(0) translateX(0);
+  }
+  25% {
+    transform: scale(1.2) translateY(-3%) translateX(-2%);
+  }
+  50% {
+    transform: scale(1.2) translateY(-6%) translateX(2%);
+  }
+  75% {
+    transform: scale(1.2) translateY(-3%) translateX(-1%);
+  }
+  100% {
+    transform: scale(1.2) translateY(0) translateX(0);
+  }
+}
+
+/* Fade in animation */
+.full-width-image__media.animate--fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Placeholder styling */
+.full-width-image__media .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
