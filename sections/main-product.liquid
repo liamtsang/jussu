@@ -674,7 +674,48 @@
                   {%- endif -%}
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
-                {% render 'icon-with-text', block: block %}
+                {%- render 'icon-with-text', block: block -%}
+              {%- when 'full_width_image' -%}
+                </section>
+                </div>
+                </div>
+                </div>
+                {%- if block.settings.image != blank -%}
+                  <div class="product__full-width-image product__full-width-image--{{ block.settings.height }}" {{ block.shopify_attributes }}>
+                    {%- if block.settings.height == 'adapt' -%}
+                      {%- assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' -%}
+                      {{ block.settings.image | image_url: width: 3840 | image_tag:
+                        width: block.settings.image.width,
+                        height: block.settings.image.height,
+                        class: 'product__full-width-image-img',
+                        sizes: '100vw',
+                        widths: widths,
+                        loading: 'lazy'
+                      }}
+                    {%- else -%}
+                      {%- assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' -%}
+                      <div class="product__full-width-image-wrapper product__full-width-image-wrapper--{{ block.settings.height }}">
+                        {{ block.settings.image | image_url: width: 3840 | image_tag:
+                          width: block.settings.image.width,
+                          height: block.settings.image.height,
+                          class: 'product__full-width-image-img',
+                          sizes: '100vw',
+                          widths: widths,
+                          loading: 'lazy'
+                        }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                <div class="page-width">
+                <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+                <div class="grid__item product__media-wrapper" style="display: none;">
+                </div>
+                <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                <section
+                  id="ProductInfo-{{ section.id }}"
+                  class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+                >
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -1466,6 +1507,41 @@
           "id": "enable_quick_add",
           "label": "t:sections.main-product.blocks.complementary_products.settings.enable_quick_add.label",
           "default": false
+        }
+      ]
+    },
+    {
+      "type": "full_width_image",
+      "name": "Full Width Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "height",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "Adapt to image"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "adapt",
+          "label": "Image height"
         }
       ]
     },
