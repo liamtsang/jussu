@@ -138,7 +138,6 @@
     },
     "full-width-image": {
       "type": "full-width-image",
-      "disabled": true,
       "settings": {
         "desktop_height": "adapt",
         "mobile_height": 250,
