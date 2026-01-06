@@ -27,7 +27,7 @@
   {%- endif -%}
 </style>
 
-<section class="full-width-image color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<section class="section full-width-image full-width-image--{{ section.settings.desktop_height }} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {%- unless section.settings.full_width -%}
     <div class="page-width">
   {%- endunless -%}
@@ -62,7 +62,7 @@
 {
   "name": "Full Width Image",
   "tag": "section",
-  "class": "section full-width-image--{{ section.settings.desktop_height }}",
+  "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
