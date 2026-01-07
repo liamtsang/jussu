@@ -67,9 +67,17 @@
         {% if limit and media_position > limit %}
           {% break %}
         {% endif %}
+        {%- liquid
+          assign is_full_width = false
+          if media.media_type != 'image'
+            assign is_full_width = true
+          elsif media.media_type == 'image' and media.preview_image.aspect_ratio > 1
+            assign is_full_width = true
+          endif
+        -%}
         <li
           id="Slide-{{ section.id }}-{{ media.id }}"
-          class="product__media-item grid__item slider__slide{% if forloop.first %} is-active{% endif %}{% if single_media_visible %} product__media-item--single{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          class="product__media-item grid__item slider__slide{% if forloop.first %} is-active{% endif %}{% if single_media_visible %} product__media-item--single{% endif %}{% if is_full_width %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           data-media-id="{{ section.id }}-{{ media.id }}"
         >
           {%- liquid
