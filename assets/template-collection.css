@@ -5,6 +5,14 @@
   }
 }
 
+/* Full width product cards for wide images */
+@media screen and (min-width: 750px) {
+  .product-grid .grid__item--full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 @media screen and (max-width: 989px) {
   .collection .slider.slider--tablet {
     margin-bottom: 1.5rem;

@@ -171,8 +171,14 @@
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
                   {%- endif -%}
+                  {%- liquid
+                    assign is_wide_image = false
+                    if product.featured_media and product.featured_media.aspect_ratio > 1
+                      assign is_wide_image = true
+                    endif
+                  -%}
                   <li
-                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    class="grid__item{% if is_wide_image %} grid__item--full-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                     {% if settings.animations_reveal_on_scroll %}
                       data-cascade
                       style="--animation-order: {{ forloop.index }};"
