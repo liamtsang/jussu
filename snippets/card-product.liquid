@@ -16,6 +16,7 @@
   - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
   - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
+  - is_full_width: {Boolean} Render high-resolution image for full-width display. Default: false (optional)
 
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
@@ -39,6 +40,14 @@
     elsif media_aspect_ratio == 'adapt' and card_product.featured_media
       assign ratio = card_product.featured_media.aspect_ratio
     endif
+    
+    if is_full_width
+      assign image_sizes = '100vw'
+      assign image_widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+    else
+      assign image_sizes = '(min-width: ' | append: settings.page_width | append: 'px) ' | append: settings.page_width | minus: 130 | divided_by: 4 | append: 'px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)'
+      assign image_widths = '165, 360, 533, 720, 940, 1066'
+    endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
     <a href="{{ card_product.url }}" class="full-card-link" aria-label="{{ card_product.title | escape }}">
@@ -48,26 +57,41 @@
             <div class="card__media">
               <div class="media media--transparent">
                 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-                <img
-                  srcset="
-                    {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
-                    {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
-                    {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
-                    {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
-                    {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
-                    {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
-                    {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
-                  "
-                  src="{{ card_product.featured_media | image_url: width: 533 }}"
-                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                  alt="{{ card_product.featured_media.alt | escape }}"
-                  class="motion-reduce"
-                  {% unless lazy_load == false %}
-                    loading="lazy"
-                  {% endunless %}
-                  width="{{ card_product.featured_media.width }}"
-                  height="{{ card_product.featured_media.height }}"
-                >
+                {%- if is_full_width -%}
+                  {{
+                    card_product.featured_media
+                    | image_url: width: 3840
+                    | image_tag:
+                      width: card_product.featured_media.width,
+                      height: card_product.featured_media.height,
+                      class: 'motion-reduce',
+                      sizes: image_sizes,
+                      widths: image_widths,
+                      loading: lazy_load,
+                      alt: card_product.featured_media.alt
+                  }}
+                {%- else -%}
+                  <img
+                    srcset="
+                      {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                      {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                      {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                      {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                      {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                      {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                      {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
+                    "
+                    src="{{ card_product.featured_media | image_url: width: 533 }}"
+                    sizes="{{ image_sizes }}"
+                    alt="{{ card_product.featured_media.alt | escape }}"
+                    class="motion-reduce"
+                    {% unless lazy_load == false %}
+                      loading="lazy"
+                    {% endunless %}
+                    width="{{ card_product.featured_media.width }}"
+                    height="{{ card_product.featured_media.height }}"
+                  >
+                {%- endif -%}
                 {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
               </div>
             </div>
