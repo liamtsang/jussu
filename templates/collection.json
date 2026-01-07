@@ -40,6 +40,7 @@
     },
     "full_width_product_ianNjp": {
       "type": "full-width-product",
+      "disabled": true,
       "name": "Full width product",
       "settings": {
         "product": "o16",
