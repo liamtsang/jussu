@@ -132,6 +132,13 @@
         "image_zoom": "none",
         "hide_variants": true,
         "enable_video_looping": false,
+        "password_show_title": false,
+        "password_show_placeholder": false,
+        "password_submit_text": "Enter",
+        "password_overlay_color": "#000000",
+        "password_overlay_opacity": 100,
+        "password_modal_bg_color": "",
+        "password_prompt_font_size": 16,
         "padding_top": 40,
         "padding_bottom": 40
       }
