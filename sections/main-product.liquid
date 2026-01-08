@@ -729,7 +729,7 @@
     {% render 'product-media-modal', variant_images: variant_images %}
     
     {%- if product.metafields.custom.is_password_protected -%}
-      {% render 'product-password-modal', product: product %}
+      {% render 'product-password-modal', product: product, settings: section.settings %}
     {%- endif -%}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
@@ -2319,6 +2319,59 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "header",
+      "content": "Password Protection"
+    },
+    {
+      "type": "checkbox",
+      "id": "password_show_title",
+      "default": false,
+      "label": "Show 'Protected Product' title"
+    },
+    {
+      "type": "checkbox",
+      "id": "password_show_placeholder",
+      "default": false,
+      "label": "Show 'Enter password' placeholder"
+    },
+    {
+      "type": "text",
+      "id": "password_submit_text",
+      "default": "Enter",
+      "label": "Submit button text"
+    },
+    {
+      "type": "color",
+      "id": "password_overlay_color",
+      "label": "Overlay background color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "password_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "password_modal_bg_color",
+      "label": "Modal background color (leave empty for theme default)"
+    },
+    {
+      "type": "range",
+      "id": "password_prompt_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Question/prompt font size",
+      "default": 16
     },
     {
       "type": "header",
