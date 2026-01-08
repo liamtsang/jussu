@@ -35,7 +35,9 @@
   {%- unless is_password_protected -%}
   {%- liquid
     assign ratio = 1
-    if media_aspect_ratio == 'portrait'
+    if is_full_width and card_product.featured_media
+      assign ratio = card_product.featured_media.aspect_ratio
+    elsif media_aspect_ratio == 'portrait'
       assign ratio = 0.8
     elsif media_aspect_ratio == 'adapt' and card_product.featured_media
       assign ratio = card_product.featured_media.aspect_ratio

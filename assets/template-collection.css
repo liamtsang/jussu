@@ -11,6 +11,26 @@
     width: 100% !important;
     max-width: 100% !important;
   }
+  
+  /* Remove aspect ratio padding for full-width images */
+  .product-grid .grid__item--full-width .card__inner.ratio::before {
+    padding-bottom: 0;
+  }
+  
+  /* Make full-width card images fit naturally */
+  .product-grid .grid__item--full-width .card__inner {
+    display: block;
+  }
+  
+  .product-grid .grid__item--full-width .card__media {
+    position: relative;
+  }
+  
+  .product-grid .grid__item--full-width .media img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 @media screen and (max-width: 989px) {
