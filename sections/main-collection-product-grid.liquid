@@ -145,16 +145,15 @@
             class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
           >
             <div class="loading-overlay gradient"></div>
-            <div class="collection-with-info">
-              <ul
-                id="product-grid"
-                data-id="{{ section.id }}"
-                class="
-                  grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                  grid--{{ section.settings.columns_desktop }}-col-desktop
-                  {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
-                "
-              >
+            <ul
+              id="product-grid"
+              data-id="{{ section.id }}"
+              class="
+                grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                grid--{{ section.settings.columns_desktop }}-col-desktop
+                {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
+              "
+            >
                 {% assign skip_card_product_styles = false %}
                 {%- for product in collection.products -%}
                   {%- comment -%} Exclude refound items from 'all' collection {%- endcomment -%}
@@ -237,7 +236,6 @@
                   </div>
                 </div>
               {% endcomment %}
-            </div>
 
             {%- if paginate.pages > 1 -%}
               {% render 'pagination', paginate: paginate, anchor: '' %}
