@@ -172,7 +172,7 @@
                   {%- endif -%}
                   {%- liquid
                     assign is_wide_image = false
-                    if product.featured_media and product.featured_media.aspect_ratio > 1
+                    if product.featured_media and product.featured_media.aspect_ratio > 2
                       assign is_wide_image = true
                     endif
                   -%}
