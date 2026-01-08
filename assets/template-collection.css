@@ -12,24 +12,30 @@
     max-width: 100% !important;
   }
   
-  /* Remove aspect ratio padding for full-width images */
-  .product-grid .grid__item--full-width .card__inner.ratio::before {
-    padding-bottom: 0;
-  }
-  
-  /* Make full-width card images fit naturally */
+  /* Make full-width images display at natural aspect ratio */
   .product-grid .grid__item--full-width .card__inner {
     display: block;
+    position: relative;
+  }
+  
+  .product-grid .grid__item--full-width .card__inner::before {
+    display: none;
   }
   
   .product-grid .grid__item--full-width .card__media {
     position: relative;
   }
   
+  .product-grid .grid__item--full-width .card__media .media {
+    position: relative;
+    padding: 0;
+  }
+  
   .product-grid .grid__item--full-width .media img {
+    position: relative;
     width: 100%;
     height: auto;
-    object-fit: cover;
+    display: block;
   }
 }
 
