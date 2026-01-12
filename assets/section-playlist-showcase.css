@@ -88,7 +88,6 @@
 /* Image styling */
 .playlist-showcase__image-wrapper {
     width: 100%;
-    max-width: 50rem;
     aspect-ratio: 1;
     overflow: hidden;
 }
@@ -110,7 +109,6 @@
     font-size: 1.4rem;
     line-height: 1.6;
     color: rgba(var(--color-foreground), 0.85);
-    max-width: 45rem;
 }
 
 .playlist-showcase__description p:first-child {
