@@ -31,7 +31,7 @@
             "playlist_title": "JUSSU MIX. 1",
             "playlist_image": "shopify://shop_images/Screenshot_2025-07-12_at_6.34.02_PM.png",
             "playlist_description": "<h5>feels like flipping through scenes from different films —spanning languages, places, moods.<br/>Play it in sequence, or drop in mid-scene.<br/></h5><h5><br/>The <a href=\"https://jussuobjects.com/products/cue-object-1\">cue object</a> appears around track eight.</h5><h5><br/>Look for the fruit.</h5>",
-            "playlist_url": "",
+            "playlist_url": "{{ page.metafields.custom.playlist_url.value }}",
             "button_label": "PLAY"
           }
         }
@@ -42,6 +42,7 @@
       "name": "Playlist Showcase",
       "settings": {
         "enable_archive_mode": true,
+        "background_image": "shopify://shop_images/jussumixbutton_copy.png",
         "background_position_x": "center",
         "background_position_y": "center",
         "background_size": "cover",
