@@ -42,7 +42,6 @@
       "name": "Playlist Showcase",
       "settings": {
         "enable_archive_mode": true,
-        "background_image": "shopify://shop_images/jussumixbutton_copy.png",
         "background_position_x": "left",
         "background_position_y": "top",
         "background_size": "contain",
