@@ -12,71 +12,229 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  {%- if section.settings.enable_archive_mode and section.settings.background_image != blank -%}
+    .playlist-showcase--archive-{{ section.id }} {
+      background-image: url('{{ section.settings.background_image | image_url: width: 2400 }}');
+      --bg-position: {{ section.settings.background_position_x }} {{ section.settings.background_position_y }};
+      --bg-size: {{ section.settings.background_size }};
+    }
+  {%- endif -%}
+
+  .playlist-showcase__section-{{ section.id }} + .playlist-showcase__section-{{ section.id }} {
+    margin-top: {{ section.settings.section_spacing }}px;
+  }
 {%- endstyle -%}
 
-<div class="playlist-showcase color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <div class="playlist-showcase__wrapper page-width">
-    <div class="playlist-showcase__container">
+{%- if section.settings.enable_archive_mode -%}
+  {%- comment -%} Archive Mode: Multiple playlists with fixed background {%- endcomment -%}
+  <div class="playlist-showcase playlist-showcase--archive playlist-showcase--archive-{{ section.id }} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+    <div class="playlist-showcase__wrapper page-width">
+      
+      {%- liquid
+        assign current_blocks = section.blocks | where: 'type', 'playlist' | where: 'settings.section_type', 'current'
+        assign previous_blocks = section.blocks | where: 'type', 'playlist' | where: 'settings.section_type', 'previous'
+      -%}
 
-      {%- if page.title != blank -%}
-        <{{ section.settings.heading_tag }} class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ page.title }}
-        </{{ section.settings.heading_tag }}>
-      {%- endif -%}
+      {%- comment -%} CURRENTLY PLAYING Section {%- endcomment -%}
+      {%- if current_blocks.size > 0 and section.settings.current_section_title != blank -%}
+        <div class="playlist-showcase__section playlist-showcase__section-{{ section.id }}">
+          <h2 class="playlist-showcase__section-header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            {{ section.settings.current_section_title }}
+          </h2>
 
-      {%- if section.settings.show_by_jussu -%}
-        <p class="playlist-showcase__byline{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          by <strong>Jussu</strong>
-        </p>
-      {%- endif -%}
+          {%- for block in current_blocks -%}
+            <div class="playlist-showcase__block playlist-showcase__container" {{ block.shopify_attributes }}>
+              {%- if block.settings.playlist_title != blank -%}
+                <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ block.settings.playlist_title }}
+                </h3>
+              {%- endif -%}
 
-      {%- if page.metafields.custom.playlist_image != blank -%}
-        <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          <img
-            srcset="
-              {%- if page.metafields.custom.playlist_image.width >= 375 -%}{{ page.metafields.custom.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
-              {%- if page.metafields.custom.playlist_image.width >= 750 -%}{{ page.metafields.custom.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
-              {%- if page.metafields.custom.playlist_image.width >= 1100 -%}{{ page.metafields.custom.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
-              {{ page.metafields.custom.playlist_image | image_url }} {{ page.metafields.custom.playlist_image.width }}w
-            "
-            src="{{ page.metafields.custom.playlist_image | image_url: width: 750 }}"
-            loading="lazy"
-            alt="{{ page.metafields.custom.playlist_image.alt | escape }}"
-            width="{{ page.metafields.custom.playlist_image.width }}"
-            height="{{ page.metafields.custom.playlist_image.height }}"
-            class="playlist-showcase__image"
-          >
+              {%- if block.settings.playlist_image != blank -%}
+                <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  <img
+                    srcset="
+                      {%- if block.settings.playlist_image.width >= 375 -%}{{ block.settings.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
+                      {%- if block.settings.playlist_image.width >= 750 -%}{{ block.settings.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
+                      {%- if block.settings.playlist_image.width >= 1100 -%}{{ block.settings.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                      {{ block.settings.playlist_image | image_url }} {{ block.settings.playlist_image.width }}w
+                    "
+                    src="{{ block.settings.playlist_image | image_url: width: 750 }}"
+                    loading="lazy"
+                    alt="{{ block.settings.playlist_image.alt | escape }}"
+                    width="{{ block.settings.playlist_image.width }}"
+                    height="{{ block.settings.playlist_image.height }}"
+                    class="playlist-showcase__image"
+                  >
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.playlist_description != blank -%}
+                <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ block.settings.playlist_description }}
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.button_label != blank -%}
+                <div class="playlist-showcase__button{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  <a
+                    {% if block.settings.playlist_url == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ block.settings.playlist_url }}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    {% endif %}
+                    class="button-diamond"
+                    style="--button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-border-color: {{ section.settings.button_border_color }};"
+                  >
+                    <svg class="button-diamond__bg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+                      <polygon points="100,10 190,50 100,90 10,50" />
+                    </svg>
+                    <span class="button-diamond__text">{{ block.settings.button_label | escape }}</span>
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
         </div>
       {%- endif -%}
 
-      {%- if page.content != blank -%}
-        <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {{ page.content }}
-        </div>
-      {%- endif -%}
+      {%- comment -%} PREVIOUSLY Section {%- endcomment -%}
+      {%- if previous_blocks.size > 0 and section.settings.previous_section_title != blank -%}
+        <div class="playlist-showcase__section playlist-showcase__section-{{ section.id }}">
+          <h2 class="playlist-showcase__section-header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            {{ section.settings.previous_section_title }}
+          </h2>
 
-      {%- if section.settings.button_label != blank -%}
-        <div class="playlist-showcase__button{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          <a
-            {% if page.metafields.custom.playlist_url == blank %}
-              role="link" aria-disabled="true"
-            {% else %}
-              href="{{ page.metafields.custom.playlist_url }}"
-            {% endif %}
-            class="button-diamond"
-            style="--button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-border-color: {{ section.settings.button_border_color }};"
-          >
-            <svg class="button-diamond__bg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
-              <polygon points="100,10 190,50 100,90 10,50" />
-            </svg>
-            <span class="button-diamond__text">{{ section.settings.button_label | escape }}</span>
-          </a>
+          {%- for block in previous_blocks -%}
+            <div class="playlist-showcase__block playlist-showcase__container" {{ block.shopify_attributes }}>
+              {%- if block.settings.playlist_title != blank -%}
+                <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ block.settings.playlist_title }}
+                </h3>
+              {%- endif -%}
+
+              {%- if block.settings.playlist_image != blank -%}
+                <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  <img
+                    srcset="
+                      {%- if block.settings.playlist_image.width >= 375 -%}{{ block.settings.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
+                      {%- if block.settings.playlist_image.width >= 750 -%}{{ block.settings.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
+                      {%- if block.settings.playlist_image.width >= 1100 -%}{{ block.settings.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                      {{ block.settings.playlist_image | image_url }} {{ block.settings.playlist_image.width }}w
+                    "
+                    src="{{ block.settings.playlist_image | image_url: width: 750 }}"
+                    loading="lazy"
+                    alt="{{ block.settings.playlist_image.alt | escape }}"
+                    width="{{ block.settings.playlist_image.width }}"
+                    height="{{ block.settings.playlist_image.height }}"
+                    class="playlist-showcase__image"
+                  >
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.playlist_description != blank -%}
+                <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ block.settings.playlist_description }}
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.button_label != blank -%}
+                <div class="playlist-showcase__button{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  <a
+                    {% if block.settings.playlist_url == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ block.settings.playlist_url }}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    {% endif %}
+                    class="button-diamond"
+                    style="--button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-border-color: {{ section.settings.button_border_color }};"
+                  >
+                    <svg class="button-diamond__bg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+                      <polygon points="100,10 190,50 100,90 10,50" />
+                    </svg>
+                    <span class="button-diamond__text">{{ block.settings.button_label | escape }}</span>
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
         </div>
       {%- endif -%}
 
     </div>
   </div>
-</div>
+
+{%- else -%}
+  {%- comment -%} Single Playlist Mode: Use page content {%- endcomment -%}
+  <div class="playlist-showcase color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+    <div class="playlist-showcase__wrapper page-width">
+      <div class="playlist-showcase__container">
+
+        {%- if page.title != blank -%}
+          <{{ section.settings.heading_tag }} class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            {{ page.title }}
+          </{{ section.settings.heading_tag }}>
+        {%- endif -%}
+
+        {%- if section.settings.show_by_jussu -%}
+          <p class="playlist-showcase__byline{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            by <strong>Jussu</strong>
+          </p>
+        {%- endif -%}
+
+        {%- if page.metafields.custom.playlist_image != blank -%}
+          <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <img
+              srcset="
+                {%- if page.metafields.custom.playlist_image.width >= 375 -%}{{ page.metafields.custom.playlist_image | image_url: width: 375 }} 375w,{%- endif -%}
+                {%- if page.metafields.custom.playlist_image.width >= 750 -%}{{ page.metafields.custom.playlist_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if page.metafields.custom.playlist_image.width >= 1100 -%}{{ page.metafields.custom.playlist_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                {{ page.metafields.custom.playlist_image | image_url }} {{ page.metafields.custom.playlist_image.width }}w
+              "
+              src="{{ page.metafields.custom.playlist_image | image_url: width: 750 }}"
+              loading="lazy"
+              alt="{{ page.metafields.custom.playlist_image.alt | escape }}"
+              width="{{ page.metafields.custom.playlist_image.width }}"
+              height="{{ page.metafields.custom.playlist_image.height }}"
+              class="playlist-showcase__image"
+            >
+          </div>
+        {%- endif -%}
+
+        {%- if page.content != blank -%}
+          <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            {{ page.content }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="playlist-showcase__button{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+            <a
+              {% if page.metafields.custom.playlist_url == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ page.metafields.custom.playlist_url }}"
+              {% endif %}
+              class="button-diamond"
+              style="--button-bg-color: {{ section.settings.button_bg_color }}; --button-text-color: {{ section.settings.button_text_color }}; --button-border-color: {{ section.settings.button_border_color }};"
+            >
+              <svg class="button-diamond__bg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+                <polygon points="100,10 190,50 100,90 10,50" />
+              </svg>
+              <span class="button-diamond__text">{{ section.settings.button_label | escape }}</span>
+            </a>
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -93,7 +251,102 @@
     },
     {
       "type": "header",
-      "content": "Playlist Settings"
+      "content": "Archive Mode"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_archive_mode",
+      "label": "Enable Archive Mode",
+      "info": "Show multiple playlists with fixed background. When enabled, page content is ignored and playlist blocks are used instead.",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Only visible in archive mode"
+    },
+    {
+      "type": "select",
+      "id": "background_position_x",
+      "label": "Background Horizontal Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "background_position_y",
+      "label": "Background Vertical Position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "background_size",
+      "label": "Background Size",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover (fill entire area)"
+        },
+        {
+          "value": "contain",
+          "label": "Contain (fit to area)"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "text",
+      "id": "current_section_title",
+      "label": "Current Section Title",
+      "default": "CURRENTLY PLAYING:"
+    },
+    {
+      "type": "text",
+      "id": "previous_section_title",
+      "label": "Previous Section Title",
+      "default": "PREVIOUSLY,"
+    },
+    {
+      "type": "range",
+      "id": "section_spacing",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing Between Sections",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Playlist Settings (Single Mode)"
     },
     {
       "type": "select",
@@ -124,7 +377,7 @@
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button Label",
+      "label": "Button Label (Single Mode)",
       "default": "Listen Now"
     },
     {
@@ -178,6 +431,58 @@
       "unit": "px",
       "label": "Padding Bottom",
       "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "playlist",
+      "name": "Playlist",
+      "settings": [
+        {
+          "type": "select",
+          "id": "section_type",
+          "label": "Section",
+          "options": [
+            {
+              "value": "current",
+              "label": "Currently Playing"
+            },
+            {
+              "value": "previous",
+              "label": "Previously"
+            }
+          ],
+          "default": "current"
+        },
+        {
+          "type": "text",
+          "id": "playlist_title",
+          "label": "Playlist Title",
+          "default": "Playlist Name"
+        },
+        {
+          "type": "image_picker",
+          "id": "playlist_image",
+          "label": "Playlist Cover Image"
+        },
+        {
+          "type": "richtext",
+          "id": "playlist_description",
+          "label": "Playlist Description"
+        },
+        {
+          "type": "url",
+          "id": "playlist_url",
+          "label": "Playlist URL",
+          "info": "Link to Spotify, SoundCloud, etc."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "PLAY"
+        }
+      ]
     }
   ],
   "presets": [
