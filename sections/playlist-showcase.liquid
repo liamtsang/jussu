@@ -30,7 +30,7 @@
   {%- comment -%} Archive Mode: Multiple playlists with fixed background {%- endcomment -%}
   <div class="playlist-showcase playlist-showcase--archive playlist-showcase--archive-{{ section.id }} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
     <div class="playlist-showcase__wrapper page-width">
-      
+
       {%- liquid
         assign has_current = false
         assign has_previous = false
@@ -53,11 +53,6 @@
           {%- for block in section.blocks -%}
           {%- if block.type == 'playlist' and block.settings.section_type == 'current' -%}
             <div class="playlist-showcase__block playlist-showcase__container" {{ block.shopify_attributes }}>
-              {%- if block.settings.playlist_title != blank -%}
-                <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-                  {{ block.settings.playlist_title }}
-                </h3>
-              {%- endif -%}
 
               {%- if block.settings.playlist_image != blank -%}
                 <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -78,7 +73,14 @@
                 </div>
               {%- endif -%}
 
+              {%- if block.settings.playlist_title != blank -%}
+                <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ block.settings.playlist_title }}
+                </h3>
+              {%- endif -%}
+
               {%- if block.settings.playlist_description != blank -%}
+
                 <div class="playlist-showcase__description rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
                   {{ block.settings.playlist_description }}
                 </div>
@@ -120,12 +122,6 @@
           {%- for block in section.blocks -%}
           {%- if block.type == 'playlist' and block.settings.section_type == 'previous' -%}
             <div class="playlist-showcase__block playlist-showcase__container" {{ block.shopify_attributes }}>
-              {%- if block.settings.playlist_title != blank -%}
-                <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-                  {{ block.settings.playlist_title }}
-                </h3>
-              {%- endif -%}
-
               {%- if block.settings.playlist_image != blank -%}
                 <div class="playlist-showcase__image-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
                   <img
@@ -143,6 +139,12 @@
                     class="playlist-showcase__image"
                   >
                 </div>
+              {%- endif -%}
+
+              {%- if block.settings.playlist_title != blank -%}
+                <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                  {{ block.settings.playlist_title }}
+                </h3>
               {%- endif -%}
 
               {%- if block.settings.playlist_description != blank -%}
