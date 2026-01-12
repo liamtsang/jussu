@@ -23,6 +23,22 @@
     },
     "playlist_showcase_HniWFQ": {
       "type": "playlist-showcase",
+      "blocks": {
+        "playlist_VFyUqU": {
+          "type": "playlist",
+          "settings": {
+            "section_type": "current",
+            "playlist_title": "Playlist Name",
+            "playlist_image": "shopify://shop_images/Screenshot_2025-07-12_at_6.34.02_PM.png",
+            "playlist_description": "",
+            "playlist_url": "",
+            "button_label": "PLAY"
+          }
+        }
+      },
+      "block_order": [
+        "playlist_VFyUqU"
+      ],
       "name": "Playlist Showcase",
       "settings": {
         "enable_archive_mode": true,
