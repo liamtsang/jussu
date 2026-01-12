@@ -30,7 +30,7 @@
     align-items: center;
     gap: 2rem;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 /* Section header styling (CURRENTLY PLAYING:, PREVIOUSLY,) */
@@ -41,7 +41,7 @@
     text-transform: uppercase;
     text-decoration: underline;
     margin: 0 0 3rem 0;
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 
@@ -207,7 +207,7 @@
 
 /* Archive mode sections */
 .playlist-showcase__section {
-    width: 100%;
+    width: 60rem;
 }
 
 /* Playlist blocks in archive mode */
