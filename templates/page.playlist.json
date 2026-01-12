@@ -25,6 +25,13 @@
       "type": "playlist-showcase",
       "name": "Playlist Showcase",
       "settings": {
+        "enable_archive_mode": true,
+        "background_position_x": "center",
+        "background_position_y": "center",
+        "background_size": "cover",
+        "current_section_title": "CURRENTLY PLAYING:",
+        "previous_section_title": "PREVIOUSLY,",
+        "section_spacing": 60,
         "heading_tag": "h2",
         "show_by_jussu": false,
         "button_label": "PLAY",
