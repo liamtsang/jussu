@@ -32,18 +32,26 @@
     <div class="playlist-showcase__wrapper page-width">
       
       {%- liquid
-        assign current_blocks = section.blocks | where: 'type', 'playlist' | where: 'settings.section_type', 'current'
-        assign previous_blocks = section.blocks | where: 'type', 'playlist' | where: 'settings.section_type', 'previous'
+        assign has_current = false
+        assign has_previous = false
+        for block in section.blocks
+          if block.type == 'playlist' and block.settings.section_type == 'current'
+            assign has_current = true
+          elsif block.type == 'playlist' and block.settings.section_type == 'previous'
+            assign has_previous = true
+          endif
+        endfor
       -%}
 
       {%- comment -%} CURRENTLY PLAYING Section {%- endcomment -%}
-      {%- if current_blocks.size > 0 and section.settings.current_section_title != blank -%}
+      {%- if has_current and section.settings.current_section_title != blank -%}
         <div class="playlist-showcase__section playlist-showcase__section-{{ section.id }}">
           <h2 class="playlist-showcase__section-header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
             {{ section.settings.current_section_title }}
           </h2>
 
-          {%- for block in current_blocks -%}
+          {%- for block in section.blocks -%}
+          {%- if block.type == 'playlist' and block.settings.section_type == 'current' -%}
             <div class="playlist-showcase__block playlist-showcase__container" {{ block.shopify_attributes }}>
               {%- if block.settings.playlist_title != blank -%}
                 <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -97,18 +105,20 @@
                 </div>
               {%- endif -%}
             </div>
+          {%- endif -%}
           {%- endfor -%}
         </div>
       {%- endif -%}
 
       {%- comment -%} PREVIOUSLY Section {%- endcomment -%}
-      {%- if previous_blocks.size > 0 and section.settings.previous_section_title != blank -%}
+      {%- if has_previous and section.settings.previous_section_title != blank -%}
         <div class="playlist-showcase__section playlist-showcase__section-{{ section.id }}">
           <h2 class="playlist-showcase__section-header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
             {{ section.settings.previous_section_title }}
           </h2>
 
-          {%- for block in previous_blocks -%}
+          {%- for block in section.blocks -%}
+          {%- if block.type == 'playlist' and block.settings.section_type == 'previous' -%}
             <div class="playlist-showcase__block playlist-showcase__container" {{ block.shopify_attributes }}>
               {%- if block.settings.playlist_title != blank -%}
                 <h3 class="playlist-showcase__title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -162,6 +172,7 @@
                 </div>
               {%- endif -%}
             </div>
+          {%- endif -%}
           {%- endfor -%}
         </div>
       {%- endif -%}
