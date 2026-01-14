@@ -24,6 +24,17 @@
     "playlist_showcase_HniWFQ": {
       "type": "playlist-showcase",
       "blocks": {
+        "playlist_jfajWK": {
+          "type": "playlist",
+          "settings": {
+            "section_type": "previous",
+            "playlist_title": "JUSSU MIX. 2",
+            "playlist_image": "shopify://shop_images/Screenshot_2026-01-13_at_7.40.28_PM.png",
+            "playlist_description": "",
+            "playlist_url": "",
+            "button_label": "PLAY"
+          }
+        },
         "playlist_VFyUqU": {
           "type": "playlist",
           "settings": {
@@ -37,6 +48,7 @@
         }
       },
       "block_order": [
+        "playlist_jfajWK",
         "playlist_VFyUqU"
       ],
       "name": "Playlist Showcase",
