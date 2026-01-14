@@ -135,7 +135,7 @@
         "password_show_title": false,
         "password_show_placeholder": false,
         "password_submit_text": "Enter",
-        "password_overlay_color": "#005BD3",
+        "password_overlay_color": "#ffffff",
         "password_overlay_opacity": 100,
         "password_modal_bg_color": "",
         "password_prompt_font_size": 16,
