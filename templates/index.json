@@ -65,6 +65,27 @@
     },
     "interactive_dinner_table_zwh9EA": {
       "type": "interactive-dinner-table",
+      "blocks": {
+        "product_item_PXW4f9": {
+          "type": "product_item",
+          "settings": {
+            "product": "shopify://products/o1",
+            "normal_image": "shopify://shop_images/1.png",
+            "hover_image": "shopify://shop_images/1_HOVER.png",
+            "position_x": 19,
+            "position_y": 29,
+            "item_width": 220,
+            "item_height": 170,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        }
+      },
+      "block_order": [
+        "product_item_PXW4f9"
+      ],
       "name": "Interactive Dinner Table",
       "settings": {
         "section_title": "Objects from Scene. 1",
