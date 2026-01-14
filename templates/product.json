@@ -130,7 +130,7 @@
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "none",
-        "hide_variants": true,
+        "hide_variants": false,
         "enable_video_looping": false,
         "password_show_title": false,
         "password_show_placeholder": false,
