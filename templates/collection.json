@@ -34,8 +34,8 @@
         "enable_filtering": true,
         "filter_type": "horizontal",
         "enable_sorting": false,
-        "padding_top": 20,
-        "padding_bottom": 88
+        "padding_top": 12,
+        "padding_bottom": 100
       }
     },
     "full_width_product_ianNjp": {
