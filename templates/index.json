@@ -66,6 +66,22 @@
     "interactive_dinner_table_zwh9EA": {
       "type": "interactive-dinner-table",
       "blocks": {
+        "product_item_QVETkX": {
+          "type": "product_item",
+          "settings": {
+            "product": "shopify://pages/test-playlist",
+            "normal_image": "shopify://shop_images/JUSSUMIX1.png",
+            "hover_image": "shopify://shop_images/JUSSUMIX1_HOVER.png",
+            "position_x": 66,
+            "position_y": 41,
+            "item_width": 320,
+            "item_height": 260,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
         "product_item_PXW4f9": {
           "type": "product_item",
           "settings": {
@@ -84,6 +100,7 @@
         }
       },
       "block_order": [
+        "product_item_QVETkX",
         "product_item_PXW4f9"
       ],
       "name": "Interactive Dinner Table",
