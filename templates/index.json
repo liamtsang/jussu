@@ -66,6 +66,22 @@
     "interactive_dinner_table_zwh9EA": {
       "type": "interactive-dinner-table",
       "blocks": {
+        "product_item_kcaKdt": {
+          "type": "product_item",
+          "settings": {
+            "product": "shopify://products/o6",
+            "normal_image": "shopify://shop_images/6.png",
+            "hover_image": "shopify://shop_images/6_HOVER.png",
+            "position_x": 45,
+            "position_y": 34,
+            "item_width": 420,
+            "item_height": 230,
+            "click_action": "product_page",
+            "show_product_title": true,
+            "show_price": true,
+            "hover_scale": 110
+          }
+        },
         "product_item_tGEKEG": {
           "type": "product_item",
           "settings": {
@@ -212,6 +228,7 @@
         }
       },
       "block_order": [
+        "product_item_kcaKdt",
         "product_item_tGEKEG",
         "product_item_6W4pLx",
         "product_item_XVm4DF",
