@@ -73,7 +73,7 @@
             "normal_image": "shopify://shop_images/PROPSNWARDROBE.png",
             "hover_image": "shopify://shop_images/PROPSNWARDROBE_HOVER.png",
             "position_x": 74,
-            "position_y": 23,
+            "position_y": 20,
             "item_width": 420,
             "item_height": 400,
             "click_action": "product_page",
