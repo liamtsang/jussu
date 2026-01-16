@@ -122,7 +122,7 @@
             "hover_image": "shopify://shop_images/3_HOVER.png",
             "position_x": 48,
             "position_y": 17,
-            "item_width": 280,
+            "item_width": 290,
             "item_height": 240,
             "click_action": "product_page",
             "show_product_title": true,
