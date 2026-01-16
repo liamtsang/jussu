@@ -105,7 +105,7 @@
             "normal_image": "shopify://shop_images/5.png",
             "hover_image": "shopify://shop_images/5_HOVER.png",
             "position_x": 61,
-            "position_y": 17,
+            "position_y": 18,
             "item_width": 280,
             "item_height": 260,
             "click_action": "product_page",
