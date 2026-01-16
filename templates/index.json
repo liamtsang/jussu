@@ -259,7 +259,7 @@
         "product_item_QVETkX": {
           "type": "product_item",
           "settings": {
-            "product": "shopify://pages/test-playlist",
+            "product": "shopify://pages/jussu-mix",
             "normal_image": "shopify://shop_images/JUSSUMIX1.png",
             "hover_image": "shopify://shop_images/JUSSUMIX1_HOVER.png",
             "position_x": 69,
