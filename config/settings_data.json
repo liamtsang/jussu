@@ -82,7 +82,7 @@
     "text_boxes_shadow_horizontal_offset": 0,
     "text_boxes_shadow_vertical_offset": 4,
     "text_boxes_shadow_blur": 5,
-    "media_border_thickness": 1,
+    "media_border_thickness": 0,
     "media_border_opacity": 5,
     "media_radius": 0,
     "media_shadow_opacity": 0,
@@ -92,7 +92,7 @@
     "popup_border_thickness": 1,
     "popup_border_opacity": 10,
     "popup_corner_radius": 0,
-    "popup_shadow_opacity": 5,
+    "popup_shadow_opacity": 0,
     "popup_shadow_horizontal_offset": 0,
     "popup_shadow_vertical_offset": 4,
     "popup_shadow_blur": 5,
@@ -123,6 +123,8 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
