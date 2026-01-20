@@ -12,7 +12,7 @@
     "logo": "shopify://shop_images/13_1.png",
     "logo_width": 130,
     "favicon": "shopify://shop_images/favicon.png",
-    "type_header_font": "space_mono_n4",
+    "type_header_font": "roboto_mono_n3",
     "heading_scale": 100,
     "type_body_font": "courier_new_n4",
     "body_scale": 100,
@@ -185,11 +185,11 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#fff",
+          "background": "#ffffff",
           "background_gradient": "",
           "text": "#767676",
-          "button": "#fff",
-          "button_label": "#fff",
+          "button": "#ffffff",
+          "button_label": "#ffffff",
           "secondary_button_label": "#000000",
           "shadow": "#121212"
         }
