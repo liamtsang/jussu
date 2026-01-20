@@ -89,6 +89,7 @@
         },
         "collapsible-row-3": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Vintage Condition",
             "icon": "none",
