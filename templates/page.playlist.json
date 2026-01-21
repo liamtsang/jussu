@@ -72,7 +72,7 @@
         "background_size": "cover",
         "current_section_title": "CURRENTLY PLAYING:",
         "previous_section_title": "PREVIOUSLY,",
-        "section_spacing": 60,
+        "section_spacing": 40,
         "heading_tag": "h2",
         "show_by_jussu": false,
         "button_label": "PLAY",
