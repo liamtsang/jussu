@@ -46,8 +46,8 @@
       "type": "fixed-side-image",
       "name": "Fixed Side Image",
       "settings": {
-        "image": "shopify://shop_images/jussumixbutton.png",
-        "hover_image": "shopify://shop_images/jussumixbutton_hover_3989cbb7-6590-4557-9739-67cd553f7f40.png",
+        "image": "shopify://shop_images/jussumixbutton_7abc37b8-8971-4c83-8363-83c3d114705c.png",
+        "hover_image": "shopify://shop_images/jussumixbutton_hover.png",
         "alt_text": "",
         "link_url": "shopify://pages/jussu-mix",
         "open_in_new_tab": false,
