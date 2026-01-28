@@ -51,7 +51,7 @@
           "settings": {
             "section_type": "previous",
             "playlist_title": "JUSSU MIX. 1",
-            "playlist_image": "shopify://shop_images/JM1COVER.jpg",
+            "playlist_image": "shopify://shop_images/1_COVER.jpg",
             "playlist_description": "<h5>feels like flipping through scenes from different films —spanning languages, places, moods.<br/>Play it in sequence, or drop in mid-scene.<br/></h5><h5><br/>The <a href=\"https://jussuobjects.com/products/cue-object-1\">cue object</a> appears around track eight.</h5><h5><br/>Look for the fruit.</h5>",
             "playlist_url": "{{ page.metafields.custom.playlist_url.value }}",
             "button_label": "PLAY"
