@@ -23,7 +23,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "sans_serif_n4",
+            "title_font": "anybody_n4",
             "title_font_size": 40,
             "title_font_size_mobile": 30,
             "title_font_weight": "700"
