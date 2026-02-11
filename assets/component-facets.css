@@ -549,6 +549,10 @@
     visibility: visible;
 }
 
+.facet-checkbox > input[type='checkbox'] {
+    display: none;
+}
+
 @media screen and (forced-colors: active) {
     .facet-checkbox > svg {
         background-color: inherit;
