@@ -107,7 +107,7 @@
                               class="facets__label facet-checkbox{% if scene_active_count == 0 %} active{% endif %}"
                             >
                               {{- 'square.svg' | inline_asset_content -}}
-                              <div class="svg-wrapper">
+                              <div class="svg-wrapper"{% if scene_active_count == 0 %} style="visibility: visible"{% endif %}>
                                 {{- 'icon-checkmark.svg' | inline_asset_content -}}
                               </div>
                               <span class="facet-checkbox__text">
@@ -677,7 +677,9 @@
                           >
                             <span class="mobile-facets__highlight"></span>
                             {{- 'square.svg' | inline_asset_content -}}
-                            {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                            <span class="icon-checkmark"{% if scene_active_count_mobile == 0 %} style="visibility: visible"{% endif %}>
+                              {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                            </span>
                             <span class="facet-checkbox__text">
                               <span class="facet-checkbox__text-label">All Scenes</span>
                             </span>
