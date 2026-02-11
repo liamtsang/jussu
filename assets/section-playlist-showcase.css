@@ -99,10 +99,6 @@
     transition: transform 0.3s ease;
 }
 
-.playlist-showcase__image-wrapper:hover .playlist-showcase__image {
-    transform: scale(1.03);
-}
-
 /* Description styling */
 .playlist-showcase__description {
     font-size: 1.4rem;
