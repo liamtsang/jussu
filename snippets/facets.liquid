@@ -56,58 +56,88 @@
               {% endcomment %}
             {%- endif -%}
 
-            {%- comment -%} Collection Switcher Dropdown {%- endcomment -%}
+            {%- comment -%} Tag-based Scene Filter {%- endcomment -%}
             {%- if filter_type == 'horizontal' -%}
-              <details
-                id="Details-CollectionSelect-{{ section.id }}"
-                class="disclosure-has-popup facets__disclosure js-filter collection-switcher"
-                data-index="collection"
-              >
-                <summary class="facets__summary caption-large focus-offset">
-                  <div>
-                    <span class="facets__summary-label">Scene</span>
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </div>
-                </summary>
-                <div
-                  id="Facet-Collection-{{ section.id }}"
-                  class="facets__display"
-                >
-                  <div class="facets__header">
-                    <span class="facets__selected">Select a scene</span>
-                  </div>
-                  <fieldset class="facets-wrap">
-                    <legend class="visually-hidden">Scene</legend>
-                    <ul class="facets-layout facets-layout-list facets__list list-unstyled" role="list">
-                      {%- for coll in collections -%}
-                        {%- assign coll_title_lower = coll.title | downcase -%}
-                        {%- if coll_title_lower contains 'scene' or coll.handle == 'frontpage' -%}
-                          <li class="list-menu__item facets__item">
-                            <a
-                              href="{{ coll.url }}"
-                              class="facets__label facet-checkbox{% if collection.handle == coll.handle %} active{% endif %}"
-                            >
-                              {{- 'square.svg' | inline_asset_content -}}
-                              <div class="svg-wrapper">
-                                {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                              </div>
-                              <span class="facet-checkbox__text">
-                                <span class="facet-checkbox__text-label">
-                                  {%- if coll.handle == 'frontpage' -%}
-                                    All Scenes
-                                  {%- else -%}
-                                    {{ coll.title }}
-                                  {%- endif -%}
+              {%- assign scene_filter = nil -%}
+              {%- for filter in results.filters -%}
+                {%- if filter.param_name contains 'tag' -%}
+                  {%- assign scene_filter = filter -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if scene_filter -%}
+                {%- assign has_scene_values = false -%}
+                {%- assign scene_active_count = 0 -%}
+                {%- for value in scene_filter.values -%}
+                  {%- assign label_lower = value.label | downcase -%}
+                  {%- if label_lower contains 'scene-' -%}
+                    {%- assign has_scene_values = true -%}
+                    {%- if value.active -%}
+                      {%- assign scene_active_count = scene_active_count | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if has_scene_values -%}
+                  <details
+                    id="Details-SceneFilter-{{ section.id }}"
+                    class="disclosure-has-popup facets__disclosure js-filter"
+                    data-index="scene"
+                  >
+                    <summary class="facets__summary caption-large focus-offset">
+                      <div>
+                        <span class="facets__summary-label">Scene</span>
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                      </div>
+                    </summary>
+                    <div
+                      id="Facet-Scene-{{ section.id }}"
+                      class="facets__display"
+                    >
+                      <div class="facets__header">
+                        <span class="facets__selected">
+                          {{- 'products.facets.filters_selected' | t: count: scene_active_count -}}
+                        </span>
+                      </div>
+                      <fieldset class="facets-wrap">
+                        <legend class="visually-hidden">Scene</legend>
+                        <ul class="facets-layout facets-layout-list facets__list list-unstyled" role="list">
+                          {%- for value in scene_filter.values -%}
+                            {%- assign label_lower = value.label | downcase -%}
+                            {%- unless label_lower contains 'scene-' -%}
+                              {%- continue -%}
+                            {%- endunless -%}
+                            {%- assign input_id = 'Filter-Scene-' | append: forloop.index -%}
+                            {%- assign is_disabled = false -%}
+                            {%- if value.count == 0 and value.active == false -%}
+                              {%- assign is_disabled = true -%}
+                            {%- endif -%}
+                            {%- assign scene_label = value.label | downcase | replace: '-', ' ' | capitalize -%}
+                            <li class="list-menu__item facets__item">
+                              <label for="{{ input_id }}" class="facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}">
+                                <input
+                                  type="checkbox"
+                                  name="{{ value.param_name }}"
+                                  value="{{ value.value }}"
+                                  id="{{ input_id }}"
+                                  {% if value.active %}checked{% endif %}
+                                  {% if is_disabled %}disabled{% endif %}
+                                >
+                                {{- 'square.svg' | inline_asset_content -}}
+                                <div class="svg-wrapper">
+                                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                                </div>
+                                <span class="facet-checkbox__text">
+                                  <span class="facet-checkbox__text-label">{{ scene_label }}</span> ({{ value.count }})
                                 </span>
-                              </span>
-                            </a>
-                          </li>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    </ul>
-                  </fieldset>
-                </div>
-              </details>
+                              </label>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </fieldset>
+                    </div>
+                  </details>
+                {%- endif -%}
+              {%- endif -%}
             {%- endif -%}
 
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
@@ -252,6 +282,12 @@
                           role="list"
                         >
                           {%- for value in sorted_values -%}
+                            {%- if filter.param_name contains 'tag' -%}
+                              {%- assign _tag_lower = value.label | downcase -%}
+                              {%- if _tag_lower contains 'scene-' or _tag_lower == 'vintage' or _tag_lower == 'oth' or _tag_lower == 'refound' -%}
+                                {%- continue -%}
+                              {%- endif -%}
+                            {%- endif -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
                               assign is_disabled = false
@@ -566,56 +602,100 @@
               id="FacetsWrapperMobile"
               class="mobile-facets__main has-submenu gradient"
             >
-              {%- comment -%} Collection Switcher Dropdown - Mobile {%- endcomment -%}
-              <details
-                id="Details-Mobile-CollectionSelect-{{ section.id }}"
-                class="mobile-facets__details js-filter"
-                data-index="mobile-collection"
-              >
-                <summary class="mobile-facets__summary focus-inset">
-                  <div>
-                    <span>Scene</span>
-                    <span class="mobile-facets__arrow">
-                      {{- 'icon-arrow.svg' | inline_asset_content -}}
-                    </span>
-                  </div>
-                </summary>
-                <div
-                  id="FacetMobile-Collection-{{ section.id }}"
-                  class="mobile-facets__submenu gradient"
-                >
-                  <button
-                    class="mobile-facets__close-button link link--text focus-inset"
-                    aria-expanded="true"
-                    type="button"
+              {%- comment -%} Tag-based Scene Filter - Mobile {%- endcomment -%}
+              {%- assign scene_filter_mobile = nil -%}
+              {%- for filter in results.filters -%}
+                {%- if filter.param_name contains 'tag' -%}
+                  {%- assign scene_filter_mobile = filter -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if scene_filter_mobile -%}
+                {%- assign has_scene_values_mobile = false -%}
+                {%- for value in scene_filter_mobile.values -%}
+                  {%- assign label_lower = value.label | downcase -%}
+                  {%- if label_lower contains 'scene-' -%}
+                    {%- assign has_scene_values_mobile = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if has_scene_values_mobile -%}
+                  <details
+                    id="Details-Mobile-SceneFilter-{{ section.id }}"
+                    class="mobile-facets__details js-filter"
+                    data-index="mobile-scene"
                   >
-                    {{- 'icon-arrow.svg' | inline_asset_content -}}
-                    <span>Scene</span>
-                  </button>
-                  <ul class="mobile-facets__list list-unstyled" role="list">
-                    {%- for coll in collections -%}
-                      {%- assign coll_title_lower = coll.title | downcase -%}
-                      {%- if coll_title_lower contains 'scene' or coll.handle == 'frontpage' -%}
-                        <li class="mobile-facets__item list-menu__item">
-                          <a
-                            href="{{ coll.url }}"
-                            class="mobile-facets__label{% if collection.handle == coll.handle %} active{% endif %}"
-                          >
-                            {%- if coll.handle == 'frontpage' -%}
-                              All Scenes
-                            {%- else -%}
-                              {{ coll.title }}
-                            {%- endif -%}
-                            {%- if collection.handle == coll.handle -%}
+                    <summary class="mobile-facets__summary focus-inset">
+                      <div>
+                        <span>Scene</span>
+                        <span class="mobile-facets__arrow">
+                          {{- 'icon-arrow.svg' | inline_asset_content -}}
+                        </span>
+                      </div>
+                    </summary>
+                    <div
+                      id="FacetMobile-Scene-{{ section.id }}"
+                      class="mobile-facets__submenu gradient"
+                    >
+                      <button
+                        class="mobile-facets__close-button link link--text focus-inset"
+                        aria-expanded="true"
+                        type="button"
+                      >
+                        {{- 'icon-arrow.svg' | inline_asset_content -}}
+                        <span>Scene</span>
+                      </button>
+                      <ul class="mobile-facets__list list-unstyled" role="list">
+                        {%- for value in scene_filter_mobile.values -%}
+                          {%- assign label_lower = value.label | downcase -%}
+                          {%- unless label_lower contains 'scene-' -%}
+                            {%- continue -%}
+                          {%- endunless -%}
+                          {%- assign input_id = 'Filter-Scene-mobile-' | append: forloop.index -%}
+                          {%- assign is_disabled = false -%}
+                          {%- if value.count == 0 and value.active == false -%}
+                            {%- assign is_disabled = true -%}
+                          {%- endif -%}
+                          {%- assign scene_label = value.label | downcase | replace: '-', ' ' | capitalize -%}
+                          <li class="mobile-facets__item list-menu__item">
+                            <label for="{{ input_id }}" class="facets__label mobile-facets__label{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}">
+                              <input
+                                class="mobile-facets__checkbox"
+                                type="checkbox"
+                                name="{{ value.param_name }}"
+                                value="{{ value.value }}"
+                                id="{{ input_id }}"
+                                {% if value.active %}checked{% endif %}
+                                {% if is_disabled %}disabled{% endif %}
+                              >
                               <span class="mobile-facets__highlight"></span>
-                            {%- endif -%}
+                              {{- 'square.svg' | inline_asset_content -}}
+                              {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                              <span class="facet-checkbox__text">
+                                <span class="facet-checkbox__text-label">{{ scene_label }}</span> ({{ value.count }})
+                              </span>
+                            </label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      <div class="mobile-facets__footer gradient">
+                        <facet-remove class="mobile-facets__clear-wrapper">
+                          <a href="{{ scene_filter_mobile.url_to_remove }}" class="mobile-facets__clear underlined-link">
+                            {{- 'products.facets.clear' | t -}}
                           </a>
-                        </li>
-                      {%- endif -%}
-                    {%- endfor -%}
-                  </ul>
-                </div>
-              </details>
+                        </facet-remove>
+                        <button
+                          type="button"
+                          class="button button--primary"
+                          onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
+                        >
+                          {{ 'products.facets.apply' | t }}
+                        </button>
+                      </div>
+                    </div>
+                  </details>
+                {%- endif -%}
+              {%- endif -%}
 
               {%- if enable_filtering -%}
                 {%- for filter in results.filters -%}
@@ -671,6 +751,12 @@
                               endif
                             -%}
                             {%- for value in sorted_values -%}
+                              {%- if filter.param_name contains 'tag' -%}
+                                {%- assign _tag_lower = value.label | downcase -%}
+                                {%- if _tag_lower contains 'scene-' or _tag_lower == 'vintage' or _tag_lower == 'oth' or _tag_lower == 'refound' -%}
+                                  {%- continue -%}
+                                {%- endif -%}
+                              {%- endif -%}
                               {% liquid
                                 assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-mobile-' | append: forloop.index
                                 assign is_disabled = false
