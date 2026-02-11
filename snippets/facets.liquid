@@ -101,6 +101,20 @@
                       <fieldset class="facets-wrap">
                         <legend class="visually-hidden">Scene</legend>
                         <ul class="facets-layout facets-layout-list facets__list list-unstyled" role="list">
+                          <li class="list-menu__item facets__item">
+                            <a
+                              href="{{ scene_filter.url_to_remove }}"
+                              class="facets__label facet-checkbox{% if scene_active_count == 0 %} active{% endif %}"
+                            >
+                              {{- 'square.svg' | inline_asset_content -}}
+                              <div class="svg-wrapper">
+                                {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                              </div>
+                              <span class="facet-checkbox__text">
+                                <span class="facet-checkbox__text-label">All Scenes</span>
+                              </span>
+                            </a>
+                          </li>
                           {%- for value in scene_filter.values -%}
                             {%- assign label_lower = value.label | downcase -%}
                             {%- unless label_lower contains 'scene-' -%}
@@ -649,6 +663,26 @@
                         <span>Scene</span>
                       </button>
                       <ul class="mobile-facets__list list-unstyled" role="list">
+                        {%- assign scene_active_count_mobile = 0 -%}
+                        {%- for value in scene_filter_mobile.values -%}
+                          {%- assign label_lower_check = value.label | downcase -%}
+                          {%- if label_lower_check contains 'scene-' and value.active -%}
+                            {%- assign scene_active_count_mobile = scene_active_count_mobile | plus: 1 -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        <li class="mobile-facets__item list-menu__item">
+                          <a
+                            href="{{ scene_filter_mobile.url_to_remove }}"
+                            class="facets__label mobile-facets__label{% if scene_active_count_mobile == 0 %} active{% endif %}"
+                          >
+                            <span class="mobile-facets__highlight"></span>
+                            {{- 'square.svg' | inline_asset_content -}}
+                            {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                            <span class="facet-checkbox__text">
+                              <span class="facet-checkbox__text-label">All Scenes</span>
+                            </span>
+                          </a>
+                        </li>
                         {%- for value in scene_filter_mobile.values -%}
                           {%- assign label_lower = value.label | downcase -%}
                           {%- unless label_lower contains 'scene-' -%}
