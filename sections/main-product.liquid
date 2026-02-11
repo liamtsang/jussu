@@ -41,6 +41,16 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'title' -%}
+        @media screen and (min-width: 750px) {
+          #MainProduct-{{ section.id }} .product__title {
+            font-size: {{ block.settings.title_font_size }}px;
+          }
+        }
+      {%- endif -%}
+    {%- endfor -%}
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -105,7 +115,18 @@
                   {{- block.settings.text -}}
                 </p>
               {%- when 'title' -%}
-                <div class="product__title" {{ block.shopify_attributes }}>
+                {%- if block.settings.title_font -%}
+                  {% style %}
+                    {{ block.settings.title_font | font_face: font_display: 'swap' }}
+                  {% endstyle %}
+                {%- endif -%}
+                <div class="product__title" {{ block.shopify_attributes }}
+                  style="
+                    {%- if block.settings.title_font -%}font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};{%- endif -%}
+                    font-weight: {{ block.settings.title_font_weight }};
+                    font-size: {{ block.settings.title_font_size_mobile }}px;
+                  "
+                >
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
                     <h2 class="h1">
@@ -828,7 +849,49 @@
     {
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "font_picker",
+          "id": "title_font",
+          "label": "Title Font",
+          "default": "assistant_n4"
+        },
+        {
+          "type": "range",
+          "id": "title_font_size",
+          "min": 16,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "label": "Title Font Size (Desktop)",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "title_font_size_mobile",
+          "min": 14,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "label": "Title Font Size (Mobile)",
+          "default": 30
+        },
+        {
+          "type": "select",
+          "id": "title_font_weight",
+          "label": "Title Font Weight",
+          "options": [
+            { "value": "300", "label": "Light" },
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi-Bold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "900", "label": "Black" }
+          ],
+          "default": "700"
+        }
+      ]
     },
     {
       "type": "price",
