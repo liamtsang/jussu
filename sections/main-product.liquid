@@ -120,13 +120,7 @@
                     {{ block.settings.title_font | font_face: font_display: 'swap' }}
                   {% endstyle %}
                 {%- endif -%}
-                <div class="product__title" {{ block.shopify_attributes }}
-                  style="
-                    {%- if block.settings.title_font -%}font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};{%- endif -%}
-                    font-weight: {{ block.settings.title_font_weight }};
-                    font-size: {{ block.settings.title_font_size_mobile }}px;
-                  "
-                >
+                <div class="product__title" {{ block.shopify_attributes }}>
                   <h1
                     style="
                       {%- if block.settings.title_font -%}font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};{%- endif -%}
