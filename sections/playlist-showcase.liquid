@@ -1,5 +1,10 @@
 {{ 'section-playlist-showcase.css' | asset_url | stylesheet_tag }}
 
+{% style %}
+  {{ section.settings.section_header_font | font_face: font_display: 'swap' }}
+  {{ section.settings.playlist_title_font | font_face: font_display: 'swap' }}
+{% endstyle %}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -23,6 +28,30 @@
 
   .playlist-showcase__section-{{ section.id }} + .playlist-showcase__section-{{ section.id }} {
     margin-top: {{ section.settings.section_spacing }}px;
+  }
+
+  .playlist-showcase--archive-{{ section.id }} .playlist-showcase__section-header {
+    font-family: {{ section.settings.section_header_font.family }}, {{ section.settings.section_header_font.fallback_families }};
+    font-weight: {{ section.settings.section_header_font_weight }};
+    font-size: {{ section.settings.section_header_font_size_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .playlist-showcase--archive-{{ section.id }} .playlist-showcase__section-header {
+      font-size: {{ section.settings.section_header_font_size }}px;
+    }
+  }
+
+  .playlist-showcase--archive-{{ section.id }} .playlist-showcase__title {
+    font-family: {{ section.settings.playlist_title_font.family }}, {{ section.settings.playlist_title_font.fallback_families }};
+    font-weight: {{ section.settings.playlist_title_font_weight }};
+    font-size: {{ section.settings.playlist_title_font_size_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .playlist-showcase--archive-{{ section.id }} .playlist-showcase__title {
+      font-size: {{ section.settings.playlist_title_font_size }}px;
+    }
   }
 {%- endstyle -%}
 
@@ -346,6 +375,94 @@
       "id": "previous_section_title",
       "label": "Previous Section Title",
       "default": "PREVIOUSLY,"
+    },
+    {
+      "type": "header",
+      "content": "Section Header Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "section_header_font",
+      "label": "Section Header Font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "section_header_font_size",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Header Font Size (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "section_header_font_size_mobile",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Section Header Font Size (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "section_header_font_weight",
+      "label": "Section Header Font Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Playlist Title Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "playlist_title_font",
+      "label": "Playlist Title Font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "playlist_title_font_size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Playlist Title Font Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "playlist_title_font_size_mobile",
+      "min": 14,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Playlist Title Font Size (Mobile)",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "playlist_title_font_weight",
+      "label": "Playlist Title Font Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "700"
     },
     {
       "type": "range",
