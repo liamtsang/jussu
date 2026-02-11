@@ -294,6 +294,7 @@ product-info {
 .product__description p {
     margin: 0;
     line-height: 1.325;
+    font-size: 14px;
 }
 
 .product__info-container iframe {
