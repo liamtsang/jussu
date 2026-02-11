@@ -2560,7 +2560,7 @@ input[type='checkbox'] {
 }
 
 .header__icon .svg-wrapper img{
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .header__icon::after {
