@@ -1,3 +1,64 @@
+.blog-filter {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.blog-filter-label {
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.blog-filter-tags {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.blog-filter-tag {
+  font-size: 1.3rem;
+  letter-spacing: 0.06rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.blog-filter-tag:hover {
+  opacity: 0.6;
+}
+
+.blog-filter-tag--active {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+}
+
+.blog-filter-tag--active:hover {
+  opacity: 1;
+}
+
+@media screen and (max-width: 749px) {
+  .blog-filter {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-filter-label {
+    font-size: 1.2rem;
+  }
+
+  .blog-filter-tag {
+    font-size: 1.1rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
 .blog-articles {
   display: flex;
   flex-direction: column;
