@@ -1,4 +1,5 @@
 {{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{{ 'component-facets.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -17,18 +18,56 @@
 {%- paginate blog.articles by 6 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
     {%- if blog.all_tags.size > 0 -%}
-      <div class="blog-filter">
-        <span class="blog-filter-label caption-large">Category</span>
-        <div class="blog-filter-tags">
-          <a href="{{ blog.url }}" class="blog-filter-tag{% unless current_tags %} blog-filter-tag--active{% endunless %}">
-            <span class="blog-filter-tag-inner">All</span>
-          </a>
-          {%- for tag in blog.all_tags -%}
-            <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="blog-filter-tag{% if current_tags contains tag %} blog-filter-tag--active{% endif %}">
-              <span class="blog-filter-tag-inner">{{ tag }}</span>
-            </a>
-          {%- endfor -%}
-        </div>
+      {%- assign active_tag_count = current_tags | size | default: 0 -%}
+      <div class="blog-filter facets__wrapper">
+        <details
+          id="Details-BlogCategory-{{ section.id }}"
+          class="disclosure-has-popup facets__disclosure js-filter"
+        >
+          <summary class="facets__summary caption-large focus-offset">
+            <div>
+              <span class="facets__summary-label">Category</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </div>
+          </summary>
+          <div class="facets__display">
+            <div class="facets__header">
+              <span class="facets__selected">
+                {%- if current_tags -%}
+                  {{ current_tags | join: ', ' }}
+                {%- else -%}
+                  All
+                {%- endif -%}
+              </span>
+            </div>
+            <ul class="facets-layout facets-layout-list facets-layout-list--text facets__list list-unstyled" role="list">
+              <li class="list-menu__item facets__item">
+                <a href="{{ blog.url }}" class="facets__label facet-checkbox{% unless current_tags %} active{% endunless %}">
+                  {{- 'square.svg' | inline_asset_content -}}
+                  <div class="svg-wrapper"{% unless current_tags %} style="visibility: visible"{% endunless %}>
+                    {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                  </div>
+                  <span class="facet-checkbox__text">
+                    <span class="facet-checkbox__text-label">All</span>
+                  </span>
+                </a>
+              </li>
+              {%- for tag in blog.all_tags -%}
+                <li class="list-menu__item facets__item">
+                  <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="facets__label facet-checkbox{% if current_tags contains tag %} active{% endif %}">
+                    {{- 'square.svg' | inline_asset_content -}}
+                    <div class="svg-wrapper"{% if current_tags contains tag %} style="visibility: visible"{% endif %}>
+                      {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                    </div>
+                    <span class="facet-checkbox__text">
+                      <span class="facet-checkbox__text-label">{{ tag }}</span>
+                    </span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </details>
       </div>
     {%- endif -%}
 
