@@ -48,13 +48,16 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   text-align: center;
-  font-size: 1.6rem;
-  line-height: 1.6;
+  font-size: 1.4rem;
+  line-height: 1.4;
   font-weight: bold;
 }
 
 .blog-article-description p {
   margin: 0;
+  margin: 0;
+  max-width: 24ch;
+  text-align: left;
 }
 
 .blog-article-media:hover .blog-article-thumb,
