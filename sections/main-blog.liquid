@@ -18,11 +18,15 @@
   <div class="main-blog page-width section-{{ section.id }}-padding">
     {%- if blog.all_tags.size > 0 -%}
       <div class="blog-filter">
-        <span class="blog-filter-label">Category</span>
+        <span class="blog-filter-label caption-large">Category</span>
         <div class="blog-filter-tags">
-          <a href="{{ blog.url }}" class="blog-filter-tag{% unless current_tags %} blog-filter-tag--active{% endunless %}">All</a>
+          <a href="{{ blog.url }}" class="blog-filter-tag{% unless current_tags %} blog-filter-tag--active{% endunless %}">
+            <span class="blog-filter-tag-inner">All</span>
+          </a>
           {%- for tag in blog.all_tags -%}
-            <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="blog-filter-tag{% if current_tags contains tag %} blog-filter-tag--active{% endif %}">{{ tag }}</a>
+            <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="blog-filter-tag{% if current_tags contains tag %} blog-filter-tag--active{% endif %}">
+              <span class="blog-filter-tag-inner">{{ tag }}</span>
+            </a>
           {%- endfor -%}
         </div>
       </div>

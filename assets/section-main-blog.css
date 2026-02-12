@@ -1,61 +1,84 @@
 .blog-filter {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
-  margin-bottom: 3rem;
   flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+  gap: 0;
 }
 
 .blog-filter-label {
+  color: rgba(var(--color-foreground), 0.85);
   font-size: 1.4rem;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
+  margin-right: 2rem;
   flex-shrink: 0;
 }
 
 .blog-filter-tags {
   display: flex;
-  gap: 0.8rem;
   flex-wrap: wrap;
 }
 
 .blog-filter-tag {
-  font-size: 1.3rem;
-  letter-spacing: 0.06rem;
-  padding: 0.5rem 1.2rem;
-  border: 1px solid currentColor;
+  display: block;
+  margin-right: 1.5rem;
+  margin-top: 1.5rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
   text-decoration: none;
-  color: inherit;
-  transition: opacity 0.2s ease;
 }
 
-.blog-filter-tag:hover {
-  opacity: 0.6;
+.blog-filter-tag-inner {
+  color: rgb(var(--color-foreground));
+  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
+  border-radius: 2.6rem;
+  font-size: 1.4rem;
+  min-height: 0;
+  min-width: 0;
+  padding: 0.25rem 1.25rem;
+  display: flex;
+  align-items: center;
 }
 
-.blog-filter-tag--active {
-  background: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
-  border-color: rgb(var(--color-foreground));
+.blog-filter-tag:hover .blog-filter-tag-inner {
+  box-shadow: 0 0 0 0.2rem rgba(var(--color-foreground), 0.4);
 }
 
-.blog-filter-tag--active:hover {
-  opacity: 1;
+.blog-filter-tag--active .blog-filter-tag-inner {
+  box-shadow: 0 0 0 0.1rem rgb(var(--color-foreground));
 }
 
-@media screen and (max-width: 749px) {
-  .blog-filter {
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
+.blog-filter-tag--active:hover .blog-filter-tag-inner {
+  box-shadow: 0 0 0 0.2rem rgb(var(--color-foreground));
+}
 
-  .blog-filter-label {
-    font-size: 1.2rem;
-  }
+.blog-filter-tag:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 
+.blog-filter-tag:focus-visible .blog-filter-tag-inner {
+  box-shadow:
+    0 0 0 0.1rem rgba(var(--color-foreground), 0.2),
+    0 0 0 0.2rem rgb(var(--color-background)),
+    0 0 0 0.4rem rgb(var(--color-foreground));
+  outline: none;
+}
+
+@media screen and (max-width: 989px) {
   .blog-filter-tag {
-    font-size: 1.1rem;
-    padding: 0.4rem 1rem;
+    margin: 0;
+    padding: 1.2rem;
+  }
+
+  .blog-filter-tag-inner {
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .blog-filter-tag-inner {
+    font-size: 1.4rem;
   }
 }
 
