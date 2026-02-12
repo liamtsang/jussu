@@ -53,7 +53,7 @@
     overflow: hidden;
     /* Calculate scale factor: table height is constrained by viewport, so items should scale relative to table height */
     --table-base-height: {{ section.settings.table_height }};
-    --table-max-vh: calc(100vh - 85px - 35px);
+    --table-max-vh: min(calc(100vh - 85px - 35px), calc((100vw - 40px) * {{ section.settings.table_height }} / {{ section.settings.table_width }}));
   }
 
   .table-surface {
