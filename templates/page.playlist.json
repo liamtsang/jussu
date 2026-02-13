@@ -63,8 +63,8 @@
         "button_text_color": "#ffffff",
         "button_border_color": "",
         "color_scheme": "scheme-1",
-        "padding_top": 8,
-        "padding_bottom": 100
+        "padding_top": 32,
+        "padding_bottom": 80
       }
     }
   },
