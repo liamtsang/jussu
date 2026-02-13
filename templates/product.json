@@ -23,7 +23,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "fraunces_n4",
+            "title_font": "lora_n4",
             "title_font_size": 24,
             "title_font_size_mobile": 56,
             "title_font_weight": "300"
