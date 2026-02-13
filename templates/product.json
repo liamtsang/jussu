@@ -23,10 +23,10 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "manrope_n4",
-            "title_font_size": 24,
-            "title_font_size_mobile": 38,
-            "title_font_weight": "300"
+            "title_font": "sans_serif_n4",
+            "title_font_size": 32,
+            "title_font_size_mobile": 28,
+            "title_font_weight": "500"
           }
         },
         "description": {
