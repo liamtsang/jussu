@@ -24,8 +24,8 @@
           "type": "title",
           "settings": {
             "title_font": "palatino_n4",
-            "title_font_size": 40,
-            "title_font_size_mobile": 28,
+            "title_font_size": 30,
+            "title_font_size_mobile": 42,
             "title_font_weight": "400"
           }
         },
