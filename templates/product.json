@@ -23,8 +23,8 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "cardo_n4",
-            "title_font_size": 32,
+            "title_font": "palatino_n4",
+            "title_font_size": 40,
             "title_font_size_mobile": 28,
             "title_font_weight": "400"
           }
