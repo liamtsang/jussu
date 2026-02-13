@@ -24,32 +24,10 @@
     "playlist_showcase_HniWFQ": {
       "type": "playlist-showcase",
       "blocks": {
-        "playlist_cLwneq": {
-          "type": "playlist",
-          "settings": {
-            "section_type": "current",
-            "playlist_title": "JUSSU MIX. 3",
-            "playlist_image": "shopify://shop_images/Screenshot_2026-01-13_at_7.40.28_PM.png",
-            "playlist_description": "<h5>feels like flipping through scenes from different films —spanning languages, places, moods.<br/>Play it in sequence, or drop in mid-scene.<br/></h5><h5><br/>The <a href=\"https://jussuobjects.com/products/cue-object-1\">cue object</a> appears around track eight.</h5><h5><br/>Look for the fruit.</h5>",
-            "playlist_url": "",
-            "button_label": "PLAY"
-          }
-        },
-        "playlist_QhinkG": {
-          "type": "playlist",
-          "settings": {
-            "section_type": "previous",
-            "playlist_title": "JUSSU MIX. 2",
-            "playlist_image": "shopify://shop_images/Screenshot_2026-01-13_at_7.45.16_PM.png",
-            "playlist_description": "<h5>feels like flipping through scenes from different films —spanning languages, places, moods.<br/>Play it in sequence, or drop in mid-scene.<br/></h5><h5><br/>The <a href=\"https://jussuobjects.com/products/cue-object-1\">cue object</a> appears around track eight.</h5><h5><br/>Look for the fruit.</h5>",
-            "playlist_url": "",
-            "button_label": "PLAY"
-          }
-        },
         "playlist_VFyUqU": {
           "type": "playlist",
           "settings": {
-            "section_type": "previous",
+            "section_type": "current",
             "playlist_title": "JUSSU MIX. 1",
             "playlist_image": "shopify://shop_images/1_COVER.jpg",
             "playlist_description": "<h5>feels like flipping through scenes from different films —spanning languages, places, moods. Play it in sequence, or drop in mid-scene.<br/></h5><h5><br/>The <a href=\"https://jussuobjects.com/products/cue-object-1\">cue object</a> appears around track eight.</h5><h5><br/>Look for the fruit.</h5>",
@@ -59,8 +37,6 @@
         }
       },
       "block_order": [
-        "playlist_cLwneq",
-        "playlist_QhinkG",
         "playlist_VFyUqU"
       ],
       "name": "Playlist Showcase",
