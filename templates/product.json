@@ -23,9 +23,9 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "trispace_n4",
-            "title_font_size": 42,
-            "title_font_size_mobile": 28,
+            "title_font": "playfair_n4",
+            "title_font_size": 36,
+            "title_font_size_mobile": 50,
             "title_font_weight": "300"
           }
         },
