@@ -24,8 +24,8 @@
           "type": "title",
           "settings": {
             "title_font": "space_mono_n4",
-            "title_font_size": 38,
-            "title_font_size_mobile": 28,
+            "title_font_size": 26,
+            "title_font_size_mobile": 24,
             "title_font_weight": "500"
           }
         },
