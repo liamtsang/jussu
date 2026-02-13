@@ -23,9 +23,9 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "sans_serif_n4",
+            "title_font": "anybody_n4",
             "title_font_size": 24,
-            "title_font_size_mobile": 44,
+            "title_font_size_mobile": 34,
             "title_font_weight": "300"
           }
         },
