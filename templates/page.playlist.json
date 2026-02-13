@@ -45,7 +45,7 @@
         "background_image": "shopify://shop_images/jussumix_background_copy_d316c39c-e951-4fd1-aec0-32aa70daad7c.jpg",
         "background_position_x": "center",
         "background_position_y": "center",
-        "background_size": "cover",
+        "background_size": "contain",
         "current_section_title": "CURRENTLY PLAYING —",
         "previous_section_title": "PREVIOUSLY,",
         "section_header_font": "courier_new_n4",
