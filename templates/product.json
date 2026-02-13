@@ -23,7 +23,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "title_font": "taviraj_n4",
+            "title_font": "playfair_n4",
             "title_font_size": 40,
             "title_font_size_mobile": 60,
             "title_font_weight": "400"
