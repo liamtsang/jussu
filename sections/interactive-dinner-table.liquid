@@ -10,7 +10,9 @@
       {% comment %} Base table background {% endcomment %}
       <div
         class="table-surface"
-        style="background-image: url('https://cdn.shopify.com/s/files/1/0654/4690/3887/files/TABLE_EMPTY.webp?v=1754949437');"
+        {% if section.settings.table_background %}
+          style="background-image: url('{{ section.settings.table_background | image_url: width: section.settings.table_width }}');"
+        {% endif %}
       ></div>
 
       {% comment %} Render all product blocks {% endcomment %}
