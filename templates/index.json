@@ -311,6 +311,7 @@
         "title_font": "system_ui_n4",
         "title_font_size": 36,
         "title_color": "#333333",
+        "table_background": "shopify://shop_images/TABLE_EMPTY.webp",
         "table_width": 2300,
         "table_height": 1300,
         "table_border_radius": 20,
