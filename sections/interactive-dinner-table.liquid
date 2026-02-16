@@ -82,6 +82,17 @@
   "name": "Interactive Dinner Table",
   "settings": [
     {
+      "type": "select",
+      "id": "visibility",
+      "label": "Section Visibility",
+      "options": [
+        { "value": "always", "label": "Always" },
+        { "value": "mobile_only", "label": "Mobile Only" },
+        { "value": "desktop_only", "label": "Desktop Only" }
+      ],
+      "default": "always"
+    },
+    {
       "type": "text",
       "id": "section_title",
       "label": "Section Title",
