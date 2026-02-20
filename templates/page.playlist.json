@@ -31,7 +31,7 @@
             "playlist_title": "JUSSU MIX.1",
             "playlist_image": "shopify://shop_images/1_COVER.jpg",
             "playlist_description": "<h5>feels like flipping through scenes from different films —spanning languages, places, moods. Play it in sequence, or drop in mid-scene.<br/></h5><h5><br/>The <a href=\"https://jussuobjects.com/products/cue-object-1\">cue object</a> appears around track eight.</h5><h5><br/>Look for the fruit.</h5>",
-            "playlist_url": "{{ page.metafields.custom.playlist_url.value }}",
+            "playlist_url": "https://open.spotify.com/playlist/6L9RItKtb8Crgm2RMMA3Vx?si=bb7f3a05352d4cf5",
             "button_label": "PLAY"
           }
         }
