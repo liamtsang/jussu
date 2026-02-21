@@ -144,7 +144,7 @@
         "password_overlay_opacity": 100,
         "password_modal_bg_color": "",
         "password_prompt_font_size": 14,
-        "padding_top": 40,
+        "padding_top": 20,
         "padding_bottom": 40
       }
     },
