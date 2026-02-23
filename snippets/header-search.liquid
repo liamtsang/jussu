@@ -3,6 +3,7 @@
 
   Accepts:
   - input_id: {String} Id for the search input element (required)
+  - icon_image: {String} Optional URL for a custom PNG icon (replaces SVG)
 
   Usage:
   {% render 'header-search', input_id: 'My-Id'%}
@@ -17,7 +18,11 @@
     >
       <span>
         <span class="svg-wrapper">
-          {{- 'icon-search.svg' | inline_asset_content -}}
+          {%- if icon_image -%}
+            <img src="{{ icon_image }}" alt="Search" width="38" height="38">
+          {%- else -%}
+            {{- 'icon-search.svg' | inline_asset_content -}}
+          {%- endif -%}
         </span>
         <span class="svg-wrapper header__icon-close">
           {{- 'icon-close.svg' | inline_asset_content -}}
