@@ -18,11 +18,7 @@
     >
       <span>
         <span class="svg-wrapper">
-          {%- if icon_image -%}
-            <img src="{{ icon_image }}" alt="Search" width="38" height="38">
-          {%- else -%}
-            {{- 'icon-search.svg' | inline_asset_content -}}
-          {%- endif -%}
+          <img src="{{ icon_image | default: 'https://cdn.shopify.com/s/files/1/0859/3771/7525/files/search.png?v=1771889034' }}" alt="Search" width="38" height="38">
         </span>
         <span class="svg-wrapper header__icon-close">
           {{- 'icon-close.svg' | inline_asset_content -}}
@@ -80,7 +76,7 @@
             </button>
             <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
               <span class="svg-wrapper">
-                {{- 'icon-search.svg' | inline_asset_content -}}
+                <img src="https://cdn.shopify.com/s/files/1/0859/3771/7525/files/search.png?v=1771889034" alt="Search" width="38" height="38">
               </span>
             </button>
           </div>
