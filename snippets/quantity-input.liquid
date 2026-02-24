@@ -10,6 +10,19 @@
   {% render 'quantity-input' variant: variant %}
 {% endcomment %}
 
+{%- liquid
+  assign qi_effective_max = variant.quantity_rule.max
+  if variant.inventory_management == 'shopify' and variant.inventory_policy != 'continue'
+    assign qi_inv_qty = variant.inventory_quantity | at_least: 0
+    if qi_effective_max != null
+      if qi_inv_qty < qi_effective_max
+        assign qi_effective_max = qi_inv_qty
+      endif
+    else
+      assign qi_effective_max = qi_inv_qty
+    endif
+  endif
+-%}
 <quantity-input class="quantity cart-quantity">
   <button class="quantity__button" name="minus" type="button" data-target="decrement-{{ variant.id }}">
     <span class="visually-hidden">
@@ -27,8 +40,8 @@
     data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}"
     min="{{ min }}"
     data-min="{{ variant.quantity_rule.min }}"
-    {% if variant.quantity_rule.max != null %}
-      max="{{ variant.quantity_rule.max }}"
+    {% if qi_effective_max != null %}
+      max="{{ qi_effective_max }}"
     {% endif %}
     step="{{ variant.quantity_rule.increment }}"
     {% # theme-check-enable %}
