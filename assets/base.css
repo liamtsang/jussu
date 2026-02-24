@@ -1355,7 +1355,7 @@ shopify-accelerated-checkout-cart {
 .customer button.disabled,
 .quantity__button.disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    visibility: hidden;
 }
 
 .button--full-width {
