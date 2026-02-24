@@ -118,6 +118,7 @@
   font-size: 1.3rem;
   background-color: transparent;
   gap: 4px;
+  font-family: var(--font-body-family);
 }
 
 .disclosure__list-wrapper {
