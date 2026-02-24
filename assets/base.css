@@ -2644,6 +2644,7 @@ input[type='checkbox'] {
     top: 100%;
     right: 0;
     z-index: 4;
+    height: fit-content;
 }
 
 .header__icon--menu[aria-expanded='true']::before {
