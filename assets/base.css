@@ -1607,7 +1607,7 @@ details[open] > .share-button__fallback {
 .select:before,
 .customer .field:before,
 .customer select:before,
-.localization-form__select:before {
+{
     pointer-events: none;
     content: '';
     position: absolute;
