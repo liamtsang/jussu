@@ -77,7 +77,7 @@
 }
 
 .localization-form__select .icon-caret {
-  position: absolute;
+  /* position: absolute; */
   content: '';
   height: 0.6rem;
   right: calc(var(--inputs-border-width) + 1.5rem);
@@ -115,8 +115,6 @@
   align-items: center;
   cursor: pointer;
   display: flex;
-  height: 4rem;
-  padding: 0 1.5rem 0 1.5rem;
   font-size: 1.3rem;
   background-color: transparent;
   align-items: start;
