@@ -1284,3 +1284,15 @@ input.mobile-facets__checkbox {
         padding: 0 1rem 1rem;
     }
 }
+
+@media screen and (max-width: 749px) {
+  .mobile-facets__open-label {
+    display: none !important;
+  }
+  .mobile-facets__count {
+    display: none;
+  }
+  .mobile-facets__footer {
+    bottom: 52px;
+  }
+}

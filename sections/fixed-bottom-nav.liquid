@@ -296,7 +296,70 @@
         pointer-events: auto;
       }
 
-      /* Trigger button (summary) */
+      /* Fixed bottom bar with search/menu/cart */
+      .fixed-bottom-nav__mobile-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding: 12px 20px;
+        background: rgb(var(--color-background));
+        border-top: 1px solid rgba(var(--color-foreground), 0.08);
+        z-index: 5;
+      }
+
+      .fixed-bottom-nav__mobile-bar-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: {{ section.settings.menu_text_color }};
+        text-decoration: none;
+        width: 24px;
+        height: 24px;
+      }
+
+      .fixed-bottom-nav__mobile-bar-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .fixed-bottom-nav__mobile-bar-icon .icon-cart {
+        width: 24px;
+        height: 24px;
+      }
+
+      .fixed-bottom-nav__mobile-cart-count {
+        position: absolute;
+        top: -4px;
+        right: -8px;
+        font-size: 10px;
+        font-weight: 600;
+        color: {{ section.settings.menu_text_color }};
+        line-height: 1;
+      }
+
+      .fixed-bottom-nav__mobile-bar-menu-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: {{ section.settings.menu_text_color }};
+        font-size: {{ section.settings.menu_font_size }}px;
+        font-weight: {{ section.settings.menu_font_weight }};
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      /* Trigger button (summary) — hidden, controlled by JS */
       .fixed-bottom-nav__mobile-trigger {
         position: fixed;
         bottom: 0;
@@ -318,6 +381,10 @@
         cursor: pointer;
         z-index: 4;
         list-style: none;
+        visibility: hidden;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
       }
 
       .fixed-bottom-nav__mobile-trigger::-webkit-details-marker {
@@ -352,6 +419,15 @@
       }
 
       .fixed-bottom-nav__mobile-details[open] .fixed-bottom-nav__mobile-icon .icon-hamburger {
+        display: none;
+      }
+
+      /* Bar trigger icon swap */
+      .fixed-bottom-nav__mobile-bar-menu-trigger.menu-open .icon-close {
+        display: block;
+      }
+
+      .fixed-bottom-nav__mobile-bar-menu-trigger.menu-open .icon-hamburger {
         display: none;
       }
 
@@ -393,7 +469,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        max-height: 85vh;
+        max-height: 55vh;
         background: rgb(var(--color-background));
         transform: translateY(100%);
         visibility: hidden;
@@ -401,6 +477,10 @@
         overflow-y: auto;
         padding: 24px 24px 70px;
         transition: transform 0s, visibility 0s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       .js .fixed-bottom-nav__mobile-details[open] > .fixed-bottom-nav__mobile-drawer {
@@ -416,11 +496,13 @@
       .fixed-bottom-nav__mobile-drawer .fixed-bottom-nav__menu-list {
         flex-direction: column;
         gap: {{ section.settings.menu_item_spacing }}px;
+        align-items: center;
+        text-align: center;
       }
 
       .fixed-bottom-nav__mobile-drawer .fixed-bottom-nav__menu-link {
         display: inline-block;
-        text-align: left;
+        text-align: center;
         width: auto;
         font-size: {{ section.settings.menu_font_size }}px;
       }
@@ -440,15 +522,17 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        align-items: center;
+        text-align: center;
       }
 
       .fixed-bottom-nav__mobile-drawer-info .fixed-bottom-nav__info-item {
-        text-align: left;
+        text-align: center;
         font-size: {{ section.settings.info_font_size }}px;
       }
 
       .fixed-bottom-nav__mobile-drawer-info .fixed-bottom-nav__info-item--icon {
-        justify-content: flex-start;
+        justify-content: center;
       }
     {% endif %}
   }
@@ -581,8 +665,34 @@
 
   {% comment %} Mobile Slide-Out Drawer {% endcomment %}
   <menu-drawer class="fixed-bottom-nav__mobile-wrapper" data-breakpoint="mobile">
+    {% comment %} Fixed bottom bar with search, menu, cart {% endcomment %}
+    <div class="fixed-bottom-nav__mobile-bar">
+      {% if section.settings.show_search_icon %}
+        <a href="{{ routes.search_url }}" class="fixed-bottom-nav__mobile-bar-icon" aria-label="Search">
+          {{- 'icon-search.svg' | inline_asset_content -}}
+        </a>
+      {% endif %}
+
+      <span class="fixed-bottom-nav__mobile-bar-menu-trigger" role="button" tabindex="0" aria-label="Menu">
+        <span class="fixed-bottom-nav__mobile-icon">
+          {{- 'icon-hamburger.svg' | inline_asset_content -}}
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </span>
+        <span>MENU</span>
+      </span>
+
+      {% if section.settings.show_cart_icon %}
+        <a href="{{ routes.cart_url }}" class="fixed-bottom-nav__mobile-bar-icon" aria-label="Cart">
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+          <span class="fixed-bottom-nav__mobile-cart-count" data-cart-count="{{ cart.item_count }}">
+            {%- if cart.item_count > 0 -%}{{ cart.item_count }}{%- endif -%}
+          </span>
+        </a>
+      {% endif %}
+    </div>
+
     <details class="fixed-bottom-nav__mobile-details">
-      <summary class="fixed-bottom-nav__mobile-trigger" aria-label="Menu">
+      <summary class="fixed-bottom-nav__mobile-trigger" aria-label="Menu" aria-hidden="true" tabindex="-1">
         <span class="fixed-bottom-nav__mobile-icon">
           {{- 'icon-hamburger.svg' | inline_asset_content -}}
           {{- 'icon-close.svg' | inline_asset_content -}}
@@ -697,6 +807,31 @@
   </menu-drawer>
 
 </nav>
+
+<script>
+  (function() {
+    const barTrigger = document.querySelector('.fixed-bottom-nav__mobile-bar-menu-trigger');
+    const details = document.querySelector('.fixed-bottom-nav__mobile-details');
+    const summary = details ? details.querySelector('.fixed-bottom-nav__mobile-trigger') : null;
+    const bar = document.querySelector('.fixed-bottom-nav__mobile-bar');
+
+    if (barTrigger && summary) {
+      barTrigger.addEventListener('click', function() {
+        summary.click();
+      });
+
+      // Sync icon state on bar trigger with details open state
+      const observer = new MutationObserver(function() {
+        if (details.open && details.classList.contains('menu-opening')) {
+          barTrigger.classList.add('menu-open');
+        } else {
+          barTrigger.classList.remove('menu-open');
+        }
+      });
+      observer.observe(details, { attributes: true, attributeFilter: ['open', 'class'] });
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -994,6 +1129,20 @@
       "label": "Hide on mobile",
       "default": false,
       "info": "Hide navigation on screens smaller than 768px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search_icon",
+      "label": "Show search icon (mobile)",
+      "default": true,
+      "info": "Show search icon in the mobile bottom bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_icon",
+      "label": "Show cart icon (mobile)",
+      "default": true,
+      "info": "Show cart icon in the mobile bottom bar"
     }
   ],
   "blocks": [

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
+    <meta name="format-detection" content="telephone=no">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -251,6 +252,12 @@
       @media screen and (min-width: 750px) {
         body {
           font-size: 1.6rem;
+        }
+      }
+
+      @media screen and (max-width: 749px) {
+        .content-for-layout {
+          padding-bottom: 60px;
         }
       }
     {% endstyle %}

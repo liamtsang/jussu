@@ -197,6 +197,7 @@
 /* Archive mode sections */
 .playlist-showcase__section {
     width: 54rem;
+    max-width: 100%;
 }
 
 /* Playlist blocks in archive mode */

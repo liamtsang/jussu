@@ -163,15 +163,19 @@
 /* Mobile adjustments */
 @media screen and (max-width: 749px) {
     .movie-script-text__wrapper {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
     }
 
     .movie-script-text__content {
-        font-size: 1.2rem;
+        font-size: 1.0rem;
     }
 
     .movie-script-text__item {
-        padding: 3rem 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .movie-script-text__container {
+        max-width: 98%;
     }
 
     .movie-script-text__container::before,

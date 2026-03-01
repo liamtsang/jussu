@@ -502,6 +502,32 @@
   }
 }
 
+/* Bottom branding */
+.footer__bottom-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  gap: 0.5rem;
+}
+
+.footer__bottom-branding-logo img {
+  display: block;
+  height: auto;
+}
+
+.footer__bottom-branding-copyright,
+.footer__bottom-branding-instagram,
+.footer__bottom-branding-year {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgba(var(--color-foreground), 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
   @media screen and (max-width: 749px) {

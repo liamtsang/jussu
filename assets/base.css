@@ -1077,6 +1077,10 @@ summary::-webkit-details-marker {
         width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
     }
 
+    .grid--3-col-tablet-down .grid__item {
+        width: calc(33.33% - var(--grid-mobile-horizontal-spacing) * 2 / 3);
+    }
+
     .slider--tablet.grid--peek.grid--2-col-tablet-down .grid__item,
     .grid--peek .grid__item {
         width: calc(50% - var(--grid-mobile-horizontal-spacing) - 3rem);
@@ -1108,6 +1112,10 @@ summary::-webkit-details-marker {
 
     .grid--2-col-tablet-down .grid__item {
         width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+    }
+
+    .grid--3-col-tablet-down .grid__item {
+        width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
     }
 
     .grid--1-col-tablet-down.grid--peek .grid__item {

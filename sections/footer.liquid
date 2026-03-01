@@ -249,6 +249,33 @@
       </div>
     {%- endunless -%}
   {%- endif -%}
+
+  {%- if section.settings.show_bottom_branding -%}
+    <div class="footer__bottom-branding">
+      {%- if section.settings.footer_logo != blank -%}
+        <div class="footer__bottom-branding-logo">
+          <img
+            src="{{ section.settings.footer_logo | image_url: width: section.settings.footer_logo_width }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.footer_logo_width }}"
+            height="auto"
+            loading="lazy"
+          >
+        </div>
+      {%- endif -%}
+      {%- if section.settings.footer_copyright_text != blank -%}
+        <p class="footer__bottom-branding-copyright">
+          &copy; {{ section.settings.footer_copyright_text }}
+        </p>
+      {%- endif -%}
+      {%- if section.settings.footer_instagram_handle != blank -%}
+        <p class="footer__bottom-branding-instagram">
+          {{ section.settings.footer_instagram_handle }}
+        </p>
+      {%- endif -%}
+      <p class="footer__bottom-branding-year">{{ 'now' | date: '%Y' }}</p>
+    </div>
+  {%- endif -%}
 </footer>
 
 {% schema %}
@@ -421,6 +448,43 @@
       "default": true,
       "label": "t:sections.footer.settings.show_policy.label",
       "info": "t:sections.footer.settings.show_policy.info"
+    },
+    {
+      "type": "header",
+      "content": "Bottom branding"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_branding",
+      "default": false,
+      "label": "Show bottom branding"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer logo"
+    },
+    {
+      "type": "range",
+      "id": "footer_logo_width",
+      "min": 30,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Footer logo width",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "footer_copyright_text",
+      "label": "Copyright text",
+      "default": "JUSSU OBJECTS"
+    },
+    {
+      "type": "text",
+      "id": "footer_instagram_handle",
+      "label": "Instagram handle",
+      "default": "@JUSSU.OBJECTS"
     },
     {
       "type": "header",
