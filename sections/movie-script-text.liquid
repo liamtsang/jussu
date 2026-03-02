@@ -48,15 +48,20 @@
   {%- endif -%}
 
   #MovieScriptText-{{ section.id }} .movie-script-text__container {
-    height: {{ section.settings.container_height }}vh;
-    max-width: {{ section.settings.max_width }}%;
+    height: {{ section.settings.mobile_container_height }}vh;
+    max-width: {{ section.settings.mobile_max_width }}%;
   }
 
   #MovieScriptText-{{ section.id }} .movie-script-text__content {
-    font-size: {{ section.settings.font_size | times: 0.1 }}rem;
+    font-size: {{ section.settings.mobile_font_size | times: 0.1 }}rem;
   }
 
   @media screen and (min-width: 750px) {
+    #MovieScriptText-{{ section.id }} .movie-script-text__container {
+      height: {{ section.settings.container_height }}vh;
+      max-width: {{ section.settings.max_width }}%;
+    }
+
     #MovieScriptText-{{ section.id }} .movie-script-text__content {
       font-size: {{ section.settings.font_size | times: 0.1 }}rem;
     }
@@ -184,6 +189,43 @@
       "unit": "px",
       "default": 16,
       "info": "Base font size for the script text"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Display Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_container_height",
+      "label": "Mobile Container Height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 60,
+      "info": "Height of the script container on mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_max_width",
+      "label": "Mobile Maximum Width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "info": "Maximum width of the script container on mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "label": "Mobile Font Size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "info": "Base font size for the script text on mobile"
     },
     {
       "type": "header",
