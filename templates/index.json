@@ -307,6 +307,7 @@
       ],
       "name": "Interactive Dinner Table",
       "settings": {
+        "visibility": "always",
         "section_title": "Objects from Scene. 1",
         "title_font": "system_ui_n4",
         "title_font_size": 36,
@@ -334,6 +335,9 @@
         "container_height": 50,
         "max_width": 65,
         "font_size": 15,
+        "mobile_container_height": 60,
+        "mobile_max_width": 100,
+        "mobile_font_size": 12,
         "background_size": "cover",
         "background_position": "center center",
         "background_overlay_opacity": 0,
