@@ -282,17 +282,6 @@
       </div>
     </div>
 
-    {%- if section.settings.mobile_logo != blank -%}
-      <a href="/" class="header__mobile-logo">
-        <img
-          src="{{ section.settings.mobile_logo | image_url: width: 200 }}"
-          alt="{{ shop.name }}"
-          loading="eager"
-          width="{{ section.settings.mobile_logo.width }}"
-          height="{{ section.settings.mobile_logo.height }}"
-        >
-      </a>
-    {%- endif -%}
   </header>
 </{{ header_tag }}>
 
