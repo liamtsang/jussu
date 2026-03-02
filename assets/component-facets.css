@@ -787,6 +787,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 .mobile-facets__wrapper {
     margin-left: 0;
     display: flex;
+    justify-content: end;
 }
 
 .mobile-facets__wrapper .disclosure-has-popup[open] > summary::before {
