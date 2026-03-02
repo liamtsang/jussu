@@ -80,11 +80,16 @@
   }
 
   @media screen and (max-width: 749px) {
-    .header__icons {
+    .header__icons,
+    .header > .header__search,
+    .header .header__search {
       display: none !important;
     }
     .header__mobile-logo {
-      display: block;
+      display: flex;
+      align-items: center;
+      grid-area: icons;
+      justify-self: end;
     }
     .header__mobile-logo img {
       height: auto;
