@@ -684,7 +684,9 @@
 
       {% if section.settings.show_cart_icon %}
         <a href="{{ routes.cart_url }}" class="fixed-bottom-nav__mobile-bar-icon" aria-label="Cart">
-          {{- 'icon-cart.svg' | inline_asset_content -}}
+          <span class="svg-wrapper">
+            <img src="https://cdn.shopify.com/s/files/1/0859/3771/7525/files/cart.png?v=1770833342" alt="Cart" width="38" height="38">
+          </span>
           <span class="fixed-bottom-nav__mobile-cart-count" data-cart-count="{{ cart.item_count }}">
             {%- if cart.item_count > 0 -%}{{ cart.item_count }}{%- endif -%}
           </span>
