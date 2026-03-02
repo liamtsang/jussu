@@ -58,14 +58,29 @@
 
   .dinner-table {
     position: relative;
-    max-height: calc(100vh - 85px - 35px);
     aspect-ratio: {{ section.settings.table_width }} / {{ section.settings.table_height }};
     margin: 0 auto;
     border-radius: {{ section.settings.table_border_radius }}px;
     overflow: hidden;
     /* Calculate scale factor: table height is constrained by viewport, so items should scale relative to table height */
     --table-base-height: {{ section.settings.table_height }};
-    --table-max-vh: min(calc(100vh - 85px - 35px), calc((100vw - 40px) * {{ section.settings.table_height }} / {{ section.settings.table_width }}));
+    --table-max-vh: calc(100vw * {{ section.settings.table_height }} / {{ section.settings.table_width }});
+  }
+
+  @media (max-width: 749px) {
+    .dinner-table-container {
+      padding: 0;
+    }
+    .dinner-table {
+      border-radius: 0;
+    }
+  }
+
+  @media (min-width: 750px) {
+    .dinner-table {
+      max-height: calc(100vh - 85px - 35px);
+      --table-max-vh: min(calc(100vh - 85px - 35px), calc((100vw - 40px) * {{ section.settings.table_height }} / {{ section.settings.table_width }}));
+    }
   }
 
   .table-surface {
