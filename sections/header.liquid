@@ -74,6 +74,24 @@
       padding-top: 0.5rem;
     }
   }
+
+  .header__mobile-logo {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header__icons {
+      display: none !important;
+    }
+    .header__mobile-logo {
+      display: block;
+    }
+    .header__mobile-logo img {
+      height: auto;
+      width: auto;
+      max-height: 40px;
+    }
+  }
 </style>
 
 {%- style -%}
@@ -249,6 +267,18 @@
         {%- endif -%}
       </div>
     </div>
+
+    {%- if section.settings.mobile_logo != blank -%}
+      <a href="/" class="header__mobile-logo">
+        <img
+          src="{{ section.settings.mobile_logo | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          loading="eager"
+          width="{{ section.settings.mobile_logo.width }}"
+          height="{{ section.settings.mobile_logo.height }}"
+        >
+      </a>
+    {%- endif -%}
   </header>
 </{{ header_tag }}>
 
@@ -556,6 +586,16 @@
       "default": true,
       "label": "t:sections.header.settings.enable_customer_avatar.label",
       "info": "t:sections.header.settings.enable_customer_avatar.info"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_logo",
+      "label": "Mobile Logo",
+      "info": "Logo shown on mobile in place of search and cart icons. Links to homepage."
     },
     {
       "type": "header",
