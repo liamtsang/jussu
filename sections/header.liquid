@@ -80,20 +80,22 @@
   }
 
   @media screen and (max-width: 749px) {
+    .header__icons,
     .header > .header__search,
-    .header .header__search,
-    .header__icons .header-icons-search,
-    .header__icons .header__cart-wrapper {
+    .header .header__search {
       display: none !important;
     }
     .header__mobile-logo {
       display: flex;
       align-items: center;
+      grid-area: icons;
+      justify-self: end;
     }
     .header__mobile-logo img {
       height: auto;
       width: auto;
       max-height: 40px;
+      height: 32px
     }
   }
 </style>
@@ -180,16 +182,6 @@
     %}
 
     <div class="header__icons">
-      {%- if section.settings.mobile_logo != blank -%}
-        <a href="/" class="header__mobile-logo">
-          <img
-            src="{{ section.settings.mobile_logo | image_url: width: 200 }}"
-            alt="{{ shop.name }}"
-            loading="eager"
-          >
-        </a>
-      {%- endif -%}
-
       <div class="header-icons-search small-hide medium-hide">
         {% render 'header-search', input_id: 'Search-In-Modal-Icons', icon_image: 'https://cdn.shopify.com/s/files/1/0859/3771/7525/files/search.png?v=1771889034' %}
       </div>
@@ -282,6 +274,17 @@
       </div>
     </div>
 
+    {%- if section.settings.mobile_logo != blank -%}
+      <a href="/" class="header__mobile-logo">
+        <img
+          src="{{ section.settings.mobile_logo | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          loading="eager"
+          width="{{ section.settings.mobile_logo.width }}"
+          height="{{ section.settings.mobile_logo.height }}"
+        >
+      </a>
+    {%- endif -%}
   </header>
 </{{ header_tag }}>
 
