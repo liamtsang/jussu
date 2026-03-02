@@ -746,7 +746,7 @@
         <hr class="fixed-bottom-nav__mobile-drawer-divider">
 
         {% comment %} Info Items {% endcomment %}
-        <ul class="fixed-bottom-nav__mobile-drawer-info" role="list">
+        {% comment %} <ul class="fixed-bottom-nav__mobile-drawer-info" role="list">
           {% if section.settings.logo_image != blank %}
             <li class="fixed-bottom-nav__info-item">
               <a href="/">
@@ -804,7 +804,7 @@
                 </li>
             {% endcase %}
           {% endfor %}
-        </ul>
+        </ul> {% endcomment %}
 
       </div>
     </details>
