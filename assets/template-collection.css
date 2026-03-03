@@ -6,37 +6,35 @@
 }
 
 /* Full width product cards for wide images */
-@media screen and (min-width: 750px) {
-  .product-grid .grid__item--full-width {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-  
-  /* Make full-width images display at natural aspect ratio */
-  .product-grid .grid__item--full-width .card__inner {
-    display: block;
-    position: relative;
-  }
-  
-  .product-grid .grid__item--full-width .card__inner::before {
-    display: none;
-  }
-  
-  .product-grid .grid__item--full-width .card__media {
-    position: relative;
-  }
-  
-  .product-grid .grid__item--full-width .card__media .media {
-    position: relative;
-    padding: 0;
-  }
-  
-  .product-grid .grid__item--full-width .media img {
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+.product-grid .grid__item--full-width {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Make full-width images display at natural aspect ratio */
+.product-grid .grid__item--full-width .card__inner {
+  display: block;
+  position: relative;
+}
+
+.product-grid .grid__item--full-width .card__inner::before {
+  display: none;
+}
+
+.product-grid .grid__item--full-width .card__media {
+  position: relative;
+}
+
+.product-grid .grid__item--full-width .card__media .media {
+  position: relative;
+  padding: 0;
+}
+
+.product-grid .grid__item--full-width .media img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 @media screen and (max-width: 989px) {

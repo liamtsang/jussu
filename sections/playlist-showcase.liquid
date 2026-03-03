@@ -24,6 +24,14 @@
       --bg-position: {{ section.settings.background_position_x }} {{ section.settings.background_position_y }};
       --bg-size: {{ section.settings.background_size }};
     }
+
+    {%- if section.settings.background_image_mobile != blank -%}
+      @media screen and (max-width: 749px) {
+        .playlist-showcase--archive-{{ section.id }} {
+          background-image: url('{{ section.settings.background_image_mobile | image_url: width: 800 }}');
+        }
+      }
+    {%- endif -%}
   {%- endif -%}
 
   .playlist-showcase__section-{{ section.id }} + .playlist-showcase__section-{{ section.id }} {
@@ -307,6 +315,12 @@
       "id": "background_image",
       "label": "Background Image",
       "info": "Only visible in archive mode"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image (Mobile)",
+      "info": "Optional. If empty, the desktop background image will be used on mobile."
     },
     {
       "type": "select",
