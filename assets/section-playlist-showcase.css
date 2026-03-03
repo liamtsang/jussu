@@ -16,6 +16,14 @@
     .playlist-showcase--archive {
         background-attachment: scroll;
     }
+
+    .playlist-showcase__wrapper {
+        gap: 0;
+    }
+
+    .playlist-showcase__title {
+        padding-top: 1rem;
+    }
 }
 
 .playlist-showcase__wrapper {
