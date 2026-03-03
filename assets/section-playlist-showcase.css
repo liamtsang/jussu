@@ -16,14 +16,6 @@
     .playlist-showcase--archive {
         background-attachment: scroll;
     }
-
-    .playlist-showcase__container {
-        gap: 0;
-    }
-
-    .playlist-showcase__title {
-        padding-top: 1rem;
-    }
 }
 
 .playlist-showcase__wrapper {
@@ -40,6 +32,16 @@
     gap: 2rem;
     width: 100%;
     text-align: left;
+}
+
+@media screen and (max-width: 749px) {
+    .playlist-showcase__container {
+        gap: 0;
+    }
+
+    .playlist-showcase__title {
+        padding-top: 1rem;
+    }
 }
 
 /* Section header styling (CURRENTLY PLAYING:, PREVIOUSLY,) */
