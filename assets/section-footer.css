@@ -517,6 +517,7 @@
 .footer__bottom-branding-logo img {
   display: block;
   height: auto;
+  max-width: min-content;
 }
 
 .footer__bottom-branding-copyright,
