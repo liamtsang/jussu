@@ -512,12 +512,13 @@
   gap: 0.5rem;
   width: fit-content;
   margin: 0 auto;
+  max-width: min-content;
 }
 
 .footer__bottom-branding-logo img {
   display: block;
   height: auto;
-  max-width: min-content;
+  width: 100%;
 }
 
 .footer__bottom-branding-copyright,
