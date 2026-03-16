@@ -527,6 +527,7 @@
   color: rgba(var(--color-foreground), 0.75);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 /* check for flexbox gap in older Safari versions */
