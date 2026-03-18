@@ -275,66 +275,6 @@
       {%- endif -%}
     </div>
   {%- endif -%}
-{%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-  <div class="footer__localization page-width">
-    <localization-form data-prevent-hide>
-      {%- form 'localization', id: 'FooterCurrencyForm', class: 'localization-form' -%}
-        <div class="disclosure">
-          <button
-            type="button"
-            class="header__currency-button disclosure__button localization-form__select"
-            aria-expanded="false"
-            aria-controls="FooterCurrency-country-results"
-            aria-describedby="FooterCurrencyLabel"
-          >
-            <span>{{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}</span>
-            {{ 'icon-caret.svg' | inline_asset_content }}
-          </button>
-          <div class="disclosure__list-wrapper country-selector" hidden>
-            <div class="country-filter country-filter--no-padding">
-              <button
-                class="country-selector__close-button button--small link"
-                type="button"
-                aria-label="{{ 'accessibility.close' | t }}"
-              >
-                {{- 'icon-close.svg' | inline_asset_content -}}
-              </button>
-            </div>
-            <div
-              class="disclosure__list country-selector__list"
-              id="FooterCurrency-country-results"
-            >
-              <ul role="list" class="list-unstyled countries">
-                {%- for country in localization.available_countries -%}
-                  <li class="disclosure__item" tabindex="-1">
-                    
-                      class="link link--text disclosure__link caption-large focus-inset"
-                      href="#"
-                      {% if country.iso_code == localization.country.iso_code %}
-                        aria-current="true"
-                      {% endif %}
-                      data-value="{{ country.iso_code }}"
-                      id="FooterCurrency-{{ country.iso_code }}"
-                    >
-                      <span {% if country.iso_code != localization.country.iso_code %}class="visibility-hidden"{% endif %}>
-                        {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                      </span>
-                      <span class="country">{{- country.name }}</span>
-                      <span class="localization-form__currency motion-reduce">
-                        {{ country.currency.iso_code }} {{ country.currency.symbol -}}
-                      </span>
-                  </li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          </div>
-          <div class="country-selector__overlay"></div>
-        </div>
-        <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-      {%- endform -%}
-    </localization-form>
-  </div>
-{%- endif -%}  
 </footer>
 
 {% schema %}
