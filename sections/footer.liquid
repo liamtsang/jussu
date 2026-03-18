@@ -271,12 +271,7 @@
             </p>
           {%- endif -%}
           <p class="footer__bottom-branding-year">{{ 'now' | date: '%Y' }}</p>
-        </div>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-
-  {%- if section.settings.enable_country_selector and localization.available_countries.size > 1
+            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1
     or section.settings.enable_language_selector and localization.available_languages.size > 1
   -%}
     {{ 'component-localization-form.css' | asset_url | stylesheet_tag }}
@@ -306,6 +301,12 @@
       {%- endif -%}
     </div>
   {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+
 </footer>
 
 {% schema %}
