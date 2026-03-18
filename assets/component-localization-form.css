@@ -229,6 +229,10 @@
   visibility: hidden;
 }
 
+.country-selector__overlay {
+  display: none;
+}
+
 @media screen and (max-width: 749px) {
   .disclosure__list-wrapper.country-selector:not([hidden]) + .country-selector__overlay:empty {
     display: block;
