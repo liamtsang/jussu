@@ -277,7 +277,7 @@
     {{ 'component-localization-form.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
 
-    <div class="footer__localization page-width">
+    <div class="footer__localization">
       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
         <localization-form>
           {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
