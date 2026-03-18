@@ -1609,6 +1609,7 @@ details[open] > .share-button__fallback {
     min-width: calc(7rem + (var(--inputs-border-width) * 2));
     position: relative;
     border: 0;
+    outline: 1px solid rgba(0,0,0,0.5);
 }
 
 .field:before,
