@@ -512,7 +512,7 @@
   gap: 0.5rem;
   width: fit-content;
   margin: 0 auto;
-  max-width: 100%;
+  margin-bottom: 4rem;
 }
 
 .footer__bottom-branding-logo img {
