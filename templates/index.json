@@ -178,20 +178,6 @@
             "hover_scale": 110
           }
         },
-        "product_item_KeqiGX": {
-          "type": "product_item",
-          "settings": {
-            "product": "",
-            "position_x": 50,
-            "position_y": 50,
-            "item_width": 80,
-            "item_height": 80,
-            "click_action": "product_page",
-            "show_product_title": true,
-            "show_price": true,
-            "hover_scale": 110
-          }
-        },
         "product_item_metcQ8": {
           "type": "product_item",
           "settings": {
@@ -214,10 +200,10 @@
             "product": "shopify://products/o16",
             "normal_image": "shopify://shop_images/16.png",
             "hover_image": "shopify://shop_images/16_HOVER.png",
-            "position_x": 23,
+            "position_x": 14,
             "position_y": 59,
-            "item_width": 640,
-            "item_height": 940,
+            "item_width": 790,
+            "item_height": 1000,
             "click_action": "product_page",
             "show_product_title": true,
             "show_price": true,
@@ -297,7 +283,6 @@
         "product_item_6W4pLx",
         "product_item_XVm4DF",
         "product_item_re89pU",
-        "product_item_KeqiGX",
         "product_item_metcQ8",
         "product_item_TfHGm8",
         "product_item_dj9qw3",
