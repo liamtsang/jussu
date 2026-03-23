@@ -2637,6 +2637,7 @@ input[type='checkbox'] {
     cursor: pointer;
     /* padding: 0.2rem 0.4rem; */
     padding: 0;
+    padding-right: 4px;
     min-height: unset;
     color: rgb(var(--color-foreground));
     line-height: 1;
@@ -2648,7 +2649,7 @@ input[type='checkbox'] {
 }
 
 .header__currency-button span {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 /* Currency dropdown positioning */
