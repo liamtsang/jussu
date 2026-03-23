@@ -1625,5 +1625,5 @@ a.product__text {
 
 /* Space between first image and rest of gallery */
 .product__media-list .product__media-item:first-child {
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 }
