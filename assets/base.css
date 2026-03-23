@@ -2649,7 +2649,7 @@ input[type='checkbox'] {
 }
 
 .header__currency-button span {
-    font-size: 1rem;
+    font-size: .9rem;
 }
 
 /* Currency dropdown positioning */
