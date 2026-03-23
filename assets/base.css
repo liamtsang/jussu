@@ -2646,6 +2646,10 @@ input[type='checkbox'] {
     height: 0.8rem;
 }
 
+.header__currency-button span {
+    font-size: 0.75rem;
+}
+
 /* Currency dropdown positioning */
 .header__currency-selector {
     position: relative;
