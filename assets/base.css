@@ -2635,7 +2635,7 @@ input[type='checkbox'] {
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.2rem 0.4rem;
+    /* padding: 0.2rem 0.4rem; */
     min-height: unset;
     color: rgb(var(--color-foreground));
     line-height: 1;
