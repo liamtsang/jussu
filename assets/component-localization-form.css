@@ -115,7 +115,7 @@
   align-items: center;
   cursor: pointer;
   display: flex;
-  font-size: 1.3rem;
+  font-size: 1rem;
   background-color: transparent;
   gap: 6px;
   font-family: var(--font-body-family);
