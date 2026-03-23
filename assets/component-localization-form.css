@@ -117,7 +117,7 @@
   display: flex;
   font-size: 1.3rem;
   background-color: transparent;
-  gap: 8px;
+  gap: 6px;
   font-family: var(--font-body-family);
 }
 
