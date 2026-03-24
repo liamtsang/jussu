@@ -137,7 +137,7 @@
         "image_zoom": "none",
         "hide_variants": true,
         "enable_video_looping": false,
-        "first_image_margin_bottom": 40,
+        "first_image_margin_bottom": 55,
         "password_show_title": false,
         "password_show_placeholder": false,
         "password_submit_text": "Enter",
