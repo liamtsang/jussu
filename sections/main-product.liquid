@@ -30,6 +30,10 @@
   {%- endif -%}
 
   {%- style -%}
+    .section-{{ section.id }}-padding .product__media-list .product__media-item:first-child {
+      margin-bottom: {{ section.settings.first_image_margin_bottom }}px;
+    }
+
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -2396,6 +2400,17 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "range",
+      "id": "first_image_margin_bottom",
+      "label": "First image margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px",
+      "info": "Space below the first product image"
     },
     {
       "type": "header",
