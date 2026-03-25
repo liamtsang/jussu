@@ -52,8 +52,8 @@
         "alt_text": "",
         "link_url": "shopify://pages/jussu-mix",
         "open_in_new_tab": false,
-        "image_width": 70,
-        "mobile_image_width": 50,
+        "image_width": 60,
+        "mobile_image_width": 40,
         "hide_on_mobile": false
       }
     }
