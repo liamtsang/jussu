@@ -544,6 +544,69 @@
     .fixed-bottom-nav__menu-link:hover {
     }
   }
+
+  /* Mobile Search Overlay */
+  .fixed-bottom-nav__search-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .fixed-bottom-nav__search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .fixed-bottom-nav__search-overlay.is-open {
+    display: flex;
+  }
+
+  .fixed-bottom-nav__search-overlay-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--color-foreground), 0.5);
+  }
+
+  .fixed-bottom-nav__search-overlay-content {
+    position: relative;
+    background: rgb(var(--color-background));
+    padding: 16px 20px;
+    padding-bottom: 70px;
+    z-index: 1;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .fixed-bottom-nav__search-form {
+    width: 100%;
+  }
+
+  .fixed-bottom-nav__search-form .field {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .fixed-bottom-nav__search-input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .fixed-bottom-nav__search-overlay .predictive-search {
+    position: relative;
+    width: 100%;
+  }
 </style>
 
 <nav class="fixed-bottom-nav" aria-label="Fixed bottom navigation" role="navigation">
@@ -670,11 +733,11 @@
     {% comment %} Fixed bottom bar with search, menu, cart {% endcomment %}
     <div class="fixed-bottom-nav__mobile-bar">
       {% if section.settings.show_search_icon %}
-        <a href="{{ routes.search_url }}" class="fixed-bottom-nav__mobile-bar-icon" aria-label="Search">
+        <button type="button" class="fixed-bottom-nav__mobile-bar-icon fixed-bottom-nav__search-toggle" aria-label="Search" aria-expanded="false" aria-controls="mobile-search-overlay">
           <span class="svg-wrapper">
             <img src="https://cdn.shopify.com/s/files/1/0859/3771/7525/files/search.svg?v=1773836476" alt="Search" width="38" height="38">
           </span>
-        </a>
+        </button>
       {% endif %}
 
       <span class="fixed-bottom-nav__mobile-bar-menu-trigger" role="button" tabindex="0" aria-label="Menu">
@@ -695,6 +758,66 @@
         </a>
       {% endif %}
     </div>
+
+    {% comment %} Mobile Search Overlay {% endcomment %}
+    {% if section.settings.show_search_icon %}
+      <div id="mobile-search-overlay" class="fixed-bottom-nav__search-overlay" aria-hidden="true">
+        <div class="fixed-bottom-nav__search-overlay-backdrop"></div>
+        <div class="fixed-bottom-nav__search-overlay-content">
+          {%- if settings.predictive_search_enabled -%}
+            <predictive-search class="fixed-bottom-nav__search-form-wrapper" data-loading-text="{{ 'accessibility.loading' | t }}">
+          {%- endif -%}
+          <form action="{{ routes.search_url }}" method="get" role="search" class="fixed-bottom-nav__search-form">
+            <div class="field">
+              <input
+                class="fixed-bottom-nav__search-input field__input"
+                id="mobile-bottom-search-input"
+                type="search"
+                name="q"
+                placeholder="{{ 'general.search.search' | t }}"
+                {%- if settings.predictive_search_enabled -%}
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-owns="predictive-search-results"
+                  aria-controls="predictive-search-results"
+                  aria-haspopup="listbox"
+                  aria-autocomplete="list"
+                  autocorrect="off"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                {%- endif -%}
+              >
+              <label class="field__label visually-hidden" for="mobile-bottom-search-input">{{ 'general.search.search' | t }}</label>
+              <input type="hidden" name="options[prefix]" value="last">
+              <button
+                type="reset"
+                class="reset__button field__button hidden"
+                aria-label="{{ 'general.search.reset' | t }}"
+              >
+                <span class="svg-wrapper">
+                  {{- 'icon-reset.svg' | inline_asset_content -}}
+                </span>
+              </button>
+              <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                <span class="svg-wrapper">
+                  <img src="https://cdn.shopify.com/s/files/1/0859/3771/7525/files/search.svg?v=1773836476" alt="Search" width="38" height="38">
+                </span>
+              </button>
+            </div>
+            {%- if settings.predictive_search_enabled -%}
+              <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+              </div>
+              <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+            {%- endif -%}
+          </form>
+          {%- if settings.predictive_search_enabled -%}
+            </predictive-search>
+          {%- endif -%}
+        </div>
+      </div>
+    {% endif %}
 
     <details class="fixed-bottom-nav__mobile-details">
       <summary class="fixed-bottom-nav__mobile-trigger" aria-label="Menu" aria-hidden="true" tabindex="-1">
@@ -824,7 +947,6 @@
         summary.click();
       });
 
-      // Sync icon state on bar trigger with details open state
       const observer = new MutationObserver(function() {
         if (details.open && details.classList.contains('menu-opening')) {
           barTrigger.classList.add('menu-open');
@@ -833,6 +955,56 @@
         }
       });
       observer.observe(details, { attributes: true, attributeFilter: ['open', 'class'] });
+    }
+
+    /* Search overlay toggle */
+    const searchToggle = document.querySelector('.fixed-bottom-nav__search-toggle');
+    const searchOverlay = document.getElementById('mobile-search-overlay');
+
+    if (searchToggle && searchOverlay) {
+      const backdrop = searchOverlay.querySelector('.fixed-bottom-nav__search-overlay-backdrop');
+      const searchInput = searchOverlay.querySelector('#mobile-bottom-search-input');
+
+      function openSearch() {
+        searchOverlay.classList.add('is-open');
+        searchOverlay.setAttribute('aria-hidden', 'false');
+        searchToggle.setAttribute('aria-expanded', 'true');
+        setTimeout(() => searchInput && searchInput.focus(), 100);
+      }
+
+      function closeSearch() {
+        searchOverlay.classList.remove('is-open');
+        searchOverlay.setAttribute('aria-hidden', 'true');
+        searchToggle.setAttribute('aria-expanded', 'false');
+      }
+
+      searchToggle.addEventListener('click', function() {
+        const isOpen = searchOverlay.classList.contains('is-open');
+        isOpen ? closeSearch() : openSearch();
+      });
+
+      backdrop.addEventListener('click', closeSearch);
+
+      searchOverlay.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeSearch();
+      });
+    }
+
+    /* Cart count live updates */
+    function updateMobileCartCount() {
+      fetch('/cart.js')
+        .then(r => r.json())
+        .then(cart => {
+          const el = document.querySelector('.fixed-bottom-nav__mobile-cart-count');
+          if (!el) return;
+          el.setAttribute('data-cart-count', cart.item_count);
+          el.textContent = cart.item_count > 0 ? '(' + cart.item_count + ')' : '';
+        })
+        .catch(() => {});
+    }
+
+    if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+      subscribe(PUB_SUB_EVENTS.cartUpdate, updateMobileCartCount);
     }
   })();
 </script>

@@ -141,11 +141,18 @@ class DinnerTableComponent {
       const response = await fetch('/cart.js');
       const cart = await response.json();
       
-      // Update cart count in header (adjust selector as needed)
+      // Update cart count in header
       const cartCountElements = document.querySelectorAll('.cart-count');
       cartCountElements.forEach(el => {
         el.textContent = cart.item_count;
       });
+
+      // Update mobile footer cart count
+      const mobileCartCount = document.querySelector('.fixed-bottom-nav__mobile-cart-count');
+      if (mobileCartCount) {
+        mobileCartCount.setAttribute('data-cart-count', cart.item_count);
+        mobileCartCount.textContent = cart.item_count > 0 ? '(' + cart.item_count + ')' : '';
+      }
     } catch (error) {
       console.warn('Could not update cart count:', error);
     }
