@@ -1003,9 +1003,11 @@
         .catch(() => {});
     }
 
-    if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
-      subscribe(PUB_SUB_EVENTS.cartUpdate, updateMobileCartCount);
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+        subscribe(PUB_SUB_EVENTS.cartUpdate, updateMobileCartCount);
+      }
+    });
   })();
 </script>
 
