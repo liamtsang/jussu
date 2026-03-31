@@ -23,7 +23,7 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 3,
-        "columns_mobile": "1",
+        "columns_mobile": "2",
         "color_scheme": "",
         "image_ratio": "portrait",
         "image_shape": "default",
@@ -31,6 +31,9 @@
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
+        "card_title_font": "assistant_n4",
+        "card_title_font_size": 14,
+        "card_title_font_weight": "400",
         "enable_filtering": true,
         "filter_type": "horizontal",
         "enable_sorting": false,
