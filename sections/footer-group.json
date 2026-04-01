@@ -13,6 +13,7 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": false,
@@ -23,7 +24,7 @@
         "enable_language_selector": false,
         "payment_enable": false,
         "show_policy": false,
-        "show_bottom_branding": true,
+        "show_bottom_branding": false,
         "footer_logo": "shopify://shop_images/Jussu_mobile_footer_logo.svg",
         "footer_logo_width": 80,
         "footer_copyright_text": "JUSSU OBJECTS",
