@@ -255,19 +255,23 @@
     <div class="footer__bottom-branding">
       {%- if section.settings.footer_logo != blank -%}
         <div class="footer__bottom-branding-logo">
-          <img
-            src="{{ section.settings.footer_logo | image_url: width: section.settings.footer_logo_width }}"
-            alt="{{ shop.name }}"
-            width="{{ section.settings.footer_logo_width }}"
-            height="auto"
-            loading="lazy"
-          >
+          <a href="{{ routes.root_url }}">
+            <img
+              src="{{ section.settings.footer_logo | image_url: width: section.settings.footer_logo_width }}"
+              alt="{{ shop.name }}"
+              width="{{ section.settings.footer_logo_width }}"
+              height="auto"
+              loading="lazy"
+            >
+          </a>
           {%- if section.settings.footer_copyright_text != blank -%}
             <p class="footer__bottom-branding-copyright">&copy; {{ section.settings.footer_copyright_text }}</p>
           {%- endif -%}
           {%- if section.settings.footer_instagram_handle != blank -%}
             <p class="footer__bottom-branding-instagram">
-              {{ section.settings.footer_instagram_handle }}
+              <a href="https://instagram.com/{{ section.settings.footer_instagram_handle | remove: '@' }}" target="_blank" rel="noopener">
+                {{ section.settings.footer_instagram_handle }}
+              </a>
             </p>
           {%- endif -%}
           <p class="footer__bottom-branding-year">{{ 'now' | date: '%Y' }}</p>
