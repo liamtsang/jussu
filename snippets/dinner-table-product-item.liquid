@@ -77,18 +77,15 @@
 {% endif %}
 
 <style>
-  .table-product-item {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10;
-    /* Scale items proportionally with table height */
-    /* Formula: (item_px / table_base_height) * actual_table_height */
-    /* Since table height = min(table-max-vh, calculated by aspect ratio) */
-    width: calc((var(--item-base-width) / var(--table-base-height)) * var(--table-max-vh));
-    height: calc((var(--item-base-height) / var(--table-base-height)) * var(--table-max-vh));
-  }
+.table-product-item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  width: calc((var(--item-base-width) / {{ section.settings.table_width }}) * 100%);
+  height: calc((var(--item-base-height) / {{ section.settings.table_height }}) * 100%);
+}
 
   .table-product-item:hover {
     transform: translate(-50%, -50%);
