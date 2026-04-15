@@ -47,12 +47,12 @@
       "type": "fixed-side-image",
       "name": "Fixed Side Image",
       "settings": {
-        "image": "shopify://shop_images/jussumixbutton_7abc37b8-8971-4c83-8363-83c3d114705c.png",
-        "hover_image": "shopify://shop_images/jussumixbutton_hover.png",
+        "image": "shopify://shop_images/jussumixbutton.png",
+        "hover_image": "shopify://shop_images/jussumixbutton_hover_91c7cb5f-b311-4c6d-aed3-c6d5d19a7c2d.png",
         "alt_text": "",
         "link_url": "shopify://pages/jussu-mix",
         "open_in_new_tab": false,
-        "image_width": 50,
+        "image_width": 60,
         "mobile_image_width": 40,
         "hide_on_mobile": true
       }
