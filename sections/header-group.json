@@ -54,23 +54,24 @@
         "open_in_new_tab": false,
         "image_width": 60,
         "mobile_image_width": 40,
-        "hide_on_mobile": false
+        "hide_on_mobile": true
       }
     },
-    "1776274855f612fc4b": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "177627493037aeee77": {
-      "type": "_blocks",
-      "settings": {}
+    "custom_liquid_xWmWTq": {
+      "type": "custom-liquid",
+      "name": "Mobile Jussu Mix Logo",
+      "settings": {
+        "custom_liquid": "<a href=\"/pages/jussu-mix\" class=\"jussu-fixed-icon\">\n  <img src=\"https://cdn.shopify.com/s/files/1/0859/3771/7525/files/jussumixbutton_mobile.png?v=1776276217\" alt=\"Jussu Mix\">\n</a>\n\n<style>\n.jussu-fixed-icon {\n  position: fixed;\n  right: 16px;\n  top: 55%;\n  transform: translateY(-50%);\n  z-index: 999;\n}\n\n.jussu-fixed-icon img {\n  width: 40px;\n  height: auto;\n  display: block;\n}\n\n@media screen and (min-width: 768px) {\n  .jussu-fixed-icon {\n    display: none;\n  }\n}\n</style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "announcement-bar",
     "header",
     "fixed_side_image_4FALPR",
-    "1776274855f612fc4b",
-    "177627493037aeee77"
+    "custom_liquid_xWmWTq"
   ]
 }
