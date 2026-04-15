@@ -56,11 +56,21 @@
         "mobile_image_width": 40,
         "hide_on_mobile": false
       }
+    },
+    "1776274855f612fc4b": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "177627493037aeee77": {
+      "type": "_blocks",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "fixed_side_image_4FALPR"
+    "fixed_side_image_4FALPR",
+    "1776274855f612fc4b",
+    "177627493037aeee77"
   ]
 }
