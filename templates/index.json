@@ -322,7 +322,7 @@
         "font_size": 15,
         "mobile_container_height": 60,
         "mobile_max_width": 100,
-        "mobile_font_size": 12,
+        "mobile_font_size": 10,
         "background_size": "cover",
         "background_position": "center center",
         "background_overlay_opacity": 0,
