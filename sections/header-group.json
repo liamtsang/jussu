@@ -13,18 +13,6 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement_b7mHFT": {
-          "type": "announcement",
-          "settings": {
-            "text": "JUSSU is away for London Craft Week. Orders placed May 11-17 will ship starting May 19.",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_b7mHFT"
-      ],
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
