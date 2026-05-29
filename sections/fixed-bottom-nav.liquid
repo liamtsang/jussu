@@ -503,9 +503,11 @@
       }
 
       .fixed-bottom-nav__mobile-drawer .fixed-bottom-nav__menu-link {
-        display: inline-block;
+        display: block;
         text-align: center;
-        width: auto;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 0;
         font-size: {{ section.settings.menu_font_size }}px;
       }
 
