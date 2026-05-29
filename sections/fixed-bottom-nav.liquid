@@ -466,24 +466,24 @@
       }
 
       /* Drawer panel */
-      .fixed-bottom-nav__mobile-drawer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        max-height: 55vh;
-        background: rgb(var(--color-background));
-        transform: translateY(100%);
-        visibility: hidden;
-        z-index: 3;
-        overflow-y: auto;
-        padding: 24px 24px 70px;
-        transition: transform 0s, visibility 0s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
+    .fixed-bottom-nav__mobile-drawer {
+  position: fixed;
+  bottom: env(safe-area-inset-bottom);
+  left: 0;
+  right: 0;
+  max-height: 55vh;
+  background: rgb(var(--color-background));
+  transform: translateY(100%);
+  visibility: hidden;
+  z-index: 3;
+  overflow-y: auto;
+  padding: 24px 24px max(120px, calc(70px + env(safe-area-inset-bottom)));
+  transition: transform 0s, visibility 0s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
       .js .fixed-bottom-nav__mobile-details[open] > .fixed-bottom-nav__mobile-drawer {
         transition: transform var(--duration-default, 0.3s) ease, visibility var(--duration-default, 0.3s) ease;
