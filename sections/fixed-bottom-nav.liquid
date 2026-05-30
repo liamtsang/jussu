@@ -313,6 +313,15 @@
         z-index: 5;
       }
 
+      /* Instagram in-app browser only: clear the iPhone home indicator when IG's
+         chrome hides on scroll. Capped with min() so IG's inflated inset (it folds
+         its own toolbar into the inset) can't balloon the bar. viewport-fit=cover
+         is enabled via JS for IG only (see layout/theme.liquid), so other browsers
+         report 0 here and are unaffected. */
+      .ig-browser .fixed-bottom-nav__mobile-bar {
+        padding-bottom: calc(16px + min(env(safe-area-inset-bottom), 34px));
+      }
+
       .fixed-bottom-nav__mobile-bar-icon {
         display: flex;
         align-items: center;

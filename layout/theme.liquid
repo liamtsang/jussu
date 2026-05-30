@@ -6,6 +6,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>
+      // Instagram's in-app browser overlaps the iPhone home indicator when its
+      // chrome hides on scroll. Opt IG (and the FB in-app browser) into safe-area
+      // insets + a marker class, so normal browsers (e.g. Android Firefox) never
+      // get phantom safe-area padding. See .ig-browser rules in fixed-bottom-nav.
+      (function () {
+        if (/Instagram|FBAN|FBAV/.test(navigator.userAgent)) {
+          document.documentElement.classList.add('ig-browser');
+          var vp = document.querySelector('meta[name="viewport"]');
+          if (vp) vp.setAttribute('content', vp.getAttribute('content') + ',viewport-fit=cover');
+        }
+      })();
+    </script>
     <meta name="theme-color" content="">
     <meta name="format-detection" content="telephone=no">
     <link rel="canonical" href="{{ canonical_url }}">
