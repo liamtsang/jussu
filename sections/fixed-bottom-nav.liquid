@@ -308,6 +308,9 @@
         justify-content: space-between;
         gap: 32px;
         padding: 12px 20px;
+        /* Keep the bar clear of the iPhone home indicator (Siri pill).
+           Requires viewport-fit=cover in the viewport meta or env() resolves to 0. */
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
         background: rgb(var(--color-background));
         border-top: 1px solid rgba(var(--color-foreground), 0.08);
         z-index: 5;
@@ -477,7 +480,7 @@
         visibility: hidden;
         z-index: 3;
         overflow-y: auto;
-        padding: 24px 24px 70px;
+        padding: 24px 24px calc(70px + env(safe-area-inset-bottom));
         transition: transform 0s, visibility 0s;
         display: flex;
         flex-direction: column;
