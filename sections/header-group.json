@@ -45,6 +45,7 @@
     },
     "fixed_side_image_4FALPR": {
       "type": "fixed-side-image",
+      "custom_css": [],
       "name": "Fixed Side Image",
       "settings": {
         "image": "shopify://shop_images/jussumixbutton.png",
@@ -61,7 +62,7 @@
       "type": "custom-liquid",
       "name": "Mobile Jussu Mix Logo",
       "settings": {
-        "custom_liquid": "<a href=\"/pages/jussu-mix\" class=\"jussu-fixed-icon\">\n  <img src=\"https://cdn.shopify.com/s/files/1/0859/3771/7525/files/jussumixbutton_mobile.png?v=1776276217\" alt=\"Jussu Mix\">\n</a>\n\n<style>\n.jussu-fixed-icon {\n  position: fixed;\n  right: 12px;\n  bottom: 80px;\n  top: auto%;\n  transform: none;\n  z-index: 999;\n}\n\n.jussu-fixed-icon img {\n  width: 45px;\n  height: auto;\n  display: block;\n}\n\n@media screen and (min-width: 768px) {\n  .jussu-fixed-icon {\n    display: none;\n  }\n}\n</style>",
+        "custom_liquid": "<a href=\"/pages/jussu-mix\" class=\"jussu-fixed-icon\">\n  <img src=\"https://cdn.shopify.com/s/files/1/0859/3771/7525/files/jussumixbutton_mobile.png?v=1776276217\" alt=\"Jussu Mix\">\n</a>\n\n<style>\n.jussu-fixed-icon {\n  position: fixed;\n  right: 12px;\n  bottom: 80px +env(safe-area-inset-bottom);\n  top: auto%;\n  transform: none;\n  z-index: 999;\n}\n\n.jussu-fixed-icon img {\n  width: 45px;\n  height: auto;\n  display: block;\n}\n\n@media screen and (min-width: 768px) {\n  .jussu-fixed-icon {\n    display: none;\n  }\n}\n</style>",
         "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
